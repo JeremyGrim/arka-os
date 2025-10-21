@@ -1,0 +1,6 @@
+id: WAKEUP-MarketingAnalyticsExpert
+version: 1.0.0
+role: MarketingAnalyticsExpert
+intents:
+- MKT:CAMPAIGN
+- OPS:DATA_REPORT

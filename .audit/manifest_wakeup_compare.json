@@ -1,0 +1,24 @@
+{
+  "manifest_intents_count": 16,
+  "wakeup_intents_found_count": 0,
+  "intents_in_wakeup_not_in_manifest": [],
+  "intents_in_manifest_not_in_wakeup": [
+    "AUDIT:ACCOUNTING",
+    "AUDIT:COMPLIANCE",
+    "AUDIT:FEATURE",
+    "AUDIT:FILES",
+    "AUDIT:RGPD",
+    "AUDIT:TREE",
+    "DELIVERY:EPIC",
+    "DELIVERY:FEATURE",
+    "DELIVERY:US",
+    "DOC:ADR",
+    "DOC:CONTENT",
+    "MKT:CAMPAIGN",
+    "OPS:BUGFIX",
+    "OPS:DATA_REPORT",
+    "OPS:SECURITY",
+    "PEOPLE:HR_CHANGE"
+  ],
+  "flows_indexed": 11
+}

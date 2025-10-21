@@ -1,0 +1,5 @@
+id: WAKEUP-BrandStrategyArchitect
+version: 1.0.0
+role: BrandStrategyArchitect
+intents:
+- MKT:CAMPAIGN

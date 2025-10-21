@@ -1,0 +1,5 @@
+id: WAKEUP-EmployeeExperienceDesigner
+version: 1.0.0
+role: EmployeeExperienceDesigner
+intents:
+- PEOPLE:HR_CHANGE

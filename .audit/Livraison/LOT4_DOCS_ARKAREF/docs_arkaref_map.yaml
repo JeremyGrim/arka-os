@@ -1,0 +1,18 @@
+map:
+  DELIVERY:US:
+  - ARKA_OS/ARKA_CORE/docs/governance/USE-MESSAGING.md
+  - ARKA_OS/ARKA_CORE/management/push_notify/docs/DOCTOR_OPTION_A.md
+  DOC:ADR:
+  - ARKA_OS/ARKA_CORE/docs/ARCHITECTURE.md
+  - ARKA_OS/ARKA_CORE/docs/governance/ACTIONABLE-ONLY.md
+  DOC:CONTENT:
+  - ARKA_OS/ARKA_AGENT/client/acme/docs/agents-configuration-guide.md
+  - ARKA_OS/ARKA_AGENT/client/acme/docs/agents-migration-plan.md
+  OPS:SECURITY:
+  - ARKA_OS/ARKA_CORE/docs/ARCHITECTURE.md
+  - ARKA_OS/ARKA_CORE/docs/governance/ACTIONABLE-ONLY.md
+  OPS:DATA_REPORT:
+  - ARKA_OS/ARKA_CORE/docs/governance/NO-MOCK-DATA.md
+  MKT:CAMPAIGN:
+  - ARKA_OS/ARKA_AGENT/client/acme/docs/agents-migration-plan.md
+  - ARKA_OS/ARKA_AGENT/client/acme/docs/agents-configuration-guide.md

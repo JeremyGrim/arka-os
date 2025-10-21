@@ -1,9 +1,0 @@
-id: ARKAA13-COMPLIANCE-POLICY
-version: 1.0.0
-title: "Overrides de conformité (sans toucher aux règles)"
-exports:
-  overrides:
-    ARKORE15-AGP-REACTIVE-CONTROL.zones.Z4_owner_confirmation.policy.when.condition: "high_risk_change or data_class==PII"
-    ARKORE15-AGP-REACTIVE-CONTROL.runtime.ack_strategy: "immediate"
-    ARKORE14-MEMORY-OPS.retention.default_days: 180
-    ARKORE14-MEMORY-OPS.retention.critical_days: 365

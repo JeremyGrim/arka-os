@@ -1,0 +1,23 @@
+id: AGENT-EXPERT-SecurityComplianceArchitect
+version: 1.0.0
+role: SecurityComplianceArchitect
+capabilities:
+- audit.compliance
+- audit.read
+- policy.define
+intents_supported:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- OPS:SECURITY
+wakeup_ref: experts/security-compliance-architect/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

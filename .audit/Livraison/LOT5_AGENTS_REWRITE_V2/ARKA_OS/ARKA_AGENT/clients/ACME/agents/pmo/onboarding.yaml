@@ -1,0 +1,28 @@
+id: ONBOARDING-ACME-pmo
+version: 1.0.0
+client: ACME
+agent_id: pmo
+role: PMO
+expert_ref: experts/pmo/expert.yaml
+wakeup_ref: experts/pmo/wakeup.yaml
+supported_intents:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- DELIVERY:US
+- OPS:BUGFIX
+runtime:
+  provider: codex
+  session_prefix: arka
+  thread_policy: single_turn_attach_only
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  inbox: arkamsg://inbox/ACME/pmo
+memory:
+  store: ARKA_OS/ARKA_AGENT/clients/ACME/context/memory/pmo
+policy:
+  write_guard: selected_actor_only
+  require_result_to_advance: true

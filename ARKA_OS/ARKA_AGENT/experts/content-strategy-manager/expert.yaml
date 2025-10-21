@@ -1,0 +1,18 @@
+id: AGENT-EXPERT-ContentStrategyManager
+version: 1.0.0
+role: ContentStrategyManager
+capabilities:
+- campaign.plan
+- content.plan
+intents_supported:
+- DOC:CONTENT
+- MKT:CAMPAIGN
+- OPS:BUGFIX
+wakeup_ref: experts/content-strategy-manager/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

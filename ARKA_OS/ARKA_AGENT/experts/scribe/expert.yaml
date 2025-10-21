@@ -1,0 +1,32 @@
+id: AGENT-EXPERT-Scribe
+version: 1.0.0
+role: Scribe
+capabilities:
+- audit.read
+- content.plan
+- spec.write
+- ux.audit
+intents_supported:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- DELIVERY:US
+- DOC:ADR
+- DOC:CONTENT
+- MKT:CAMPAIGN
+- OPS:BUGFIX
+- OPS:DATA_REPORT
+- PEOPLE:HR_CHANGE
+wakeup_ref: experts/scribe/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

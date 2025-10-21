@@ -1,0 +1,21 @@
+id: AGENT-EXPERT-LeadDev
+version: 1.0.0
+role: LeadDev
+capabilities:
+- arch.design
+- dev.implement
+- dev.spike
+- qa.test.plan
+- spec.refine
+intents_supported:
+- DOC:ADR
+- OPS:BUGFIX
+- OPS:SECURITY
+wakeup_ref: experts/lead-dev/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

@@ -1,0 +1,90 @@
+version: 1
+strategies:
+- match:
+    by: intent
+    value: DISCOVER:WORKFLOWS
+  route:
+    flow: ARKFLOW-00-MANIFEST:workflows_catalog
+- match:
+    by: intent
+    value: AUDIT:FILES
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FILES_CHAIN
+- match:
+    by: intent
+    value: AUDIT:TREE
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_TREE_CHAIN
+- match:
+    by: intent
+    value: AUDIT:RGPD
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN
+- match:
+    by: intent
+    value: AUDIT:COMPLIANCE
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_COMPLIANCE_CHAIN
+- match:
+    by: intent
+    value: AUDIT:FEATURE
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FEATURE_CHAIN
+- match:
+    by: intent
+    value: AUDIT:ACCOUNTING
+  route:
+    flow: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_ACCOUNTING_CHAIN
+- match:
+    by: intent
+    value: DELIVERY:EPIC
+  route:
+    flow: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_EPIC_CHAIN
+- match:
+    by: intent
+    value: DELIVERY:FEATURE
+  route:
+    flow: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_FEATURE_CHAIN
+- match:
+    by: intent
+    value: DELIVERY:US
+  route:
+    flow: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_US_CHAIN
+- match:
+    by: intent
+    value: DOC:ADR
+  route:
+    flow: ARKFLOW-04C-WORKFLOWS-DOC:DOC_ADR_CHAIN
+- match:
+    by: intent
+    value: DOC:CONTENT
+  route:
+    flow: ARKFLOW-04C-WORKFLOWS-DOC:DOC_CONTENT_CHAIN
+- match:
+    by: intent
+    value: OPS:BUGFIX
+  route:
+    flow: ARKFLOW-04D-WORKFLOWS-OPS:OPS_BUGFIX_CHAIN
+- match:
+    by: intent
+    value: OPS:SECURITY
+  route:
+    flow: ARKFLOW-04D-WORKFLOWS-OPS:OPS_SECURITY_CHAIN
+- match:
+    by: intent
+    value: OPS:DATA_REPORT
+  route:
+    flow: ARKFLOW-04D-WORKFLOWS-OPS:OPS_DATA_REPORT_CHAIN
+- match:
+    by: intent
+    value: MKT:CAMPAIGN
+  route:
+    flow: ARKFLOW-04E-WORKFLOWS-MKT:MKT_CAMPAIGN_CHAIN
+- match:
+    by: intent
+    value: PEOPLE:HR_CHANGE
+  route:
+    flow: ARKFLOW-04F-WORKFLOWS-PEOPLE:HR_CHANGE_CHAIN
+defaults:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses

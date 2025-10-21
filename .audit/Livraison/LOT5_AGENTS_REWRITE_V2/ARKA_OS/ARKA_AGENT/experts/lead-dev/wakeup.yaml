@@ -1,0 +1,7 @@
+id: WAKEUP-LeadDev
+version: 1.0.0
+role: LeadDev
+intents:
+- DOC:ADR
+- OPS:BUGFIX
+- OPS:SECURITY

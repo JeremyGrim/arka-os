@@ -1,0 +1,43 @@
+id: ARKAROUTING-02-RESOLVERS
+version: 1.0.0
+exports:
+- resolvers
+- uri_scheme
+uri_scheme:
+  format: arka://<facet>/<id>
+  examples:
+  - arka://term/AUDIT:RGPD
+  - arka://flow/ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN
+  - arka://doc/ARKA_CORE:docs/DPA_CHECKLIST.md
+  - arka://agent/experts/SecurityComplianceArchitect
+  - arka://agent/clients/ACME/agents/pmo/onboarding.yaml
+  - arka://capability/audit.compliance
+resolvers:
+  term:
+    from:
+    - ARKA_OS/ARKA_CORE/bricks/ARKA_NOMENCLATURE01.yaml
+    - ARKA_OS/wakeup-intents.matrix.yaml
+    strategy: aliases+tags→id
+  flow:
+    from:
+    - ARKA_OS/ARKA_FLOW/router/routing.yaml
+    - ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-00-MANIFEST.yaml
+    - ARKA_OS/ARKA_FLOW/ARKFLOW00-INDEX.yaml
+    strategy: intent→flow_ref
+  doc:
+    from:
+    - ARKA_OS/**/*.md
+    strategy: frontmatter.arkaref or search(title/tags)
+  agent:
+    from:
+    - ARKA_OS/ARKA_AGENT/experts/**
+    - ARKA_OS/ARKA_AGENT/clients/**/agents/**/onboarding.yaml
+    strategy: role→expert; client→onboarding
+  capability:
+    from:
+    - ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX.yaml
+    strategy: capability→roles
+  service:
+    from:
+    - ARKA_ROUTING/bricks/ARKAROUTING-03-CONFIG.yaml
+    strategy: endpoints

@@ -1,0 +1,29 @@
+id: ARKAROUTING-01-FACETS
+version: 1.0.0
+exports: [facets]
+
+facets:
+  - id: term
+    label: Nomenclature canonique
+    description: Vocabulaire contrôlé (id, aliases, tags) → intents/workflows/docs/owners
+  - id: flow
+    label: Workflows
+    description: Intents → flow_ref (via router) + exports
+  - id: doc
+    label: Documentation
+    description: Docs Markdown avec front‑matter arkaref
+  - id: agent
+    label: Agents
+    description: Rôles experts + onboarding par client
+  - id: capability
+    label: Capacités
+    description: CAPAMAP (capability → roles)
+  - id: policy
+    label: Policies & ADR
+    description: Règles, décisions d’architecture, gates
+  - id: dataset
+    label: Données / ressources
+    description: Jeux de données, matrices, index
+  - id: service
+    label: Services internes
+    description: Endpoints internes (lookup/resolve), messaging, etc.

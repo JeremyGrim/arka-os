@@ -1,0 +1,15 @@
+id: AGENT-EXPERT-QATesteur
+version: 1.0.0
+role: QATesteur
+capabilities:
+- qa.test.plan
+intents_supported:
+- OPS:BUGFIX
+wakeup_ref: experts/qatesteur/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

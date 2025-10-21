@@ -1,3 +1,9 @@
+---
+arkaref:
+  nomenclature: OPS:SECURITY
+  workflow: null
+  owner: null
+---
 # ARKA — Spécification d’architecture (contrat v1)
 
 **Base :** brique **PUSH** existante (*inchangée*). Ce document aligne **chat vs notify**, **backlog**, **statuts** et **rôles** pour éliminer les contradictions (ACK, polling, mélange chat/message) et fluidifier la lecture humaine.

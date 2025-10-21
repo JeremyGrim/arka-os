@@ -1,0 +1,18 @@
+id: AGENT-EXPERT-MarketingAnalyticsExpert
+version: 1.0.0
+role: MarketingAnalyticsExpert
+capabilities:
+- data.extract
+- growth.experiment
+- marketing.analytics
+intents_supported:
+- MKT:CAMPAIGN
+- OPS:DATA_REPORT
+wakeup_ref: experts/marketing-analytics-expert/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

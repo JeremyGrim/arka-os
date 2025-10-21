@@ -1,0 +1,37 @@
+{
+  "hierarchy_files": [
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_CORE/bricks/ARKORE01-HIERARCHY.yaml",
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_PACK/ARKA_CORE/bricks/ARKORE01-HIERARCHY.yaml",
+    "ARKA_OS/ARKA_CORE/bricks/ARKORE01-HIERARCHY.yaml"
+  ],
+  "router_files": [],
+  "index_files": [
+    "ARKA_OS/ARKA_FLOW/ARKFLOW00-INDEX.yaml"
+  ],
+  "manifest_files": [
+    "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-00-MANIFEST.yaml"
+  ],
+  "nomenclature_files": [],
+  "meta_yaml_with_id_count": 52,
+  "meta_yaml_with_id_examples": [
+    "ARKA_META/.system/Governance/orders/ORD-CORE-005-ARCH-MSG-GOV-ALIGN.yaml",
+    "ARKA_META/.system/Governance/orders/ORD-GOV-005-SESSION-NOTIFY.yaml",
+    "ARKA_META/.system/Governance/orders/ORD-S2-001-SCRIBE-MSG.yaml",
+    "ARKA_META/.system/Governance/orders/ORD-S2-002-ONBOARDING-REFRESH.yaml",
+    "ARKA_META/.system/Governance/orders/ORD-S2-003-MEM-MSG-CLEANUP.yaml",
+    "ARKA_META/.system/Governance/orders/ORD-S2-004-PROJECT-ARBO-CHECK.yaml",
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_CORE/ARKORE00-INDEX.yaml",
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_CORE/bricks/ARKORE01-HIERARCHY.yaml",
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_CORE/bricks/ARKORE02-GLOBAL-RULES.yaml",
+    "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_CORE/bricks/ARKORE03-TEAMS-CLAUDE.yaml"
+  ],
+  "agents_clients_count": 74,
+  "agents_experts_count": 29,
+  "agents_wakeup_count": 28,
+  "agents_onboarding_count": 0,
+  "wakeup_matrix": [
+    "ARKA_OS/wakeup-intents.matrix.yaml"
+  ]
+}
+
+

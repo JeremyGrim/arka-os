@@ -1,0 +1,7 @@
+id: WAKEUP-UXUIDesignGuardian
+version: 1.0.0
+role: UXUIDesignGuardian
+intents:
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- MKT:CAMPAIGN

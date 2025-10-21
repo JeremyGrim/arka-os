@@ -1,0 +1,20 @@
+id: ARKAROUTING00-INDEX
+version: 1.0.0
+registry:
+  ARKAROUTING-01-FACETS:
+    file: bricks/ARKAROUTING-01-FACETS.yaml
+    exports:
+    - facets
+    version: 1.0.0
+  ARKAROUTING-02-RESOLVERS:
+    file: bricks/ARKAROUTING-02-RESOLVERS.yaml
+    exports:
+    - resolvers
+    - uri_scheme
+    version: 1.0.0
+  ARKAROUTING-03-CONFIG:
+    file: bricks/ARKAROUTING-03-CONFIG.yaml
+    exports:
+    - paths
+    - options
+    version: 1.0.0

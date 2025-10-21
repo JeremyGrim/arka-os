@@ -1,0 +1,20 @@
+id: AGENT-EXPERT-AgentCreatorClient
+version: 1.0.0
+role: AgentCreatorClient
+capabilities:
+- content.plan
+- market.research
+intents_supported:
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- DOC:CONTENT
+- MKT:CAMPAIGN
+- OPS:BUGFIX
+wakeup_ref: experts/agent-creator-client/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

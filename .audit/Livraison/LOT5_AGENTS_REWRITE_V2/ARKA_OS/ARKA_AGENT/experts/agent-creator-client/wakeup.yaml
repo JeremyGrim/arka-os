@@ -1,0 +1,9 @@
+id: WAKEUP-AgentCreatorClient
+version: 1.0.0
+role: AgentCreatorClient
+intents:
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- DOC:CONTENT
+- MKT:CAMPAIGN
+- OPS:BUGFIX

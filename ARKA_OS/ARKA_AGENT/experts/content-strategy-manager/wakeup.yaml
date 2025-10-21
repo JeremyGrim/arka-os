@@ -1,0 +1,7 @@
+id: WAKEUP-ContentStrategyManager
+version: 1.0.0
+role: ContentStrategyManager
+intents:
+- DOC:CONTENT
+- MKT:CAMPAIGN
+- OPS:BUGFIX

@@ -1,0 +1,8 @@
+id: WAKEUP-FSX
+version: 1.0.0
+role: FSX
+intents:
+- DOC:ADR
+- OPS:BUGFIX
+- OPS:DATA_REPORT
+- OPS:SECURITY

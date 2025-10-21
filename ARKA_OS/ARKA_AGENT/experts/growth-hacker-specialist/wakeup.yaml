@@ -1,0 +1,5 @@
+id: WAKEUP-GrowthHackerSpecialist
+version: 1.0.0
+role: GrowthHackerSpecialist
+intents:
+- MKT:CAMPAIGN

@@ -1,0 +1,18 @@
+id: AGENT-EXPERT-MarketResearchSpecialist
+version: 1.0.0
+role: MarketResearchSpecialist
+capabilities:
+- market.research
+- outreach.strategy
+intents_supported:
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- MKT:CAMPAIGN
+wakeup_ref: experts/market-research-specialist/wakeup.yaml
+messaging:
+  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
+  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
+policy:
+  logging: standard
+  chain_of_steps: sequential
+  result_required: true

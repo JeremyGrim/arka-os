@@ -1,0 +1,14 @@
+id: ARKORE01-HIERARCHY-PATCH
+version: 1.0.0
+merge:
+  flow:
+    id: ARKA_FLOW
+    index: ARKFLOW00-INDEX.yaml
+    router: router/routing.yaml
+    manifest: bricks/ARKFLOW-00-MANIFEST.yaml
+    capabilities: bricks/ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX.yaml
+    auto_register: true
+  registry:
+    nomenclature: ARKA_CORE/bricks/ARKA_NOMENCLATURE01.yaml
+    wakeup: wakeup-intents.matrix.yaml
+    auto_register: true

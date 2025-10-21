@@ -1,0 +1,12 @@
+id: WAKEUP-MissionQualifier
+version: 1.0.0
+role: MissionQualifier
+intents:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- DELIVERY:US
+- OPS:BUGFIX

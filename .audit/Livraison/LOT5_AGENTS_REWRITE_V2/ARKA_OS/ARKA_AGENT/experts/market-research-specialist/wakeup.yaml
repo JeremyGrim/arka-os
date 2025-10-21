@@ -1,0 +1,7 @@
+id: WAKEUP-MarketResearchSpecialist
+version: 1.0.0
+role: MarketResearchSpecialist
+intents:
+- DELIVERY:EPIC
+- DELIVERY:FEATURE
+- MKT:CAMPAIGN

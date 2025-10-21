@@ -1,0 +1,171 @@
+{
+  "files_total": 656,
+  "dirs_top": [
+    {
+      "top": "ARKA_META",
+      "files": 226,
+      "size": 6875825
+    },
+    {
+      "top": "ARKA_OS",
+      "files": 199,
+      "size": 596295
+    },
+    {
+      "top": ".openAi-provider",
+      "files": 119,
+      "size": 149569
+    },
+    {
+      "top": "ARKA_SOCLE",
+      "files": 57,
+      "size": 365417
+    },
+    {
+      "top": "ARKA_CLI",
+      "files": 55,
+      "size": 203137
+    }
+  ],
+  "yaml_total": 216,
+  "arkflow_indexes": [
+    {
+      "path": "ARKA_OS/ARKA_FLOW/ARKFLOW00-INDEX.yaml",
+      "index_head": [
+        "id",
+        "version",
+        "registry",
+        "contracts",
+        "change_policy"
+      ]
+    }
+  ],
+  "arkflow_routers": [
+    {
+      "path": "ARKA_META/.system/Governance/Owner/refonte-OS/ARKA_CORE/ARKA_PACK/ARKA_FLOW/router/routing.yaml",
+      "intents": [
+        "DELIVERY_SUBMIT"
+      ]
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/router/routing.yaml",
+      "intents": [
+        "DISCOVER:WORKFLOWS",
+        "AUDIT:FILES",
+        "AUDIT:TREE",
+        "AUDIT:RGPD",
+        "AUDIT:COMPLIANCE",
+        "AUDIT:FEATURE",
+        "AUDIT:ACCOUNTING",
+        "DELIVERY:EPIC",
+        "DELIVERY:FEATURE",
+        "DELIVERY:US",
+        "DOC:ADR",
+        "DOC:CONTENT",
+        "OPS:BUGFIX",
+        "OPS:SECURITY",
+        "OPS:DATA_REPORT",
+        "MKT:CAMPAIGN",
+        "PEOPLE:HR_CHANGE"
+      ]
+    }
+  ],
+  "arkflow_flow_files": [
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-00-MANIFEST.yaml",
+      "flows": [],
+      "id": "ARKFLOW-00-MANIFEST"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04A-WORKFLOWS-AUDIT.yaml",
+      "flows": [
+        "AUDIT_FILES_CHAIN",
+        "AUDIT_TREE_CHAIN",
+        "AUDIT_RGPD_CHAIN",
+        "AUDIT_COMPLIANCE_CHAIN",
+        "AUDIT_FEATURE_CHAIN",
+        "AUDIT_ACCOUNTING_CHAIN"
+      ],
+      "id": "ARKFLOW-04A-WORKFLOWS-AUDIT"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04B-WORKFLOWS-DELIVERY.yaml",
+      "flows": [
+        "DELIVERY_EPIC_CHAIN",
+        "DELIVERY_FEATURE_CHAIN",
+        "DELIVERY_US_CHAIN"
+      ],
+      "id": "ARKFLOW-04B-WORKFLOWS-DELIVERY"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04C-WORKFLOWS-DOC.yaml",
+      "flows": [
+        "DOC_ADR_CHAIN",
+        "DOC_CONTENT_CHAIN"
+      ],
+      "id": "ARKFLOW-04C-WORKFLOWS-DOC"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04D-WORKFLOWS-OPS.yaml",
+      "flows": [
+        "OPS_BUGFIX_CHAIN",
+        "OPS_SECURITY_CHAIN",
+        "OPS_DATA_REPORT_CHAIN"
+      ],
+      "id": "ARKFLOW-04D-WORKFLOWS-OPS"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04E-WORKFLOWS-MKT.yaml",
+      "flows": [
+        "MKT_CAMPAIGN_CHAIN"
+      ],
+      "id": "ARKFLOW-04E-WORKFLOWS-MKT"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-04F-WORKFLOWS-PEOPLE.yaml",
+      "flows": [
+        "HR_CHANGE_CHAIN"
+      ],
+      "id": "ARKFLOW-04F-WORKFLOWS-PEOPLE"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-12-ACTION-KEYS.yaml",
+      "flows": [],
+      "id": "ARKFLOW-12-ACTION-KEYS"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-17-ORCHESTRATION-RULES.yaml",
+      "flows": [],
+      "id": "ARKFLOW-17-ORCHESTRATION-RULES"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-19-PRECONDITIONS-DEFS.yaml",
+      "flows": [],
+      "id": "ARKFLOW-19-PRECONDITIONS-DEFS"
+    },
+    {
+      "path": "ARKA_OS/ARKA_FLOW/bricks/ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX.yaml",
+      "flows": [],
+      "id": "ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX"
+    }
+  ],
+  "wakeup_matrix_path": "ARKA_OS/wakeup-intents.matrix.yaml",
+  "wakeup_entries_count": 4,
+  "agent_top_dirs": [
+    "ARKA_OS/ARKA_AGENT/AGENT00-INDEX.yaml",
+    "ARKA_OS/ARKA_AGENT/client",
+    "ARKA_OS/ARKA_AGENT/clients",
+    "ARKA_OS/ARKA_AGENT/docs",
+    "ARKA_OS/ARKA_AGENT/master-agent.yaml",
+    "ARKA_OS/ARKA_AGENT/readme.md"
+  ],
+  "agent_sample": [
+    "ARKA_OS/ARKA_AGENT/AGENT00-INDEX.yaml",
+    "ARKA_OS/ARKA_AGENT/client/acme",
+    "ARKA_OS/ARKA_AGENT/clients/acme.yaml",
+    "ARKA_OS/ARKA_AGENT/docs/agents-catalog.yaml",
+    "ARKA_OS/ARKA_AGENT/master-agent.yaml",
+    "ARKA_OS/ARKA_AGENT/readme.md"
+  ],
+  "docs_total": 204
+}

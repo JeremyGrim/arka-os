@@ -1,0 +1,236 @@
+{
+  "catalog_from_manifest": [
+    {
+      "intent": "AUDIT:FILES",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FILES_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit de fichiers",
+      "description": "Scan fichiers, constats, gate."
+    },
+    {
+      "intent": "AUDIT:TREE",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_TREE_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit d'arborescence",
+      "description": "Évaluation structure et nommage."
+    },
+    {
+      "intent": "AUDIT:RGPD",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit RGPD",
+      "description": "Évaluation RGPD, DPA, registre."
+    },
+    {
+      "intent": "AUDIT:COMPLIANCE",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_COMPLIANCE_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit conformité",
+      "description": "Conformité aux politiques/normes."
+    },
+    {
+      "intent": "AUDIT:FEATURE",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FEATURE_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit de fonctionnalité",
+      "description": "Impacts, dépendances, risques."
+    },
+    {
+      "intent": "AUDIT:ACCOUNTING",
+      "flow_ref": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_ACCOUNTING_CHAIN",
+      "family": "AUDIT",
+      "title": "Audit comptable",
+      "description": "Contrôles et rapprochements."
+    },
+    {
+      "intent": "DELIVERY:EPIC",
+      "flow_ref": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_EPIC_CHAIN",
+      "family": "DELIVERY",
+      "title": "Cycle Epic (agnostique)",
+      "description": "Cadrage Epic → US."
+    },
+    {
+      "intent": "DELIVERY:FEATURE",
+      "flow_ref": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_FEATURE_CHAIN",
+      "family": "DELIVERY",
+      "title": "Cycle Feature (agnostique)",
+      "description": "Cadrage Feature → US → gate."
+    },
+    {
+      "intent": "DELIVERY:US",
+      "flow_ref": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_US_CHAIN",
+      "family": "DELIVERY",
+      "title": "Cycle User Story (agnostique)",
+      "description": "Spécifier → Réaliser → Revue → Gate → Publish."
+    },
+    {
+      "intent": "DOC:ADR",
+      "flow_ref": "ARKFLOW-04C-WORKFLOWS-DOC:DOC_ADR_CHAIN",
+      "family": "DOC",
+      "title": "Proposition ADR",
+      "description": "ADR draft → review → gate core → merge."
+    },
+    {
+      "intent": "DOC:CONTENT",
+      "flow_ref": "ARKFLOW-04C-WORKFLOWS-DOC:DOC_CONTENT_CHAIN",
+      "family": "DOC",
+      "title": "Chaîne contenu",
+      "description": "Brief → rédaction → review → gate → publish."
+    },
+    {
+      "intent": "OPS:BUGFIX",
+      "flow_ref": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_BUGFIX_CHAIN",
+      "family": "OPS",
+      "title": "Correctif (bugfix)",
+      "description": "Qualif → fix → test → gate → RN."
+    },
+    {
+      "intent": "OPS:SECURITY",
+      "flow_ref": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_SECURITY_CHAIN",
+      "family": "OPS",
+      "title": "Chaîne sécurité",
+      "description": "Audit sécu → remédiation → gate core."
+    },
+    {
+      "intent": "OPS:DATA_REPORT",
+      "flow_ref": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_DATA_REPORT_CHAIN",
+      "family": "OPS",
+      "title": "Rapport de données",
+      "description": "Extract → analyse → report → gate."
+    },
+    {
+      "intent": "MKT:CAMPAIGN",
+      "flow_ref": "ARKFLOW-04E-WORKFLOWS-MKT:MKT_CAMPAIGN_CHAIN",
+      "family": "MKT",
+      "title": "Campagne Marketing",
+      "description": "Research → plan → création → analytics → gate."
+    },
+    {
+      "intent": "PEOPLE:HR_CHANGE",
+      "flow_ref": "ARKFLOW-04F-WORKFLOWS-PEOPLE:HR_CHANGE_CHAIN",
+      "family": "PEOPLE",
+      "title": "Programme RH (change)",
+      "description": "Diag → roadmap → gate → déploiement."
+    }
+  ],
+  "intent_to_flow_ref": {
+    "AUDIT:FILES": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FILES_CHAIN",
+    "AUDIT:TREE": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_TREE_CHAIN",
+    "AUDIT:RGPD": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN",
+    "AUDIT:COMPLIANCE": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_COMPLIANCE_CHAIN",
+    "AUDIT:FEATURE": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FEATURE_CHAIN",
+    "AUDIT:ACCOUNTING": "ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_ACCOUNTING_CHAIN",
+    "DELIVERY:EPIC": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_EPIC_CHAIN",
+    "DELIVERY:FEATURE": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_FEATURE_CHAIN",
+    "DELIVERY:US": "ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_US_CHAIN",
+    "DOC:ADR": "ARKFLOW-04C-WORKFLOWS-DOC:DOC_ADR_CHAIN",
+    "DOC:CONTENT": "ARKFLOW-04C-WORKFLOWS-DOC:DOC_CONTENT_CHAIN",
+    "OPS:BUGFIX": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_BUGFIX_CHAIN",
+    "OPS:SECURITY": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_SECURITY_CHAIN",
+    "OPS:DATA_REPORT": "ARKFLOW-04D-WORKFLOWS-OPS:OPS_DATA_REPORT_CHAIN",
+    "MKT:CAMPAIGN": "ARKFLOW-04E-WORKFLOWS-MKT:MKT_CAMPAIGN_CHAIN",
+    "PEOPLE:HR_CHANGE": "ARKFLOW-04F-WORKFLOWS-PEOPLE:HR_CHANGE_CHAIN"
+  },
+  "index_registry": {
+    "ARKFLOW-00-MANIFEST": {
+      "file": "bricks/ARKFLOW-00-MANIFEST.yaml",
+      "version": "1.0.0",
+      "exports": [
+        "workflows_catalog"
+      ],
+      "id": "ARKFLOW-00-MANIFEST"
+    },
+    "ARKFLOW-04A-WORKFLOWS-AUDIT": {
+      "file": "bricks/ARKFLOW-04A-WORKFLOWS-AUDIT.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "AUDIT_FILES_CHAIN",
+        "AUDIT_TREE_CHAIN",
+        "AUDIT_RGPD_CHAIN",
+        "AUDIT_COMPLIANCE_CHAIN",
+        "AUDIT_FEATURE_CHAIN",
+        "AUDIT_ACCOUNTING_CHAIN"
+      ],
+      "id": "ARKFLOW-04A-WORKFLOWS-AUDIT"
+    },
+    "ARKFLOW-04B-WORKFLOWS-DELIVERY": {
+      "file": "bricks/ARKFLOW-04B-WORKFLOWS-DELIVERY.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "DELIVERY_EPIC_CHAIN",
+        "DELIVERY_FEATURE_CHAIN",
+        "DELIVERY_US_CHAIN"
+      ],
+      "id": "ARKFLOW-04B-WORKFLOWS-DELIVERY"
+    },
+    "ARKFLOW-04C-WORKFLOWS-DOC": {
+      "file": "bricks/ARKFLOW-04C-WORKFLOWS-DOC.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "DOC_ADR_CHAIN",
+        "DOC_CONTENT_CHAIN"
+      ],
+      "id": "ARKFLOW-04C-WORKFLOWS-DOC"
+    },
+    "ARKFLOW-04D-WORKFLOWS-OPS": {
+      "file": "bricks/ARKFLOW-04D-WORKFLOWS-OPS.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "OPS_BUGFIX_CHAIN",
+        "OPS_SECURITY_CHAIN",
+        "OPS_DATA_REPORT_CHAIN"
+      ],
+      "id": "ARKFLOW-04D-WORKFLOWS-OPS"
+    },
+    "ARKFLOW-04E-WORKFLOWS-MKT": {
+      "file": "bricks/ARKFLOW-04E-WORKFLOWS-MKT.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "MKT_CAMPAIGN_CHAIN"
+      ],
+      "id": "ARKFLOW-04E-WORKFLOWS-MKT"
+    },
+    "ARKFLOW-04F-WORKFLOWS-PEOPLE": {
+      "file": "bricks/ARKFLOW-04F-WORKFLOWS-PEOPLE.yaml",
+      "version": "2.2.0",
+      "exports": [
+        "HR_CHANGE_CHAIN"
+      ],
+      "id": "ARKFLOW-04F-WORKFLOWS-PEOPLE"
+    },
+    "ARKFLOW-12-ACTION-KEYS": {
+      "file": "bricks/ARKFLOW-12-ACTION-KEYS.yaml",
+      "version": "1.0.0",
+      "exports": [
+        "keys"
+      ],
+      "id": "ARKFLOW-12-ACTION-KEYS"
+    },
+    "ARKFLOW-17-ORCHESTRATION-RULES": {
+      "file": "bricks/ARKFLOW-17-ORCHESTRATION-RULES.yaml",
+      "version": "1.1.0",
+      "exports": [
+        "actor_selector",
+        "chain_locks"
+      ],
+      "id": "ARKFLOW-17-ORCHESTRATION-RULES"
+    },
+    "ARKFLOW-19-PRECONDITIONS-DEFS": {
+      "file": "bricks/ARKFLOW-19-PRECONDITIONS-DEFS.yaml",
+      "version": "1.0.0",
+      "exports": [
+        "preconditions"
+      ],
+      "id": "ARKFLOW-19-PRECONDITIONS-DEFS"
+    },
+    "ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX": {
+      "file": "bricks/ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX.yaml",
+      "version": "1.0.0",
+      "exports": [
+        "capabilities",
+        "domains"
+      ],
+      "id": "ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+id: WAKEUP-QATesteur
+version: 1.0.0
+role: QATesteur
+intents:
+- OPS:BUGFIX

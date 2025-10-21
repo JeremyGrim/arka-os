@@ -1,3 +1,9 @@
+---
+arkaref:
+  nomenclature: DELIVERY:US
+  workflow: null
+  owner: null
+---
 # DOCTOR — Option A (session manquante)
 
 Objectif: vérifier BLOCK + retour expéditeur + escalade PMO/Owner, sans création de session.

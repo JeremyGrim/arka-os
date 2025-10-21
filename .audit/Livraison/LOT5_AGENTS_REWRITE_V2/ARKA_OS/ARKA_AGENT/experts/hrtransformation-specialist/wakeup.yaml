@@ -1,0 +1,5 @@
+id: WAKEUP-HRTransformationSpecialist
+version: 1.0.0
+role: HRTransformationSpecialist
+intents:
+- PEOPLE:HR_CHANGE

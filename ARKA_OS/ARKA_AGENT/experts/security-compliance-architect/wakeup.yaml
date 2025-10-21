@@ -1,0 +1,11 @@
+id: WAKEUP-SecurityComplianceArchitect
+version: 1.0.0
+role: SecurityComplianceArchitect
+intents:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- OPS:SECURITY

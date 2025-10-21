@@ -1,0 +1,11 @@
+id: WAKEUP-Archiviste
+version: 1.0.0
+role: Archiviste
+intents:
+- AUDIT:ACCOUNTING
+- AUDIT:COMPLIANCE
+- AUDIT:FEATURE
+- AUDIT:FILES
+- AUDIT:RGPD
+- AUDIT:TREE
+- OPS:SECURITY

@@ -1,0 +1,255 @@
+id: ARKA_NOMENCLATURE01
+version: 1.0.0
+exports:
+- terms
+terms:
+- id: AUDIT:FILES
+  label: Audit de fichiers
+  aliases:
+  - Audit de fichiers
+  domain: compliance
+  tags:
+  - audit
+  - files
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FILES_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: AUDIT:TREE
+  label: Audit d'arborescence
+  aliases:
+  - Audit d'arborescence
+  domain: compliance
+  tags:
+  - audit
+  - tree
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_TREE_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: AUDIT:RGPD
+  label: Audit RGPD
+  aliases:
+  - Audit RGPD
+  domain: compliance
+  tags:
+  - audit
+  - rgpd
+  owner: Archiviste
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: AUDIT:COMPLIANCE
+  label: Audit conformité
+  aliases:
+  - Audit conformité
+  domain: compliance
+  tags:
+  - audit
+  - compliance
+  owner: Archiviste
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_COMPLIANCE_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: AUDIT:FEATURE
+  label: Audit de fonctionnalité
+  aliases:
+  - Audit de fonctionnalité
+  domain: compliance
+  tags:
+  - audit
+  - feature
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FEATURE_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: AUDIT:ACCOUNTING
+  label: Audit comptable
+  aliases:
+  - Audit comptable
+  domain: compliance
+  tags:
+  - accounting
+  - audit
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_ACCOUNTING_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: DELIVERY:EPIC
+  label: Cycle Epic (agnostique)
+  aliases:
+  - Cycle Epic (agnostique)
+  domain: delivery
+  tags:
+  - delivery
+  - epic
+  - project
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_EPIC_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: DELIVERY:FEATURE
+  label: Cycle Feature (agnostique)
+  aliases:
+  - Cycle Feature (agnostique)
+  domain: delivery
+  tags:
+  - delivery
+  - feature
+  - project
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_FEATURE_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: DELIVERY:US
+  label: Cycle User Story (agnostique)
+  aliases:
+  - Cycle User Story (agnostique)
+  domain: delivery
+  tags:
+  - delivery
+  - project
+  - us
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_US_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: DOC:ADR
+  label: Proposition ADR
+  aliases:
+  - Proposition ADR
+  domain: core
+  tags:
+  - adr
+  - doc
+  - documentation
+  owner: Archiviste
+  related_workflows:
+  - ARKFLOW-04C-WORKFLOWS-DOC:DOC_ADR_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: DOC:CONTENT
+  label: Chaîne contenu
+  aliases:
+  - Chaîne contenu
+  domain: core
+  tags:
+  - content
+  - doc
+  - documentation
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04C-WORKFLOWS-DOC:DOC_CONTENT_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: OPS:BUGFIX
+  label: Correctif (bugfix)
+  aliases:
+  - Correctif (bugfix)
+  domain: core
+  tags:
+  - bugfix
+  - maintenance
+  - ops
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04D-WORKFLOWS-OPS:OPS_BUGFIX_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: OPS:SECURITY
+  label: Chaîne sécurité
+  aliases:
+  - Chaîne sécurité
+  domain: core
+  tags:
+  - maintenance
+  - ops
+  - security
+  owner: Archiviste
+  related_workflows:
+  - ARKFLOW-04D-WORKFLOWS-OPS:OPS_SECURITY_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: OPS:DATA_REPORT
+  label: Rapport de données
+  aliases:
+  - Rapport de données
+  domain: core
+  tags:
+  - data_report
+  - maintenance
+  - ops
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04D-WORKFLOWS-OPS:OPS_DATA_REPORT_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: MKT:CAMPAIGN
+  label: Campagne Marketing
+  aliases:
+  - Campagne Marketing
+  domain: marketing
+  tags:
+  - campaign
+  - marketing
+  - mkt
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04E-WORKFLOWS-MKT:MKT_CAMPAIGN_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
+- id: PEOPLE:HR_CHANGE
+  label: Programme RH (change)
+  aliases:
+  - Programme RH (change)
+  domain: people
+  tags:
+  - hr
+  - hr_change
+  - people
+  owner: AGP
+  related_workflows:
+  - ARKFLOW-04F-WORKFLOWS-PEOPLE:HR_CHANGE_CHAIN
+  related_docs: []
+  visibility: public
+  change_policy: semver
+  deprecated: false
