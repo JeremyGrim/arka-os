@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-arka-agent14-security-compliance-architect
+version: 1.0.0
+client: ACME
+agent_id: arka-agent14-security-compliance-architect
+role: Sécurité, compliance et protection des données
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.security-compliance-architect
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.security-compliance-architect
+expert_ref: experts/security-compliance-architect/expert.yaml
+wakeup_ref: experts/security-compliance-architect/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- REPORT_CREATE
+- DOCUMENT_CREATE
+- REVIEW_DELIVERABLE
+- ORDER_ESCALATE
+- VALIDATE_NAMING
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_keys_catalog
+    - check_messages
+    default_intent: VALIDATE_NAMING
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/arka-agent14-security-compliance-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/arka-agent14-security-compliance-architect/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/security-compliance-architect/
+  index: ARKA_META/.system/.mem/security-compliance-architect/index.json
+policy:
+  ack_policy: immediate
+context_refs:
+  client: clients/ACME/client.yaml
+  keys_catalog: ARKORE11-KEYS-ANNUAIRE:keys
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-SECURITY_COMPLIANCE_ARCHITECT.yaml

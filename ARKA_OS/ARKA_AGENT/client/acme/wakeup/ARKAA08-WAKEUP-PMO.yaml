@@ -1,0 +1,35 @@
+id: ARKAA08-WAKEUP-PMO
+version: 3.0.0
+agent_id: pmo
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.arka-product-manager-officer
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.pmo
+expert_ref: client/acme/experts/ARKA_AGENT15-arka-product-manager-officer.yaml
+project_context_ref: ARKAA21-PROJECT-CONTEXT:vars
+client_ref: clients/acme.yaml
+memory:
+  dir: ARKA_META/.system/.mem/pmo/
+  index: ARKA_META/.system/.mem/pmo/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/pmo/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/pmo/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: FEATURE_CREATE
+  dispatch_mode: orchestrator_only
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Orchestration agile et coordination équipe
+  delegation:
+    method: Task tool
+    priority_agents:
+    - lead_dev
+    - technical_architect
+    - devops
+routing_ref: ARKA_ROUTING

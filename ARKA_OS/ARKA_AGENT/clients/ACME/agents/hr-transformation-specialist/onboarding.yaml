@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-hr-transformation-specialist
+version: 3.0.0
+client: ACME
+agent_id: hr-transformation-specialist
+role: Transformation digitale et modernisation des processus RH
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.hr-transformation-specialist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.hr-transformation-specialist
+expert_ref: experts/hrtransformation-specialist/expert.yaml
+wakeup_ref: experts/hrtransformation-specialist/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- PROCESS_DESIGN
+- REPORT_CREATE
+- DOCUMENT_CREATE
+- ROADMAP_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ANALYSIS_CREATE
+    dispatch_mode: transformation_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/hr-transformation-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/hr-transformation-specialist/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/hr-transformation/
+  index: ARKA_META/.system/.mem/hr-transformation/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: transformation_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-HR_TRANSFORMATION_SPECIALIST.yaml

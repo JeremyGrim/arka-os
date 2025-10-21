@@ -1,7 +1,37 @@
-id: WAKEUP-LeadDev
-version: 1.0.0
-role: LeadDev
-intents:
-- DOC:ADR
-- OPS:BUGFIX
-- OPS:SECURITY
+id: ARKAA08-WAKEUP-LEAD_DEV_BATISSEUR
+version: 3.0.0
+agent_id: lead-dev-batisseur
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.lead-dev-batisseur
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.lead-dev-batisseur
+expert_ref: experts/lead-dev/expert.yaml
+project_context_ref: ARKAA21-PROJECT-CONTEXT:vars
+client_ref: clients/ACME/client.yaml
+memory:
+  dir: ARKA_META/.system/.mem/lead-dev/
+  index: ARKA_META/.system/.mem/lead-dev/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/lead-dev-batisseur/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/lead-dev-batisseur/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: TICKET_CREATE
+  dispatch_mode: implementation_mode
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Implémentation réelle sans mock
+  constraints:
+  - No mock APIs
+  - No fictive data
+  - Real implementations only
+  tech_stack:
+  - According to client environment
+  - Test-driven development
+  - Clean architecture
+routing_ref: ARKA_ROUTING

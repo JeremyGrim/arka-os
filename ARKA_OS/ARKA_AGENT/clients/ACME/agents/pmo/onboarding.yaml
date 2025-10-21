@@ -1,28 +1,49 @@
 id: ONBOARDING-ACME-pmo
-version: 1.0.0
+version: 3.0.0
 client: ACME
 agent_id: pmo
-role: PMO
+role: Orchestration produit et coordination équipe
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.arka-product-manager-officer
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.pmo
 expert_ref: experts/pmo/expert.yaml
 wakeup_ref: experts/pmo/wakeup.yaml
 supported_intents:
-- AUDIT:ACCOUNTING
-- AUDIT:COMPLIANCE
-- AUDIT:FEATURE
-- AUDIT:FILES
-- AUDIT:RGPD
-- AUDIT:TREE
-- DELIVERY:US
-- OPS:BUGFIX
+- WORKFLOW_PLAN
+- DELEGATION_CREATE
+- REPORT_CREATE
+- DOCUMENT_READ
+- FEATURE_CREATE
 runtime:
-  provider: codex
-  session_prefix: arka
-  thread_policy: single_turn_attach_only
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: FEATURE_CREATE
+    dispatch_mode: orchestrator_only
 messaging:
-  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
-  inbox: arkamsg://inbox/ACME/pmo
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/pmo/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/pmo/outbox.yaml
+  ack_policy: immediate
 memory:
-  store: ARKA_OS/ARKA_AGENT/clients/ACME/context/memory/pmo
+  dir: ARKA_META/.system/.mem/pmo/
+  index: ARKA_META/.system/.mem/pmo/index.json
 policy:
-  write_guard: selected_actor_only
-  require_result_to_advance: true
+  ack_policy: immediate
+  dispatch_mode: orchestrator_only
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Orchestration agile et coordination équipe
+  delegation:
+    method: Task tool
+    priority_agents:
+    - lead_dev
+    - technical_architect
+    - devops
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-PMO.yaml

@@ -1,0 +1,170 @@
+# ARKAA19-AGENT-CAPABILITIES.yaml
+id: ARKAA19-AGENT-CAPABILITIES
+version: 2.0.0  # Bump car on change le format
+title: "Capacités et permissions des agents (format ARKPR09)"
+summary: >
+  Définit les actions autorisées par agent en utilisant le format
+  compact ARKPR09 (type:actions) au lieu de listes explicites
+
+exports:
+  # Configuration du parser
+  permissions_format: "ARKPR09"
+  permissions_resolver_ref: "ARKPR09-PERMISSIONS-FORMAT:resolver"
+  
+  agents:
+    # === AGP ===
+    agp: &agp_permissions
+      use_profile: agp-architecte-gouvernance-produit
+      permissions:
+        - "feature:*"        # Tout sur features
+        - "epic:*"           # Tout sur epics
+        - "us:*"             # Tout sur US
+        - "order:*"          # Ordres de gouvernance
+        - "decision:*"       # Décisions AGP
+        - "*:r"              # Read sur tout
+        - "*:v"              # Validate sur tout
+        - "-delete"          # Jamais delete
+      default_map: FEATURE_CREATE
+
+    agp-architecte-gouvernance-produit:
+      <<: *agp_permissions
+      
+    # === PMO ===
+    arka-product-manager-officer:
+      use_profile: pmo-orchestrator
+      permissions:
+        - "feature:*"      # Gestion complète structure
+        - "epic:*"
+        - "us:*"
+        - "ticket:*"
+        - "document:cr"    # Création docs seulement
+        - "report:cr"
+        - "workflow:*"     # Orchestration workflows
+        - "-delete"        # Jamais de suppression
+      default_map: US_CREATE
+      
+    # === LEAD DEV ===
+    lead-dev-batisseur:
+      use_profile: lead-dev-batisseur
+      permissions:
+        - "ticket:*"         # Tout sur tickets
+        - "document:cru"     # Create/Read/Update docs
+        - "-feature"         # Pas touche aux features
+        - "-epic"            # Pas touche aux epics
+        - "us:*"             # Tout sur US
+        - "-order"           # Pas d'ordres
+      default_map: TICKET_CREATE
+      
+    # === DEVOPS ===
+    devops-guardian:
+      use_profile: devops-guardian
+      permissions:
+        - "document:*"       # Tous les docs techniques
+        - "report:*"         # Tous les rapports
+        - "us:*"             # Tout sur US
+        - "*:rs"             # Read + Status sur tout
+        - "-create"          # Ne crée rien de structurel
+      default_map: REPORT_CREATE
+      
+    # === QA ===
+    qa-testeur:
+      use_profile: qa-testeur
+      permissions:
+        - "ticket:cru"       # Create/Read/Update tickets (bugs)
+        - "report:*"         # Tous les rapports de test
+        - "document:cr"      # Create/Read docs de test
+        - "-feature"         # Pas de structure
+        - "-epic"
+        - "us:*"             # Tout sur US
+      default_map: TICKET_CREATE
+      
+    # === CORE ARCHIVISTE ===
+    core-archivist:
+      use_profile: core-archivist
+      permissions:
+        - "document:*"       # Gestion documentaire gouvernance
+        - "report:*"
+        - "analysis:*"
+        - "plan:*"
+        - "order:*"
+        - "decision:*"
+        - "workflow:plan"
+        - "*:r"              # Lecture globale
+        - "-feature"         # Pas d'accès structure produit
+        - "-epic"
+        - "-us"
+        - "-ticket"
+        - "-delete"          # Suppression uniquement sur validation Owner
+      default_map: DOCUMENT_CREATE
+      
+    # === ARKA SCRIBE ===
+    arka-scribe:
+      use_profile: arka-scribe
+      permissions:
+        - "document:cru"     # Création/màj de mémos et CR
+        - "report:cr"        # Rapports de synthèse
+        - "analysis:r"       # Lecture analyses
+        - "plan:r"           # Lecture plans
+        - "-feature"         # Pas de structure produit
+        - "-epic"
+        - "-order"           # Pas de gouvernance directe
+      default_map: DOCUMENT_CREATE
+      
+    # === ARCHIVIST ORCHESTRATOR ===
+    arka-archivist-orchestrator:
+      use_profile: arka-archivist-orchestrator
+      permissions:
+        - "document:cru"     # Préparer CR/RFC
+        - "report:cru"       # Rapports d'arborescence
+        - "plan:cru"         # Plans d'exécution / rollback
+        - "order:cu"         # Créer/mettre à jour les ordres Owner
+        - "workflow:plan"    # Orchestration des actions à déléguer
+        - "*:r"              # Lecture globale pour audit
+        - "-delete"          # Jamais de suppression directe
+        - "-feature"         # Pas de modification structurelle
+        - "-epic"
+      default_map: DOCUMENT_CREATE
+
+    # === CORE SCRIBE ===
+    core-scribe:
+      use_profile: arka-scribe
+      permissions:
+        - "document:cru"     # Gestion des mémos/CR
+        - "report:cru"       # Rapports d'audit
+        - "analysis:cru"     # Analyses gouvernance
+        - "order:r"          # Lecture des ordres
+        - "workflow:plan"    # Planification des audits/optimisations
+        - "*:r"              # Lecture globale
+        - "-feature"
+        - "-epic"
+        - "-delete"
+      default_map: DOCUMENT_CREATE
+      
+    # === MARKET RESEARCH ===
+    market-research-specialist:
+      use_profile: market-research-specialist
+      permissions:
+        - "document:*"       # Documents de recherche
+        - "analysis:*"       # Analyses marché
+        - "report:cr"        # Rapports
+      default_map: ANALYSIS_CREATE
+      
+    # === UX ===
+    ux-ui-design-guardian:
+      use_profile: ux-ui-design-guardian
+      permissions:
+        - "document:*"       # Specs design
+        - "plan:cru"         # Plans UX
+        - "*:r"              # Read everything
+      default_map: DOCUMENT_CREATE
+
+contracts:
+  invariants:
+    - "Chaque use_profile existe dans ARKPR08"
+    - "Format permissions suit ARKPR09 syntax"
+    - "Parser ARKPR09 résout vers ARKORE12 action_keys"
+    
+requires:
+  - "ARKPR09-PERMISSIONS-FORMAT@>=1.0.0"
+  - "ARKPR08-PROFILES-CATALOG@>=1.1.0"
+  - "ARKORE12-ACTION-KEYS@>=2.0.0"  # Après ajout des 95 actions

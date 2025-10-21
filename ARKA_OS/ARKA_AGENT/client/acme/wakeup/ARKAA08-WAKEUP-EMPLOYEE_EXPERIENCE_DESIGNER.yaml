@@ -1,0 +1,24 @@
+id: ARKAA08-WAKEUP-EMPLOYEE_EXPERIENCE_DESIGNER
+version: 3.0.0
+agent_id: employee-experience-designer
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.employee-experience-designer
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.employee-experience-designer
+expert_ref: client/acme/experts/ARKA_AGENT21-employee-experience-designer.yaml
+memory:
+  dir: ARKA_META/.system/.mem/employee-experience/
+  index: ARKA_META/.system/.mem/employee-experience/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/employee-experience-designer/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/employee-experience-designer/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: experience_design_mode
+routing_ref: ARKA_ROUTING

@@ -1,0 +1,36 @@
+id: ONBOARDING-ACME-gemini-owner-sourcing
+version: 1.0.0
+client: ACME
+agent_id: gemini-owner-sourcing
+role: Identifier, qualifier et orchestrer les partenariats GEMINI
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.gemini-owner-sourcing
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.gemini-owner-sourcing
+expert_ref: experts/gemini-owner-sourcing/expert.yaml
+wakeup_ref: experts/gemini-owner-sourcing/wakeup.yaml
+supported_intents:
+- SOURCING
+- ANALYSIS_CREATE
+- REPORT_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: SOURCING
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/gemini-owner-sourcing/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/gemini-owner-sourcing/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/gemini/
+  index: ARKA_META/.system/.mem/gemini/index.json
+policy:
+  ack_policy: immediate
+context_refs:
+  client: clients/ACME/client.yaml
+  keys_catalog: ARKORE11-KEYS-ANNUAIRE:keys
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-GEMINI.yaml

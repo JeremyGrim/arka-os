@@ -1,0 +1,52 @@
+id: ONBOARDING-ACME-technical-architect
+version: 3.0.0
+client: ACME
+agent_id: technical-architect
+role: Architecture système et décisions techniques
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.technical-architect
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.technical_architect
+expert_ref: experts/tech-architecte/expert.yaml
+wakeup_ref: experts/tech-architecte/wakeup.yaml
+supported_intents:
+- ADR_CREATE
+- PLAN_CREATE
+- ANALYSIS_CREATE
+- ANALYSIS_READ
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ADR_CREATE
+    dispatch_mode: design_first
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/technical-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/technical-architect/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/technical-architect/
+  index: ARKA_META/.system/.mem/technical-architect/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: design_first
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Architecture scalable et maintenable
+  priorities:
+  - Séparation des responsabilités
+  - Patterns réutilisables
+  - Performance optimale
+  constraints:
+  - No over-engineering
+  - KISS principle
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-TECHNICAL_ARCHITECT.yaml

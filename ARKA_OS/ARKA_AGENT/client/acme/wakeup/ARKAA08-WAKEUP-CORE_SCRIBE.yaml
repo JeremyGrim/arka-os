@@ -1,0 +1,45 @@
+id: ARKAA08-WAKEUP-CORE_SCRIBE
+version: 1.1.0
+agent_id: arka-agent02-core-scribe
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.arka-scribe
+capabilities_ref: client/acme/ARKAA19-AGENT-CAPABILITIES.yaml#agents.core-scribe
+expert_ref: client/acme/experts/ARKA_AGENT02-arka-scribe.yaml
+keys_catalog_ref: ARKORE11-KEYS-ANNUAIRE:keys
+memory:
+  dir: ARKA_META/.system/.mem/arka-scribe/
+  index: ARKA_META/.system/.mem/arka-scribe/index.json
+  governance_logs: ARKA_META/.system/Governance/logs/
+  backlog_ref: ARKA_META/.system/Governance/logs/LOG-CORE-AUDIT_backlog.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/arka-agent02-core-scribe/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/arka-agent02-core-scribe/outbox.yaml
+  ack_policy: immediate
+context_refs:
+  plan_directeur_ref: ARKAA15-PLAN-DIRECTEUR:director_plan
+  governance_runtime: ARKPR20-WAKEUP-POLICIES:defaults.rules_index_ref
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_keys_catalog
+  - check_messages
+  - sync_audit_backlog
+  default_intent: PLAN_WORKFLOW
+rules_version_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_version
+rules_index_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_index_ref
+available_intents:
+- PLAN_WORKFLOW
+- REVIEW_DELIVERABLE
+- ARCHIVE_CAPTURE
+- DOCUMENT_CREATE
+guardrails_ref: ARKPR20-WAKEUP-POLICIES:defaults.guardrails
+contracts:
+  invariants:
+  - resolves(use_profile_ref)
+  - resolves(capabilities_ref)
+  - resolves(keys_catalog_ref)
+  - memory.dir startswith "ARKA_META/.system/.mem/"
+  - governance_logs startswith "ARKA_META/.system/Governance/logs/"
+routing_ref: ARKA_ROUTING

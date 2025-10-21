@@ -1,0 +1,36 @@
+id: ONBOARDING-ACME-arka-agent00-core-archivist
+version: 1.1.0
+client: ACME
+agent_id: arka-agent00-core-archivist
+role: core-archivist
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.core-archivist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.core-archivist
+expert_ref: experts/archiviste/expert.yaml
+wakeup_ref: experts/archiviste/wakeup.yaml
+supported_intents:
+- PLAN_WORKFLOW
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_keys_catalog
+    - sync_governance_registry
+    - check_messages
+    - load_audit_backlog
+    default_intent: PLAN_WORKFLOW
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/arka-agent00-core-archivist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/arka-agent00-core-archivist/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/core-archivist/
+  index: ARKA_META/.system/.mem/core-archivist/index.json
+policy:
+  ack_policy: immediate
+context_refs:
+  client: clients/ACME/client.yaml
+  keys_catalog: ARKORE11-KEYS-ANNUAIRE:keys
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-CORE_ARCHIVIST.yaml

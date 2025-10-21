@@ -1,0 +1,5 @@
+﻿build/
+node_modules/
+*.log
+.mem/
+.audit/

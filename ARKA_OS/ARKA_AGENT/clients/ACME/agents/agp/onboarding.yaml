@@ -1,0 +1,52 @@
+id: ONBOARDING-ACME-agp
+version: 3.0.0
+client: ACME
+agent_id: agp
+role: Gate de gouvernance, cadrage, validation et ADR
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.agp
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.agp
+expert_ref: experts/agp/expert.yaml
+wakeup_ref: experts/agp/wakeup.yaml
+supported_intents:
+- ADR_CREATE
+- GATE_NOTIFY
+- GATE_BROADCAST
+- ORDER_CREATE
+- ORDER_ESCALATE
+- DECISION_PUBLISH
+- DECISION_ARCHIVE
+- DOCUMENT_CREATE
+- DOCUMENT_READ
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ADR_CREATE
+    dispatch_mode: validation_first
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/agp/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/agp/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/agp/
+  index: ARKA_META/.system/.mem/agp/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: validation_first
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Validation architecture et gouvernance stricte
+  priority_gates:
+  - No mock APIs
+  - No fictive data
+  - Evidence required
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-AGP.yaml

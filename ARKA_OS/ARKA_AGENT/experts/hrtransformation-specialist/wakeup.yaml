@@ -1,5 +1,25 @@
-id: WAKEUP-HRTransformationSpecialist
-version: 1.0.0
-role: HRTransformationSpecialist
-intents:
-- PEOPLE:HR_CHANGE
+id: ARKAA08-WAKEUP-HR_TRANSFORMATION_SPECIALIST
+version: 3.0.0
+agent_id: hr-transformation-specialist
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.hr-transformation-specialist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.hr-transformation-specialist
+expert_ref: experts/hrtransformation-specialist/expert.yaml
+memory:
+  dir: ARKA_META/.system/.mem/hr-transformation/
+  index: ARKA_META/.system/.mem/hr-transformation/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/hr-transformation-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/hr-transformation-specialist/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: transformation_mode
+client_ref: clients/ACME/client.yaml
+routing_ref: ARKA_ROUTING

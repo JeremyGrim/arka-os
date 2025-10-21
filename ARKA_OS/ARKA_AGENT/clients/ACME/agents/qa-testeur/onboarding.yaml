@@ -1,0 +1,51 @@
+id: ONBOARDING-ACME-qa-testeur
+version: 3.0.0
+client: ACME
+agent_id: qa-testeur
+role: Tests, validation et assurance qualité
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.qa-testeur
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.qa-testeur
+expert_ref: experts/qatesteur/expert.yaml
+wakeup_ref: experts/qatesteur/wakeup.yaml
+supported_intents:
+- TICKET_VALIDATE
+- REPORT_CREATE
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: TICKET_VALIDATE
+    dispatch_mode: validation_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/qa-testeur/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/qa-testeur/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/qa/
+  index: ARKA_META/.system/.mem/qa/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: validation_mode
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Validation rigoureuse sans données fictives
+  testing_approach:
+  - Risk-based testing
+  - 85-90% coverage target
+  - Real data only
+  priorities:
+  - Evidence pack contribution
+  - Pipeline validation
+  - Event Bus monitoring
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-QA_TESTEUR.yaml

@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-market-research-specialist
+version: 3.0.0
+client: ACME
+agent_id: market-research-specialist
+role: Veille concurrentielle et analyse marché
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.market-research-specialist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.market-research-specialist
+expert_ref: experts/market-research-specialist/expert.yaml
+wakeup_ref: experts/market-research-specialist/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- ANALYSIS_READ
+- REPORT_CREATE
+- DOCUMENT_CREATE
+- DOCUMENT_READ
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ANALYSIS_CREATE
+    dispatch_mode: research_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/market-research-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/market-research-specialist/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/market-research/
+  index: ARKA_META/.system/.mem/market-research/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: research_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-MARKET_RESEARCH_SPECIALIST.yaml

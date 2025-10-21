@@ -1,32 +1,61 @@
 id: AGENT00-INDEX
-version: 1.0.0
+version: 2.0.0
 experts:
-  AGP: experts/agp/expert.yaml
   AgentCreatorClient: experts/agent-creator-client/expert.yaml
-  Archiviste: experts/archiviste/expert.yaml
+  AGP: experts/agp/expert.yaml
+  ArkaArchivistOrchestrator: experts/archivist-orchestrator/expert.yaml
   BrandStrategyArchitect: experts/brand-strategy-architect/expert.yaml
   CompensationBenefitsAnalyst: experts/compensation-benefits-analyst/expert.yaml
   ContentStrategyManager: experts/content-strategy-manager/expert.yaml
+  CoreArchivist: experts/archiviste/expert.yaml
   DevOpsGuardian: experts/dev-ops-guardian/expert.yaml
   EmployeeExperienceDesigner: experts/employee-experience-designer/expert.yaml
   FSX: experts/fsx/expert.yaml
   GeminiOwnerSourcing: experts/gemini-owner-sourcing/expert.yaml
   GrowthHackerSpecialist: experts/growth-hacker-specialist/expert.yaml
   HRTransformationSpecialist: experts/hrtransformation-specialist/expert.yaml
-  LeadDev: experts/lead-dev/expert.yaml
+  LeadDevBatisseur: experts/lead-dev/expert.yaml
   LearningDevelopmentStrategist: experts/learning-development-strategist/expert.yaml
-  MarketResearchSpecialist: experts/market-research-specialist/expert.yaml
   MarketingAnalyticsExpert: experts/marketing-analytics-expert/expert.yaml
+  MarketResearchSpecialist: experts/market-research-specialist/expert.yaml
   MissionQualifier: experts/mission-qualifier/expert.yaml
   OutreachStrategist: experts/outreach-strategist/expert.yaml
-  PMO: experts/pmo/expert.yaml
   PipelineTracker: experts/pipeline-tracker/expert.yaml
+  PMO: experts/pmo/expert.yaml
+  PositioningExpert: experts/positioning-expert/expert.yaml
   QATesteur: experts/qatesteur/expert.yaml
   Scribe: experts/scribe/expert.yaml
   SecurityComplianceArchitect: experts/security-compliance-architect/expert.yaml
   SpecWriter: experts/spec-writer/expert.yaml
-  TechArchitecte: experts/tech-architecte/expert.yaml
+  TechnicalArchitect: experts/tech-architecte/expert.yaml
   UXUIDesignGuardian: experts/uxuidesign-guardian/expert.yaml
 clients:
   ACME:
+    agp: clients/ACME/agents/agp/onboarding.yaml
+    arka-agent00-core-archivist: clients/ACME/agents/arka-agent00-core-archivist/onboarding.yaml
+    arka-agent01-arka-archivist-orchestrator: clients/ACME/agents/arka-agent01-arka-archivist-orchestrator/onboarding.yaml
+    arka-agent02-core-scribe: clients/ACME/agents/arka-agent02-core-scribe/onboarding.yaml
+    arka-agent03-agent-creator-client: clients/ACME/agents/arka-agent03-agent-creator-client/onboarding.yaml
+    arka-agent14-security-compliance-architect: clients/ACME/agents/arka-agent14-security-compliance-architect/onboarding.yaml
+    brand-strategy-architect: clients/ACME/agents/brand-strategy-architect/onboarding.yaml
+    compensation-benefits-analyst: clients/ACME/agents/compensation-benefits-analyst/onboarding.yaml
+    content-strategy-manager: clients/ACME/agents/content-strategy-manager/onboarding.yaml
+    devops-guardian: clients/ACME/agents/devops-guardian/onboarding.yaml
+    employee-experience-designer: clients/ACME/agents/employee-experience-designer/onboarding.yaml
+    fsx-extreme-fullstack: clients/ACME/agents/fsx-extreme-fullstack/onboarding.yaml
+    gemini-owner-sourcing: clients/ACME/agents/gemini-owner-sourcing/onboarding.yaml
+    growth-hacker-specialist: clients/ACME/agents/growth-hacker-specialist/onboarding.yaml
+    hr-transformation-specialist: clients/ACME/agents/hr-transformation-specialist/onboarding.yaml
+    lead-dev-batisseur: clients/ACME/agents/lead-dev-batisseur/onboarding.yaml
+    learning-development-strategist: clients/ACME/agents/learning-development-strategist/onboarding.yaml
+    market-research-specialist: clients/ACME/agents/market-research-specialist/onboarding.yaml
+    marketing-analytics-expert: clients/ACME/agents/marketing-analytics-expert/onboarding.yaml
+    mission-qualifier: clients/ACME/agents/mission-qualifier/onboarding.yaml
+    outreach-strategist: clients/ACME/agents/outreach-strategist/onboarding.yaml
+    pipeline-tracker: clients/ACME/agents/pipeline-tracker/onboarding.yaml
     pmo: clients/ACME/agents/pmo/onboarding.yaml
+    positioning-expert: clients/ACME/agents/positioning-expert/onboarding.yaml
+    qa-testeur: clients/ACME/agents/qa-testeur/onboarding.yaml
+    spec-writer: clients/ACME/agents/spec-writer/onboarding.yaml
+    technical-architect: clients/ACME/agents/technical-architect/onboarding.yaml
+    ux-ui-design-guardian: clients/ACME/agents/ux-ui-design-guardian/onboarding.yaml

@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-employee-experience-designer
+version: 3.0.0
+client: ACME
+agent_id: employee-experience-designer
+role: Conception et amélioration de l'expérience collaborateur
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.employee-experience-designer
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.employee-experience-designer
+expert_ref: experts/employee-experience-designer/expert.yaml
+wakeup_ref: experts/employee-experience-designer/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- SURVEY_CREATE
+- REPORT_CREATE
+- PROCESS_DESIGN
+- DOCUMENT_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ANALYSIS_CREATE
+    dispatch_mode: experience_design_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/employee-experience-designer/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/employee-experience-designer/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/employee-experience/
+  index: ARKA_META/.system/.mem/employee-experience/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: experience_design_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-EMPLOYEE_EXPERIENCE_DESIGNER.yaml

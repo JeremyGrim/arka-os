@@ -1,6 +1,25 @@
-id: WAKEUP-MarketingAnalyticsExpert
-version: 1.0.0
-role: MarketingAnalyticsExpert
-intents:
-- MKT:CAMPAIGN
-- OPS:DATA_REPORT
+id: ARKAA08-WAKEUP-MARKETING_ANALYTICS_EXPERT
+version: 3.0.0
+agent_id: marketing-analytics-expert
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.marketing-analytics-expert
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.marketing-analytics-expert
+expert_ref: experts/marketing-analytics-expert/expert.yaml
+memory:
+  dir: ARKA_META/.system/.mem/marketing-analytics/
+  index: ARKA_META/.system/.mem/marketing-analytics/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/marketing-analytics-expert/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/marketing-analytics-expert/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: analytics_mode
+client_ref: clients/ACME/client.yaml
+routing_ref: ARKA_ROUTING

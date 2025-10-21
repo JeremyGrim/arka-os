@@ -1,7 +1,25 @@
-id: WAKEUP-ContentStrategyManager
-version: 1.0.0
-role: ContentStrategyManager
-intents:
-- DOC:CONTENT
-- MKT:CAMPAIGN
-- OPS:BUGFIX
+id: ARKAA08-WAKEUP-CONTENT_STRATEGY_MANAGER
+version: 3.0.0
+agent_id: content-strategy-manager
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.content-strategy-manager
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.content-strategy-manager
+expert_ref: experts/content-strategy-manager/expert.yaml
+memory:
+  dir: ARKA_META/.system/.mem/content-strategy/
+  index: ARKA_META/.system/.mem/content-strategy/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/content-strategy-manager/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/content-strategy-manager/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: CONTENT_CREATE
+  dispatch_mode: content_strategy_mode
+client_ref: clients/ACME/client.yaml
+routing_ref: ARKA_ROUTING

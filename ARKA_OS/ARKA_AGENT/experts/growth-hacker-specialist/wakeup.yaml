@@ -1,5 +1,25 @@
-id: WAKEUP-GrowthHackerSpecialist
-version: 1.0.0
-role: GrowthHackerSpecialist
-intents:
-- MKT:CAMPAIGN
+id: ARKAA08-WAKEUP-GROWTH_HACKER_SPECIALIST
+version: 3.0.0
+agent_id: growth-hacker-specialist
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.growth-hacker-specialist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.growth-hacker-specialist
+expert_ref: experts/growth-hacker-specialist/expert.yaml
+memory:
+  dir: ARKA_META/.system/.mem/growth-hacking/
+  index: ARKA_META/.system/.mem/growth-hacking/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/growth-hacker-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/growth-hacker-specialist/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: EXPERIMENT_CREATE
+  dispatch_mode: growth_hacking_mode
+client_ref: clients/ACME/client.yaml
+routing_ref: ARKA_ROUTING

@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-learning-development-strategist
+version: 3.0.0
+client: ACME
+agent_id: learning-development-strategist
+role: Stratégie de formation et développement des compétences
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.learning-development-strategist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.learning-development-strategist
+expert_ref: experts/learning-development-strategist/expert.yaml
+wakeup_ref: experts/learning-development-strategist/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- PROGRAM_CREATE
+- CURRICULUM_DESIGN
+- REPORT_CREATE
+- ASSESSMENT_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ANALYSIS_CREATE
+    dispatch_mode: learning_strategy_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/learning-development-strategist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/learning-development-strategist/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/learning-development/
+  index: ARKA_META/.system/.mem/learning-development/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: learning_strategy_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-LEARNING_DEVELOPMENT_STRATEGIST.yaml

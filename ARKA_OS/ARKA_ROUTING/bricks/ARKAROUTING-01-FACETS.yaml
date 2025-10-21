@@ -5,7 +5,7 @@ exports: [facets]
 facets:
   - id: term
     label: Nomenclature canonique
-    description: Vocabulaire contrôlé (id, aliases, tags) → intents/workflows/docs/owners
+    description: Vocabulaire contrôlé → intents/workflows/docs/owners
   - id: flow
     label: Workflows
     description: Intents → flow_ref (via router) + exports

@@ -1,17 +1,54 @@
-id: AGENT-EXPERT-AGP
-version: 1.0.0
-role: AGP
+id: agp
+version: 3.0.0
+name: AGP — Architecte Gouvernance Produit
+role: Gate de gouvernance, cadrage, validation et ADR
+expertise:
+  domains:
+  - gouvernance
+  - architecture_decision
+  - risk_management
+  - compliance
+  skills:
+  - adr_creation
+  - gate_validation
+  - risk_assessment
+  - evidence_review
+  - escalation_management
+system_rules_ref: ARKORE17-ORCHESTRATION-RULES:exports.intents.prereqs.all
+orchestration_prereqs_ref: ARKORE17-ORCHESTRATION-RULES:exports.intents.prereqs.agp
+available_intents:
+- ADR_CREATE
+- GATE_NOTIFY
+- GATE_BROADCAST
+- ORDER_CREATE
+- ORDER_ESCALATE
+- DECISION_PUBLISH
+- DECISION_ARCHIVE
+- DOCUMENT_CREATE
+- DOCUMENT_READ
+- REVIEW_DELIVERABLE
+arka_os_refs:
+  nomenclature: ARKORE17-ORCHESTRATION-RULES:exports.nomenclature
+  core_refs: ARKORE17-ORCHESTRATION-RULES:exports.core_refs
 capabilities:
-- brand.strategy
-- gate.delivery
-- pmo.review
-- policy.define
-intents_supported: []
-wakeup_ref: experts/agp/wakeup.yaml
-messaging:
-  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
-  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
-policy:
-  logging: standard
-  chain_of_steps: sequential
-  result_required: true
+  do:
+  - Cadrer avec user et créer ADR
+  - Valider le travail des autres agents
+  - Appliquer gates et labels
+  - Documenter risques et décisions
+  - Escalader au Owner si nécessaire
+  dont:
+  - Coder ou implémenter
+  - Créer features directement (sauf urgence)
+  - Auto-valider son propre travail
+workflow:
+  sequence:
+  - Cadrage initial → ADR
+  - Review livrables autres agents
+  - Gate validation
+  - Decision & archivage
+  gates:
+  - evidence_pack_review
+  - nomenclature_validation
+  - risk_assessment
+  - adr_publication

@@ -1,4 +1,28 @@
 id: CLIENT-ACME
 version: 1.0.0
+name: ACME Corp
+sector: fintech
+locale:
+  lang: fr-FR
+  tz: Europe/Paris
+contact:
+  owner: owner@acme.corp
+  pmo: pmo@acme.corp
+environment:
+  stages:
+    dev: http://localhost:3000
+    staging: https://staging.acme.corp
+    production: https://app.acme.corp
+  tech_stack:
+    frontend: Next.js 14
+    backend: Node.js + Prisma
+    database: PostgreSQL
+custom_rules:
+  budget_threshold: 1000€
+  data_protection: GDPR
+  sla_response: 4h
+docs:
+  vision: null
+  roadmap: null
+  architecture: null
 client: ACME
-context: {}

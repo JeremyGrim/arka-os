@@ -1,5 +1,37 @@
-id: WAKEUP-QATesteur
-version: 1.0.0
-role: QATesteur
-intents:
-- OPS:BUGFIX
+id: ARKAA08-WAKEUP-QA_TESTEUR
+version: 3.0.0
+agent_id: qa-testeur
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.qa-testeur
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.qa-testeur
+expert_ref: experts/qatesteur/expert.yaml
+project_context_ref: ARKAA21-PROJECT-CONTEXT:vars
+client_ref: clients/ACME/client.yaml
+memory:
+  dir: ARKA_META/.system/.mem/qa/
+  index: ARKA_META/.system/.mem/qa/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/qa-testeur/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/qa-testeur/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: TICKET_VALIDATE
+  dispatch_mode: validation_mode
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Validation rigoureuse sans données fictives
+  testing_approach:
+  - Risk-based testing
+  - 85-90% coverage target
+  - Real data only
+  priorities:
+  - Evidence pack contribution
+  - Pipeline validation
+  - Event Bus monitoring
+routing_ref: ARKA_ROUTING

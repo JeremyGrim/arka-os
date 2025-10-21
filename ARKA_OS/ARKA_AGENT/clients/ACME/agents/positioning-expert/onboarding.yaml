@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-positioning-expert
+version: 3.0.0
+client: ACME
+agent_id: positioning-expert
+role: Adaptation et optimisation des assets commerciaux
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.positioning-expert
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.positioning-expert
+expert_ref: experts/positioning-expert/expert.yaml
+wakeup_ref: experts/positioning-expert/wakeup.yaml
+supported_intents:
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- TEMPLATE_CREATE
+- ANALYSIS_CREATE
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: DOCUMENT_CREATE
+    dispatch_mode: positioning_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/positioning-expert/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/positioning-expert/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/positioning-expert/
+  index: ARKA_META/.system/.mem/positioning-expert/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: positioning_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-POSITIONING_EXPERT.yaml

@@ -1,17 +1,36 @@
-id: WAKEUP-TechArchitecte
-version: 1.0.0
-role: TechArchitecte
-intents:
-- AUDIT:ACCOUNTING
-- AUDIT:COMPLIANCE
-- AUDIT:FEATURE
-- AUDIT:FILES
-- AUDIT:RGPD
-- AUDIT:TREE
-- DELIVERY:EPIC
-- DELIVERY:FEATURE
-- DELIVERY:US
-- DOC:ADR
-- DOC:CONTENT
-- OPS:DATA_REPORT
-- PEOPLE:HR_CHANGE
+id: ARKAA08-WAKEUP-TECHNICAL_ARCHITECT
+version: 3.0.0
+agent_id: technical-architect
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.technical-architect
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.technical_architect
+expert_ref: experts/tech-architecte/expert.yaml
+project_context_ref: ARKAA21-PROJECT-CONTEXT:vars
+client_ref: clients/ACME/client.yaml
+memory:
+  dir: ARKA_META/.system/.mem/technical-architect/
+  index: ARKA_META/.system/.mem/technical-architect/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/technical-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/technical-architect/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ADR_CREATE
+  dispatch_mode: design_first
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Architecture scalable et maintenable
+  priorities:
+  - Séparation des responsabilités
+  - Patterns réutilisables
+  - Performance optimale
+  constraints:
+  - No over-engineering
+  - KISS principle
+routing_ref: ARKA_ROUTING

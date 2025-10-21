@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-growth-hacker-specialist
+version: 3.0.0
+client: ACME
+agent_id: growth-hacker-specialist
+role: Croissance rapide et acquisition virale
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.growth-hacker-specialist
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.growth-hacker-specialist
+expert_ref: experts/growth-hacker-specialist/expert.yaml
+wakeup_ref: experts/growth-hacker-specialist/wakeup.yaml
+supported_intents:
+- EXPERIMENT_CREATE
+- ANALYSIS_CREATE
+- TEST_RUN
+- REPORT_CREATE
+- AUTOMATION_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: EXPERIMENT_CREATE
+    dispatch_mode: growth_hacking_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/growth-hacker-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/growth-hacker-specialist/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/growth-hacking/
+  index: ARKA_META/.system/.mem/growth-hacking/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: growth_hacking_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-GROWTH_HACKER_SPECIALIST.yaml

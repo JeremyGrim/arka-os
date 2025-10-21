@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-mission-qualifier
+version: 3.0.0
+client: ACME
+agent_id: mission-qualifier
+role: Qualification et scoring d'opportunités
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.mission-qualifier
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.mission-qualifier
+expert_ref: experts/mission-qualifier/expert.yaml
+wakeup_ref: experts/mission-qualifier/wakeup.yaml
+supported_intents:
+- ANALYSIS_CREATE
+- REPORT_CREATE
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- DECISION_PUBLISH
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: ANALYSIS_CREATE
+    dispatch_mode: qualification_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/mission-qualifier/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/mission-qualifier/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/mission-qualifier/
+  index: ARKA_META/.system/.mem/mission-qualifier/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: qualification_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-MISSION_QUALIFIER.yaml

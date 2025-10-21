@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-pipeline-tracker
+version: 3.0.0
+client: ACME
+agent_id: pipeline-tracker
+role: Suivi et reporting pipeline commercial
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.pipeline-tracker
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.pipeline-tracker
+expert_ref: experts/pipeline-tracker/expert.yaml
+wakeup_ref: experts/pipeline-tracker/wakeup.yaml
+supported_intents:
+- REPORT_CREATE
+- REPORT_UPDATE
+- ANALYSIS_CREATE
+- DASHBOARD_UPDATE
+- NOTIFICATION_SEND
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: REPORT_CREATE
+    dispatch_mode: tracking_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/pipeline-tracker/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/pipeline-tracker/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/pipeline-tracker/
+  index: ARKA_META/.system/.mem/pipeline-tracker/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: tracking_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-PIPELINE_TRACKER.yaml

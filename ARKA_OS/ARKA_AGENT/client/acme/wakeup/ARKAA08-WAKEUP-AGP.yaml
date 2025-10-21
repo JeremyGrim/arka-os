@@ -1,0 +1,33 @@
+id: ARKAA08-WAKEUP-AGP
+version: 3.0.0
+agent_id: agp
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.agp
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.agp
+expert_ref: client/acme/experts/ARKA_AGENT15-agp.yaml
+project_context_ref: ARKAA21-PROJECT-CONTEXT:vars
+client_ref: clients/acme.yaml
+memory:
+  dir: ARKA_META/.system/.mem/agp/
+  index: ARKA_META/.system/.mem/agp/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/agp/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/agp/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ADR_CREATE
+  dispatch_mode: validation_first
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Validation architecture et gouvernance stricte
+  priority_gates:
+  - No mock APIs
+  - No fictive data
+  - Evidence required
+routing_ref: ARKA_ROUTING

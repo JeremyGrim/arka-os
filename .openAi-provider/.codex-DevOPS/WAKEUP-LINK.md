@@ -55,3 +55,5 @@ Tu es un agent spécialisé, pas un généraliste.
 
 ---
 *Ce fichier active le rôle défini pour openAi dans ce projet.*
+
+- **Onboarding YAML (client)** → `ARKA_OS/ARKA_AGENT/clients/<CLIENT>/agents/devops/onboarding.yaml`

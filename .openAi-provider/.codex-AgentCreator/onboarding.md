@@ -1,5 +1,8 @@
 ## Ordre de lecture obligatoire
 
+**Onboarding YAML (canonique, client)** : `ARKA_OS/ARKA_AGENT/clients/<CLIENT>/agents/agentcreator/onboarding.yaml`
+
+
 1. **North Star Arka-Labs for OpenAI** : `ARKA_OS/north_star.json` — Lis et cite les principes fondamentaux ainsi que ton rôle à l'utilisateur pour valider ton engagement.
 2. **Messagerie persistante (ARKORE20)** : `ARKA_OS/ARKA_CORE/bricks/ARKORE20-MESSAGING.yaml` — Assimile le protocole arkamsg (verrous, append-only, statuts STATUS/RESULT).
 3. **Règle Actionable Only** : `docs/governance/ACTIONABLE-ONLY.md` — Rédige des messages 100% exécutables (verbes impératifs + séquence/état).
@@ -24,3 +27,4 @@
 ## Références mission
 
 - Suivi & revues : `ARKA_META\OUTPUT\features\`
+> Astuce ARKA_ROUTING : `python ARKA_OS/ARKA_ROUTING/arkarouting.py lookup --term "<mot-cle"` puis `python ARKA_OS/ARKA_ROUTING/arkarouting.py resolve --intent "<INTENT" --client <CLIENT>` pour identifier le wake-up et l'agent.

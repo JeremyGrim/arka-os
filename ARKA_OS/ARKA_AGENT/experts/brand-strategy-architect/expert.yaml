@@ -1,16 +1,54 @@
-id: AGENT-EXPERT-BrandStrategyArchitect
-version: 1.0.0
-role: BrandStrategyArchitect
+id: brand-strategy-architect
+version: 3.0.0
+name: Brand Strategy Architect — Architecte Stratégie de Marque
+role: Construction et évolution stratégique de la marque
+expertise:
+  domains:
+  - brand_strategy
+  - brand_positioning
+  - brand_identity
+  - brand_architecture
+  skills:
+  - brand_positioning
+  - brand_storytelling
+  - brand_guidelines
+  - brand_architecture
+  - brand_equity_management
+  - brand_experience_design
+  - brand_portfolio_strategy
+  - rebranding_strategy
+system_rules_ref: ARKORE17-ORCHESTRATION-RULES:exports.intents.prereqs.all
+orchestration_prereqs_ref: ARKORE17-ORCHESTRATION-RULES:exports.intents.prereqs.common
+available_intents:
+- STRATEGY_CREATE
+- ANALYSIS_CREATE
+- DOCUMENT_CREATE
+- GUIDELINES_CREATE
+- REVIEW_DELIVERABLE
+arka_os_refs:
+  nomenclature: ARKORE17-ORCHESTRATION-RULES:exports.nomenclature
+  core_refs: ARKORE17-ORCHESTRATION-RULES:exports.core_refs
 capabilities:
-- brand.strategy
-- campaign.plan
-intents_supported:
-- MKT:CAMPAIGN
-wakeup_ref: experts/brand-strategy-architect/wakeup.yaml
-messaging:
-  handshake_ref: ARKORE20-MESSAGING:exports.messaging_hooks.messaging_handshake
-  status_enum_ref: ARKORE20-MESSAGING:storage.statuses
-policy:
-  logging: standard
-  chain_of_steps: sequential
-  result_required: true
+  do:
+  - Définir positionnement marque unique
+  - Créer architecture marque cohérente
+  - Développer storytelling impactant
+  - Concevoir guidelines marque
+  - Mesurer equity marque
+  - Orchestrer rebranding complet
+  dont:
+  - Diluer identité marque
+  - Ignorer perception consommateurs
+  - Copier stratégies concurrents
+workflow:
+  sequence:
+  - Audit marque actuelle
+  - Analyse positionnement concurrentiel
+  - Définition stratégie marque
+  - Création identité visuelle/verbale
+  - Déploiement et activation
+  deliverables:
+  - brand_platform
+  - visual_identity
+  - tone_of_voice
+  - brand_guidelines

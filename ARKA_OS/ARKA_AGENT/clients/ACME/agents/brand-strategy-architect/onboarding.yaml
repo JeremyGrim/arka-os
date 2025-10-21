@@ -1,0 +1,39 @@
+id: ONBOARDING-ACME-brand-strategy-architect
+version: 3.0.0
+client: ACME
+agent_id: brand-strategy-architect
+role: Construction et évolution stratégique de la marque
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.brand-strategy-architect
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.brand-strategy-architect
+expert_ref: experts/brand-strategy-architect/expert.yaml
+wakeup_ref: experts/brand-strategy-architect/wakeup.yaml
+supported_intents:
+- STRATEGY_CREATE
+- ANALYSIS_CREATE
+- DOCUMENT_CREATE
+- GUIDELINES_CREATE
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: STRATEGY_CREATE
+    dispatch_mode: brand_strategy_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/brand-strategy-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/brand-strategy-architect/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/brand-strategy/
+  index: ARKA_META/.system/.mem/brand-strategy/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: brand_strategy_mode
+context_refs:
+  client: clients/ACME/client.yaml
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-BRAND_STRATEGY_ARCHITECT.yaml

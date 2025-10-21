@@ -1,0 +1,51 @@
+id: ONBOARDING-ACME-ux-ui-design-guardian
+version: 3.0.0
+client: ACME
+agent_id: ux-ui-design-guardian
+role: Design, ergonomie et expérience utilisateur
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.ux-ui-design-guardian
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.ux-ui-design-guardian
+expert_ref: experts/uxuidesign-guardian/expert.yaml
+wakeup_ref: experts/uxuidesign-guardian/wakeup.yaml
+supported_intents:
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- ANALYSIS_CREATE
+- REPORT_CREATE
+- REVIEW_DELIVERABLE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: DOCUMENT_CREATE
+    dispatch_mode: user_first
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/ux-ui-design-guardian/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/ux-ui-design-guardian/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/ux-ui/
+  index: ARKA_META/.system/.mem/ux-ui/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: user_first
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Expérience consultants virtuels pour PME
+  priorities:
+  - Simplicité interface
+  - Parcours intuitifs
+  - Accessibilité maximale
+  constraints:
+  - No demo-only mockups
+  - Real user flows
+  - Mobile-first approach
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-UX_UI_DESIGN_GUARDIAN.yaml

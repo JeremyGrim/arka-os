@@ -1,0 +1,22 @@
+id: ARKAA10-CONTEXT
+version: 1.0.0
+title: "Contexte client (secteur, vocabulaire, risques, locale)"
+exports:
+  sector: fintech                 # ex: fintech, health, retail
+  locale:
+    lang: fr-FR
+    tz: Europe/Paris
+  glossary:
+    KYC: "Know Your Customer"
+    KYB: "Know Your Business"
+  risk_tolerance: medium          # low|medium|high
+  data_classes:                   # pour la sensibilité & contrôles
+    - PII
+    - Financial
+  naming_overrides:               # mappages locaux sans casser le moteur
+    order -> ticket
+    request -> ticket
+  acceptance_overrides_ref: "ARKORE05-EXECUTION-SPECS:acceptance"  # + barèmes locaux si besoin
+contracts:
+  invariants:
+    - "no override of ARKORE** rule contents (refs-only)"

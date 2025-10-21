@@ -1,16 +1,78 @@
 version: 1
 roles:
-  Archiviste:
-    sessions: ["arka-arka-labs-b-Archiviste-codex"]
-  PMO:
-    sessions: ["arka-arka-labs-b-PMO-codex"]
-  LD:
-    sessions: ["arka-arka-labs-b-LD-codex"]
-  FSX:
-    sessions: ["arka-arka-labs-b-FSX-codex"]
-
+- LD
+- PMO
+- Archiviste
+- FSX
+- AGP
+- AgentCreator
+- ArchivistOrchestrator
+- BrandStrategy
+- CompensationBenefits
+- ContentStrategy
+- DevOPS
+- EmployeeExperience
+- Gemini
+- GrowthHacker
+- HRTransformation
+- LearningDevelopment
+- MarketResearch
+- MarketingAnalytics
+- MissionQualifier
+- OutreachStrategist
+- PipelineTracker
+- PositioningExpert
+- QA
+- SW
+- Scribe
+- SecurityCompliance
+- TechArchitect
+- UX-UI
 aliases:
-  arka-agent00-core-archivist: "Archiviste"
-  fsx-extreme-fullstack: "FSX"
-  pmo: "PMO"
-  ld: "LD"
+  arka-agent00-core-archivist: Archiviste
+  fsx-extreme-fullstack: FSX
+  pmo: PMO
+  ld: LD
+  marketinganalytics: MarketingAnalytics
+  m: MarketingAnalytics
+  compensationbenefits: CompensationBenefits
+  c: CompensationBenefits
+  agp: AGP
+  a: AGP
+  qa: QA
+  q: QA
+  scribe: Scribe
+  s: Scribe
+  devops: DevOPS
+  d: DevOPS
+  outreachstrategist: OutreachStrategist
+  o: OutreachStrategist
+  gemini: Gemini
+  g: Gemini
+  p: PMO
+  sw: SW
+  employeeexperience: EmployeeExperience
+  e: EmployeeExperience
+  positioningexpert: PositioningExpert
+  fsx: FSX
+  f: FSX
+  pipelinetracker: PipelineTracker
+  hrtransformation: HRTransformation
+  h: HRTransformation
+  ux-ui: UX-UI
+  uxui: UX-UI
+  uu: UX-UI
+  agentcreator: AgentCreator
+  archiviste: Archiviste
+  securitycompliance: SecurityCompliance
+  contentstrategy: ContentStrategy
+  learningdevelopment: LearningDevelopment
+  l: LearningDevelopment
+  growthhacker: GrowthHacker
+  techarchitect: TechArchitect
+  t: TechArchitect
+  missionqualifier: MissionQualifier
+  archivistorchestrator: ArchivistOrchestrator
+  brandstrategy: BrandStrategy
+  b: BrandStrategy
+  marketresearch: MarketResearch

@@ -1,12 +1,25 @@
-id: WAKEUP-MissionQualifier
-version: 1.0.0
-role: MissionQualifier
-intents:
-- AUDIT:ACCOUNTING
-- AUDIT:COMPLIANCE
-- AUDIT:FEATURE
-- AUDIT:FILES
-- AUDIT:RGPD
-- AUDIT:TREE
-- DELIVERY:US
-- OPS:BUGFIX
+id: ARKAA08-WAKEUP-MISSION_QUALIFIER
+version: 3.0.0
+agent_id: mission-qualifier
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.mission-qualifier
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.mission-qualifier
+expert_ref: experts/mission-qualifier/expert.yaml
+memory:
+  dir: ARKA_META/.system/.mem/mission-qualifier/
+  index: ARKA_META/.system/.mem/mission-qualifier/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/mission-qualifier/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/mission-qualifier/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: qualification_mode
+client_ref: clients/ACME/client.yaml
+routing_ref: ARKA_ROUTING

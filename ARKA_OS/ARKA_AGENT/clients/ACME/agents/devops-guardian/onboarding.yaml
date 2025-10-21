@@ -1,0 +1,53 @@
+id: ONBOARDING-ACME-devops-guardian
+version: 3.0.0
+client: ACME
+agent_id: devops-guardian
+role: Infrastructure, CI/CD et gardien de l'arborescence
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.devops-guardian
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.devops-guardian
+expert_ref: experts/dev-ops-guardian/expert.yaml
+wakeup_ref: experts/dev-ops-guardian/wakeup.yaml
+supported_intents:
+- VALIDATE_NAMING
+- ARCHIVE_CAPTURE
+- WORKFLOW_PLAN
+- DOCUMENT_CREATE
+- REPORT_CREATE
+- TICKET_CREATE
+- TICKET_UPDATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_expert
+    - check_messages
+    default_intent: VALIDATE_NAMING
+    dispatch_mode: guardian_mode
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/devops-guardian/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/devops-guardian/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/devops/
+  index: ARKA_META/.system/.mem/devops/index.json
+policy:
+  ack_policy: immediate
+  dispatch_mode: guardian_mode
+context_refs:
+  project: ARKAA21-PROJECT-CONTEXT:vars
+  client: clients/ACME/client.yaml
+mission_context:
+  project: Construction Arka-labs avec ARKA_OS
+  focus: Gardien nomenclature et automatisation
+  guardianship:
+  - Validation stricte arborescence
+  - Protection branches principales
+  - CI/CD sans intervention manuelle
+  monitoring:
+  - Event Bus
+  - Memory persistence
+  - Artifacts archiving
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-DEVOPS_GUARDIAN.yaml

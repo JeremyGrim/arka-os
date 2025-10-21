@@ -1,0 +1,24 @@
+id: ARKAA08-WAKEUP-OUTREACH_STRATEGIST
+version: 3.0.0
+agent_id: outreach-strategist
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.outreach-strategist
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.outreach-strategist
+expert_ref: client/acme/experts/ARKA_AGENT10-outreach-strategist.yaml
+memory:
+  dir: ARKA_META/.system/.mem/outreach-strategist/
+  index: ARKA_META/.system/.mem/outreach-strategist/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/outreach-strategist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/outreach-strategist/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: DOCUMENT_CREATE
+  dispatch_mode: outreach_mode
+routing_ref: ARKA_ROUTING

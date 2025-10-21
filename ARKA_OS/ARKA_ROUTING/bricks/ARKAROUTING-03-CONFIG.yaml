@@ -3,11 +3,7 @@ version: 1.0.0
 exports:
 - paths
 - options
-paths:
-  os_root: ../ARKA_OS
-  core: ../ARKA_OS/ARKA_CORE
-  flow: ../ARKA_OS/ARKA_FLOW
-  agents: ../ARKA_OS/ARKA_AGENT
+paths: {}
 options:
   doc_frontmatter_key: arkaref
   max_results: 50

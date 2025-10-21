@@ -1,0 +1,24 @@
+id: ARKAA08-WAKEUP-COMPENSATION_BENEFITS_ANALYST
+version: 3.0.0
+agent_id: compensation-benefits-analyst
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.compensation-benefits-analyst
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.compensation-benefits-analyst
+expert_ref: client/acme/experts/ARKA_AGENT22-compensation-benefits-analyst.yaml
+memory:
+  dir: ARKA_META/.system/.mem/compensation-benefits/
+  index: ARKA_META/.system/.mem/compensation-benefits/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/compensation-benefits-analyst/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/compensation-benefits-analyst/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: compensation_analysis_mode
+routing_ref: ARKA_ROUTING

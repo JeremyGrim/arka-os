@@ -1,0 +1,38 @@
+id: ONBOARDING-ACME-spec-writer
+version: 1.0.0
+client: ACME
+agent_id: spec-writer
+role: Transformer ADR en spécifications techniques exécutables
+profile_ref: ARKPR08-PROFILES-CATALOG:profiles.spec-writer
+capabilities_ref: clients/ACME/ARKAA19-AGENT-CAPABILITIES.yaml#agents.spec-writer
+expert_ref: experts/spec-writer/expert.yaml
+wakeup_ref: experts/spec-writer/wakeup.yaml
+supported_intents:
+- FEATURE_CREATE
+- EPIC_CREATE
+- US_CREATE
+- SPEC_CREATE
+- DOCUMENT_CREATE
+runtime:
+  startup:
+    sequence:
+    - resolve_profile
+    - mount_memory
+    - load_capabilities
+    - load_keys_catalog
+    - check_messages
+    default_intent: SPEC_CREATE
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/spec-writer/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/spec-writer/outbox.yaml
+  ack_policy: immediate
+memory:
+  dir: ARKA_META/.system/.mem/spec-writer/
+  index: ARKA_META/.system/.mem/spec-writer/index.json
+policy:
+  ack_policy: immediate
+context_refs:
+  client: clients/ACME/client.yaml
+  keys_catalog: ARKORE11-KEYS-ANNUAIRE:keys
+source_wakeup: client/acme/wakeup/ARKAA08-WAKEUP-SPEC_WRITER.yaml
