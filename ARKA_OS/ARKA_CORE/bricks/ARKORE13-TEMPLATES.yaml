@@ -1,0 +1,89 @@
+id: ARKORE13-TEMPLATES
+version: 1.2.0
+title: "Templates d’artefacts"
+summary: >
+  Modèles Markdown minimaux, non-normatifs; le contrôle reste dans ARKORE05/06/08/09.
+maintainers: ["pmo", "agp"]
+sources: ["V4_CONFIG_EXAMPLES.md"]
+exports:
+  templates:
+    feature:
+      readme: |
+        # ${featureId} — ${title}
+        ## Contexte
+        - Objectif : ...
+        ## Portée
+        - Inclus : ...
+        - Exclus : ...
+        ## KPIs
+        - Qualité / Perf / Coût
+    epic:
+      readme: |
+        # ${epicId} — ${title}
+        ## Lien Feature
+        - ${featureId}
+        ## Découpage
+        - US candidates : ...
+    us:
+      readme: |
+        # ${usId} — ${title}
+        ## Description
+        - En tant que ... je veux ... afin de ...
+        ## Critères d’acceptation (référence ARKORE05)
+        - doc_complete: ${acceptance.doc_complete}
+        - functional_ok: ${acceptance.functional_ok}
+        - security_baseline_ok: ${acceptance.security_baseline_ok}
+        - performance_ok: ${acceptance.performance_ok}
+      acceptance_checklist: |
+        - [ ] Nommage conforme (regex.user_story)
+        - [ ] DOR ok (dépendances connues)
+        - [ ] Sécurité baseline ok
+        - [ ] Budget perf respecté
+    ticket:
+      work: |
+        # ${ticketId} — ${title}
+        ## Tâches
+        - [ ] ...
+        ## Notes
+        - ...
+        ## Evidence à livrer
+        - SUMMARY.md / TESTS.md / PERF.md / approvals.json
+    change_request:
+      default: |
+        # ${crId} — ${title}
+        - Cible : ${targetId}
+        - Type : ${targetType}
+        - Date : ${date}
+
+        ## Description
+        ${description}
+    agp:
+      mission_return: |
+        **Mission Update**
+        - Scope : ${scope}
+        - Analyse : ${analysis}
+        - Décisions : ${decisions}
+        - Prochaines étapes (assignées PMO) : ${next_steps}
+      owner_confirmation: |
+        **Owner Confirmation Request**
+        - Sujet : ${subject}
+        - Justification : ${rationale}
+        - Risque/Impact : ${risk}
+        - Proposition : ${proposal}
+      review: |
+        # Review ${reviewId}
+        - Feature : ${featureId}
+        - Statut : ${status}
+        - Date : ${date}
+        - Reviewer : ${reviewer}
+
+        ## Commentaires
+        ${comments}
+provides: ["templates"]
+requires: ["ARKORE05-EXECUTION-SPECS@>=1.0.0"]
+contracts:
+  invariants:
+    - "templates are content-only (no rules)"
+  schema: "jsonschema://arka/templates/v1"
+change_policy:
+  compatibility: semver

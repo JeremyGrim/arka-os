@@ -1,0 +1,29 @@
+ARKPR03-ACTION-SETS:
+  file: bricks/ARKPR03-ACTION-SETS.yaml
+  version: 1.2.0
+  exports: [action_sets]
+
+ARKPR04-PATH-SETS:
+  file: bricks/ARKPR04-PATH-SETS.yaml
+  version: 1.2.0
+  exports: [path_sets, deny_sets]
+
+ARKPR05-RIGHTS:
+  file: bricks/ARKPR05-RIGHTS.yaml
+  version: 1.2.0
+  exports: [rights]
+
+ARKPR06-LIMITS:
+  file: bricks/ARKPR06-LIMITS.yaml
+  version: 1.1.0
+  exports: [limits]
+
+ARKPR07-AUTHZ-POLICY:
+  file: bricks/ARKPR07-AUTHZ-POLICY.yaml
+  version: 1.0.0
+  exports: [policy]
+
+ARKPR08-PROFILES-CATALOG:
+  file: bricks/ARKPR08-PROFILES-CATALOG.yaml
+  version: 1.1.0
+  exports: [profiles]

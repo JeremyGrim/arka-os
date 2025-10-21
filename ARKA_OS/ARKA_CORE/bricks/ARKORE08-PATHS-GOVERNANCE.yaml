@@ -1,0 +1,152 @@
+id: ARKORE08-PATHS-GOVERNANCE
+version: 3.0.0
+title: "Chemins, routes & organisation ARKA_META"
+summary: >
+  Architecture isolée d'ARKA dans un dossier unique `ARKA_META/` contenant
+  le système, les entrées client et tous les artefacts générés. Définit les
+  racines, les chemins dérivés, les templates et les règles de routage.
+maintainers: ["agp"]
+sources:
+  - "08-chemins-gouvernance-fondamentaux.md"
+  - "chaine-de-valeur-fonctionnel-exemple.md"
+exports:
+  repo_layout:
+    tree:
+      ARKA_META/: { desc: "Racine isolée d'ARKA" }
+      ARKA_META/.system/: { desc: "Runtime, index, configuration et mémoires" }
+      ARKA_META/INPUT/: { desc: "Documents client en entrée" }
+      ARKA_META/OUTPUT/: { desc: "Artefacts générés par ARKA" }
+    ownership:
+      ARKA_META/.system/: ["agp"]
+      ARKA_META/INPUT/: ["pmo"]
+      ARKA_META/OUTPUT/: ["pmo", "execution_agents"]
+  roots:
+    arka_root: "${ARKA_META_PATH:-./ARKA_META}"
+  system:
+    root: "${arka_root}/.system/"
+    memory: "${arka_root}/.system/.mem/"
+    memory_agent: "${arka_root}/.system/.mem/{agent}/"
+    index: "${arka_root}/.system/.index/"
+    config: "${arka_root}/.system/.config/"
+    locks: "${arka_root}/.system/.locks/"
+  input:
+    root: "${arka_root}/INPUT/"
+    vision: "${arka_root}/INPUT/vision-produit.md"
+    plan_directeur: "${arka_root}/INPUT/plan-directeur.md"
+    roadmap: "${arka_root}/INPUT/roadmap.md"
+    context: "${arka_root}/INPUT/context/"
+    context_files:
+      glossaire: "${arka_root}/INPUT/context/glossaire.md"
+      contraintes: "${arka_root}/INPUT/context/contraintes.md"
+      stakeholders: "${arka_root}/INPUT/context/stakeholders.md"
+  output:
+    root: "${arka_root}/OUTPUT/"
+    features: "${arka_root}/OUTPUT/features/"
+    deliverables: "${arka_root}/OUTPUT/deliverables/"
+    governance: "${arka_root}/OUTPUT/governance/"
+    archives: "${arka_root}/OUTPUT/archives/"
+  deliverables:
+    documents: "${arka_root}/OUTPUT/deliverables/documents/"
+    reports: "${arka_root}/OUTPUT/deliverables/reports/"
+    analysis: "${arka_root}/OUTPUT/deliverables/analysis/"
+    plans: "${arka_root}/OUTPUT/deliverables/plans/"
+    contracts: "${arka_root}/OUTPUT/deliverables/contracts/"
+  governance:
+    orders: "${arka_root}/OUTPUT/governance/orders/"
+    decisions: "${arka_root}/OUTPUT/governance/decisions/"
+  paths:
+    features_root: "${arka_root}/OUTPUT/features/"
+    epics_root: "${arka_root}/OUTPUT/features/{feature}/EPICS/"
+    user_stories_root: "${arka_root}/OUTPUT/features/{feature}/EPICS/{epic}/US/"
+    tickets_root: "${arka_root}/OUTPUT/features/{feature}/EPICS/{epic}/US/{us}/tickets/"
+    evidence_root: "${arka_root}/OUTPUT/features/{feature}/EPICS/{epic}/US/{us}/evidence/"
+    deliverables:
+      documents_root: "${arka_root}/OUTPUT/deliverables/documents/"
+      reports_root: "${arka_root}/OUTPUT/deliverables/reports/"
+      analysis_root: "${arka_root}/OUTPUT/deliverables/analysis/"
+      plans_root: "${arka_root}/OUTPUT/deliverables/plans/"
+      contracts_root: "${arka_root}/OUTPUT/deliverables/contracts/"
+    governance:
+      orders_root: "${arka_root}/OUTPUT/governance/orders/"
+      decisions_root: "${arka_root}/OUTPUT/governance/decisions/"
+  path_templates:
+    feature_dir: "${arka_root}/OUTPUT/features/${featureId}/"
+    feature_cr_dir: "${arka_root}/OUTPUT/features/${featureId}/CR/"
+    feature_reviews_dir: "${arka_root}/OUTPUT/features/${featureId}/review-pass-agp/"
+    epic_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/"
+    epic_cr_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/CR/"
+    us_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/US/${usId}/"
+    ticket_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/US/${usId}/tickets/${ticketId}/"
+    evidence_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/US/${usId}/evidence/"
+    review_evidence_dir: "${arka_root}/OUTPUT/features/${featureId}/EPICS/${epicId}/US/${usId}/evidence/"
+  memory_isolation:
+    claude: "${arka_root}/.system/.mem/claude/"
+    codex: "${arka_root}/.system/.mem/codex/"
+    merlin: "${arka_root}/.system/.mem/merlin/"
+  routing:
+    rules:
+      on_new_feature:
+        create:
+          - ${feature_dir}
+          - ${feature_dir}CR/
+          - ${feature_dir}EPICS/
+          - ${feature_dir}review-pass-agp/
+          - ${feature_dir}README.md
+        require:
+          - "name matches ARKORE09-NAMING-PATTERNS:regex.feature"
+      on_new_epic:
+        create:
+          - ${epic_dir}
+          - ${epic_dir}CR/
+          - ${epic_dir}US/
+          - ${epic_dir}README.md
+        require:
+          - "name matches ARKORE09-NAMING-PATTERNS:regex.epic"
+      on_new_user_story:
+        create:
+          - ${us_dir}
+          - ${us_dir}evidence/
+          - ${us_dir}tickets/
+          - ${us_dir}README.md
+        require:
+          - "name matches ARKORE09-NAMING-PATTERNS:regex.user_story"
+      on_new_ticket:
+        create:
+          - ${ticket_dir}
+          - ${ticket_dir}WORK.md
+          - ${ticket_dir}.todo.md
+        require:
+          - "name matches ARKORE09-NAMING-PATTERNS:regex.ticket"
+      on_close_ticket:
+        move:
+          - src: ${ticket_dir}
+            dst: "${us_dir}evidence/"
+            keep: ["*_SUMMARY.md", "*_TESTS.md", "*_PERF.md", "approvals.json"]
+  globs:
+    docs: ["**/*.md", "**/*.mdx"]
+    configs: ["**/*.yaml", "**/*.yml", "**/*.json"]
+    code: ["**/*.py", "**/*.ts", "**/*.js", "**/*.sh"]
+    secrets_forbidden: ["**/*.pem", "**/*.key", "**/.env*"]
+  validations:
+    filename_policy:
+      no_spaces: true
+      allowed_charset: "[a-z0-9-_.]"
+      case: "lower + prefixes (FEAT/EPIC/US/TCK)"
+    structure_policy:
+      max_depth_from_us: 4
+      required_files_in_us: ["README.md"]
+    naming_refs:
+      feature_regex_ref: "ARKORE09-NAMING-PATTERNS:regex.feature"
+      epic_regex_ref: "ARKORE09-NAMING-PATTERNS:regex.epic"
+      us_regex_ref: "ARKORE09-NAMING-PATTERNS:regex.user_story"
+      ticket_regex_ref: "ARKORE09-NAMING-PATTERNS:regex.ticket"
+provides: ["repo_layout", "roots", "system", "input", "output", "deliverables", "governance", "paths", "path_templates", "routing", "memory_isolation"]
+requires: ["ARKORE09-NAMING-PATTERNS@>=2.0.0"]
+contracts:
+  invariants:
+    - "all roots end with '/'"
+    - "no filename contains spaces"
+    - "routing rules reference regex from ARKORE09 only (no local duplicates)"
+  schema: "jsonschema://arka/paths-governance/v3"
+change_policy:
+  compatibility: semver

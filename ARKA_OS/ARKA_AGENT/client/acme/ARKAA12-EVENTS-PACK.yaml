@@ -1,0 +1,18 @@
+id: ARKAA12-EVENTS-PACK
+version: 1.0.0
+override:
+  ARKORE16-EVENT-BUS:
+    dispatch:
+      local:   { base_dir: "scripts/handlers/" }
+      webhook: { retries: 2, backoff_ms: 800 }
+    subscriptions:
+      - on: US_CREATED
+        using: local
+        run: "us_created__issue_links.js"
+        args: ["--provider","github"]
+      - on: OWNER_CONFIRMATION_REQUESTED
+        using: webhook
+        run: "${SLACK_WEBHOOK}"
+      - on: DELIVERY_RECEIVED
+        using: local
+        run: "delivery_received__adr_snapshot.js"

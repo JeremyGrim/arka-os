@@ -1,0 +1,16 @@
+id: TESTS_EVENTS_SUBSCRIPTIONS
+version: 1.1.0
+title: "Events — Abonnements (sans SSE)"
+cases:
+  - id: "notify_e2e_delivery"
+    given: "événement notify v1 inséré dans le journal local"
+    then:
+      - "daemon unique le consomme"
+      - "soumission tmux conforme profil Codex (ligne "" vue)"
+      - "état = delivered"
+  - id: "missing_session_block_optionA"
+    given: "session absente ou hors allow-list"
+    then:
+      - "état = failed (missing_session)"
+      - "retour expéditeur + escalade PMO/Owner"
+      - "aucune session créée"

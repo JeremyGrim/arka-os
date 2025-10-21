@@ -1,0 +1,41 @@
+id: ARKPR08-PROFILES-CATALOG
+version: 1.1.0
+title: "Profils — Catalogue de types (mapping droits + limites)"
+exports:
+  profiles:
+    technical-architect:            { rights: architect_rights,           limits: moderate, tags: [architecture, structure, acceptance] }
+    lead-dev-batisseur:             { rights: lead_dev_rights,            limits: strict,   tags: [delivery, tickets, e2e] }
+    devops-guardian:                { rights: devops_rights,              limits: strict,   tags: [ci-cd, ops, delivery] }
+    ux-ui-design-guardian:          { rights: ux_guardian_rights,         limits: moderate, tags: [ux, validation] }
+    core-archivist:                 { rights: core_archivist_rights,      limits: moderate, tags: [core, guardian, governance] }
+    arka-archivist-orchestrator:    { rights: core_archivist_rights,      limits: moderate, tags: [archivist, orchestrator] }
+    arka-product-manager-officer:   { rights: pmo_rights,                 limits: moderate, tags: [pmo, planning, governance] }
+    arka-scribe:                    { rights: scribe_rights,              limits: moderate, tags: [scribe, documentation, evidence] }
+    brand-strategy-architect:       { rights: brand_strategy_architect_rights,       limits: moderate, tags: [brand, strategy, positioning] }
+    market-research-specialist:     { rights: market_research_rights,     limits: moderate, tags: [research, market, discovery] }
+    content-strategy-manager:       { rights: content_strategy_manager_rights,       limits: moderate, tags: [content, strategy, storytelling] }
+    employee-experience-designer:   { rights: employee_experience_designer_rights,   limits: moderate, tags: [hr, experience, journey] }
+    compensation-benefits-analyst:  { rights: compensation_benefits_analyst_rights,  limits: moderate, tags: [hr, compensation, benefits] }
+    growth-hacker-specialist:       { rights: growth_hacker_specialist_rights,       limits: moderate, tags: [growth, acquisition, experiments] }
+    hr-transformation-specialist:   { rights: hr_transformation_specialist_rights,   limits: moderate, tags: [hr, transformation, change] }
+    learning-development-strategist: { rights: learning_development_strategist_rights, limits: moderate, tags: [hr, learning, enablement] }
+    marketing-analytics-expert:     { rights: marketing_analytics_expert_rights,     limits: moderate, tags: [marketing, analytics, data] }
+    gemini-owner-sourcing:          { rights: sourcing_specialist_rights,             limits: moderate, tags: [sourcing, partnerships, research] }
+    mission-qualifier:              { rights: mission_qualifier_rights,   limits: moderate, tags: [mission, triage, ingest] }
+    outreach-strategist:            { rights: outreach_rights,            limits: moderate, tags: [outreach, comms, external] }
+    agent-creator-client:           { rights: agent_creator_rights,       limits: moderate, tags: [agents, profiles, bootstrap] }
+    agp-architecte-gouvernance-produit: { rights: agp_rights,            limits: moderate, tags: [governance, agp, adr, labels] }
+    fsx-extreme-fullstack:          { rights: fsx_fullstack_rights,       limits: emergency, tags: [emergency, unblocker, incident] }
+    spec-writer:                    { rights: spec_writer_rights,         limits: moderate, tags: [documentation, specs, delivery] }
+    pipeline-tracker:               { rights: pipeline_tracker_rights,    limits: moderate, tags: [pipeline, reporting] }
+    positioning-expert:             { rights: positioning_expert_rights,  limits: moderate, tags: [positioning, messaging] }
+    qa-testeur:                     { rights: qa_rights,                  limits: strict,   tags: [qa, tests, bugs] }
+    security-compliance-architect:  { rights: security_compliance_architect_rights, limits: moderate, tags: [security, compliance] }
+    agp:
+      right_ref: ARKPR05-RIGHTS:agp_rights
+contracts:
+  invariants:
+    - "rights exist in ARKPR05"
+    - "limits exist in ARKPR06"
+requires: ["ARKPR05-RIGHTS@>=1.2.0","ARKPR06-LIMITS@>=1.1.0"]
+change_policy: { compatibility: semver }

@@ -1,0 +1,130 @@
+id: ARKORE02-GLOBAL-RULES
+version: 1.1.0
+title: "Principes & règles globales"
+summary: >
+  Philosophie, règles transverses, isolation, procédures d'urgence et règles anti-dérive.
+maintainers: ["agp"]
+sources:
+  - "02-principes-regles-globales.md"
+exports:
+  tag_registry:
+    no_temporal:
+      type: constraint
+      applies: messaging
+      severity: critical
+      doc: docs/governance/NO-TEMPORAL-MOCK.md
+    no_mock:
+      type: constraint
+      applies: all
+      severity: critical
+      doc: docs/governance/NO-MOCK-DATA.md
+    actionable_only:
+      type: constraint
+      applies: messaging
+      severity: critical
+      doc: docs/governance/ACTIONABLE-ONLY.md
+      summary: >
+        Chaque message doit embarquer des actions concrètes, exécutables
+        immédiatement par l'agent ciblé.
+    use_messaging:
+      type: constraint
+      applies: all_agents
+      severity: critical
+      doc: docs/governance/USE-MESSAGING.md
+      summary: "Communication inter-agents uniquement via la messagerie."
+    evidence_driven:
+      type: principle
+      applies: delivery
+      severity: high
+      doc: docs/governance/EVIDENCE-DRIVEN.md
+    real_impl_only:
+      type: constraint
+      applies: implementation
+      severity: critical
+      doc: docs/governance/REAL-IMPL-ONLY.md
+
+  principles:
+    actionable_messaging:
+      rule: |
+        Chaque message doit contenir des actions concrètes, pas des intentions
+        vagues. Les LLMs n'interprètent pas : ils exécutent.
+      required:
+        - "Verbes impératifs (crée, envoie, ack, exécute, valide, livre, déploie, notifie, marque, passe)"
+        - "Séquence numérotée OU transition d'état explicite"
+        - "Pas de conditionnels faibles (il faudrait, peut-être)"
+      examples:
+        bad: "Il faudrait améliorer la sécurité"
+        good: |
+          1. Ack
+          2. Crée ticket TCK-SEC-001
+          3. Exécute scan OWASP ZAP
+          4. Envoie rapport
+    inter_agent_communication:
+      rule: |
+        Communication inter-agents via messagerie uniquement. Le user n'est pas
+        un proxy.
+      forbidden:
+        - "Demander au user de transmettre un message"
+        - "Fournir un contenu à copier/coller vers un agent"
+        - "Positionner le user en coursier"
+      required:
+        - "Envoyer les livrables via outbox/inbox"
+        - "Citer le message_id dans la réponse user"
+        - "Notifier le user de l'envoi (pas de contenu brut)"
+    temporal_clarity:
+      rule: |
+        Les LLMs n'ont pas de notion du temps réel. Toute instruction doit être
+        actionnable immédiatement ou définie comme séquence d'actions explicites.
+    clarity_first:
+      summary: "Clarté avant tout (anti-ambiguïté)."
+    modularity_default:
+      summary: "Modularité par défaut (briques indépendantes)."
+    failure_mindset:
+      summary: "Penser à l'échec (résilience & garde-fous)."
+    explicit_over_implicit:
+      summary: "Explicite > Implicite (contrats, permissions, workflows)."
+    cross_validation:
+      summary: "Validation croisée obligatoire (anti-dérive)."
+
+  governance_pillars: ["security", "quality", "velocity", "anti_drift"]
+  
+  anti_drift:
+    no_self_validation:
+      rule: "Un agent ne peut jamais valider son propre travail"
+      enforce: true
+      applies_to: ["all_agents", "all_deliverables"]
+    
+    mandatory_transformations:
+      ADR_TO_FEATURE:
+        source: "agp"
+        transformer: "pmo"
+        rule: "ADR doit devenir Feature avant exécution"
+        original_author_can: ["review", "comment", "suggest"]
+        original_author_cannot: ["edit_directly", "approve", "merge"]
+    
+    cross_validation:
+      min_validators: 2
+      same_agent_prohibited: true
+      rule: "Toujours 2 agents différents minimum dans une chaîne"
+  
+  isolation:
+    archiviste: "strict"
+    memory: "par équipe et par brique"
+    deliverables: "author != validator"
+  
+  emergency:
+    owner_bypass: true
+    conditions: ["incident_critique", "risque_legal", "exposition_donnee"]
+    audit_log_required: true
+    
+provides: ["principles", "isolation", "emergency", "anti_drift"]
+requires: ["ARKORE01-HIERARCHY@>=1.0.0"]
+contracts:
+  invariants:
+    - "owner_bypass requires audit log"
+    - "no governance detail duplicates keys from ARKORE06 (use refs)"
+    - "anti_drift.no_self_validation always true"
+    - "mandatory_transformations preserve immutability"
+  schema: "jsonschema://arka/global-rules/v1"
+change_policy:
+  compatibility: semver

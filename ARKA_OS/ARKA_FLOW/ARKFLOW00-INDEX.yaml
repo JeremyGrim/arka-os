@@ -1,0 +1,76 @@
+id: ARKFLOW00-INDEX
+version: 1.0.0
+registry:
+  ARKFLOW-00-MANIFEST:
+    file: bricks/ARKFLOW-00-MANIFEST.yaml
+    version: 1.0.0
+    exports:
+    - workflows_catalog
+  ARKFLOW-04A-WORKFLOWS-AUDIT:
+    file: bricks/ARKFLOW-04A-WORKFLOWS-AUDIT.yaml
+    version: 2.2.0
+    exports:
+    - AUDIT_FILES_CHAIN
+    - AUDIT_TREE_CHAIN
+    - AUDIT_RGPD_CHAIN
+    - AUDIT_COMPLIANCE_CHAIN
+    - AUDIT_FEATURE_CHAIN
+    - AUDIT_ACCOUNTING_CHAIN
+  ARKFLOW-04B-WORKFLOWS-DELIVERY:
+    file: bricks/ARKFLOW-04B-WORKFLOWS-DELIVERY.yaml
+    version: 2.2.0
+    exports:
+    - DELIVERY_EPIC_CHAIN
+    - DELIVERY_FEATURE_CHAIN
+    - DELIVERY_US_CHAIN
+  ARKFLOW-04C-WORKFLOWS-DOC:
+    file: bricks/ARKFLOW-04C-WORKFLOWS-DOC.yaml
+    version: 2.2.0
+    exports:
+    - DOC_ADR_CHAIN
+    - DOC_CONTENT_CHAIN
+  ARKFLOW-04D-WORKFLOWS-OPS:
+    file: bricks/ARKFLOW-04D-WORKFLOWS-OPS.yaml
+    version: 2.2.0
+    exports:
+    - OPS_BUGFIX_CHAIN
+    - OPS_SECURITY_CHAIN
+    - OPS_DATA_REPORT_CHAIN
+  ARKFLOW-04E-WORKFLOWS-MKT:
+    file: bricks/ARKFLOW-04E-WORKFLOWS-MKT.yaml
+    version: 2.2.0
+    exports:
+    - MKT_CAMPAIGN_CHAIN
+  ARKFLOW-04F-WORKFLOWS-PEOPLE:
+    file: bricks/ARKFLOW-04F-WORKFLOWS-PEOPLE.yaml
+    version: 2.2.0
+    exports:
+    - HR_CHANGE_CHAIN
+  ARKFLOW-12-ACTION-KEYS:
+    file: bricks/ARKFLOW-12-ACTION-KEYS.yaml
+    version: 1.0.0
+    exports:
+    - keys
+  ARKFLOW-17-ORCHESTRATION-RULES:
+    file: bricks/ARKFLOW-17-ORCHESTRATION-RULES.yaml
+    version: 1.1.0
+    exports:
+    - actor_selector
+    - chain_locks
+  ARKFLOW-19-PRECONDITIONS-DEFS:
+    file: bricks/ARKFLOW-19-PRECONDITIONS-DEFS.yaml
+    version: 1.0.0
+    exports:
+    - preconditions
+  ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX:
+    file: bricks/ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX.yaml
+    version: 1.0.0
+    exports:
+    - capabilities
+    - domains
+contracts:
+  invariants:
+  - router is declarative (no imperative code)
+  schema: jsonschema://arkflow/router/v1
+change_policy:
+  compatibility: semver

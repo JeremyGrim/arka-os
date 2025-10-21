@@ -1,0 +1,17 @@
+version: 2
+project: "arka-labs-b"
+provider: "codex"
+session_prefix: "arka"
+notify:
+  attach_only: true
+  allowlist_file: "../../push_notify/config/allowlist.yaml"
+  policy_file: "../../push_notify/config/policy.yaml"
+messaging:
+  append_only: true
+  statuses: ["TODO","IN_PROGRESS","BLOCKED","OBSOLETE"]
+  response_types: ["STATUS","RESULT"]
+guardians:
+  blockers:
+    - block_llm_ack_file
+    - block_illegal_status
+    - block_chat_output_after_notify

@@ -1,0 +1,93 @@
+id: ARKORE20-MESSAGING
+version: 2.1.0
+title: "Messagerie stricte (append-only) — Threads ONLY"
+summary: >
+  Un sujet = un fil (thread). Les réponses se font par fichiers STATUS|RESULT dans le même fil.
+  Le modèle v1 `messaging/msg/...` est décommissionné (lecture et écriture interdites).
+
+structure:
+  root: "messaging/threads/<thread-ref>/"
+  thread-ref: "THR-<shortid>__<topic-slug>"
+  files:
+    - "<isoZ>__from@to__TODO.yaml"
+    - "<isoZ>__from@to__IN_PROGRESS.yaml"
+    - "<isoZ>__from@to__BLOCKED.yaml"
+    - "<isoZ>__from@to__RESULT.yaml"
+    - "index.yaml"
+    - "Attachments/"
+
+general_timeline:
+  path: "ARKA_META/messaging/general.yaml"
+  version: 2
+  entry_model:
+    ts: "ISO 8601 Z"
+    kind: "status|result|notify|decision|escalation|return_to_sender|system"
+    thread_id: "THR-<shortid>__<topic-slug>"
+    message_id: "msg-..."
+    from: "<rôle>"
+    to: "<rôle>"
+    subject: "Titre clair"
+    status: "STATUS|RESULT value"
+    path: "messaging/threads/<thread-ref>/<file>.yaml"
+    tags: ["..."]
+
+rules:
+  append_only: true
+  response_types: ["STATUS","RESULT"]
+  statuses: ["TODO","IN_PROGRESS","BLOCKED","OBSOLETE"]
+  relates_to_required: true
+  thread_id_required: true
+  no_chat_output: true
+  forbid_v1_paths: true          # interdit messaging/msg/**
+  file_naming_invariant: "ISOZ__from@to__STATUS.yaml"
+  forbid_user_proxy: true
+  forbid_receipt_only: true
+
+protocol:
+  handshake: "core.messaging.handshake.v1"
+  commands:
+    pull: "arkamsg pull --agent <agent_id>"
+  verrous:
+    enabled: true
+    lock_required: true
+
+processing:
+  sequence:
+    - "pull threads via arkamsg"
+    - "lire chaque message"
+    - "exécuter les actions demandées"
+    - "répondre par STATUS/RESULT"
+
+body_contract:
+  imperative_only: true
+  sequence_required: true
+  actions_expected_required: true
+  forbid_conditionals: true
+  forbid_empty_receipt: true
+  relates_to:
+    required_for_reply: true
+    format: "msg-<shortid>"
+  status_sync:
+    allowed: ["TODO","IN_PROGRESS","BLOCKED","OBSOLETE"]
+
+message_template:
+  tid: "T-XXXXXX"
+  type: "STATUS | RESULT"
+  status: "TODO | IN_PROGRESS | BLOCKED | OBSOLETE"
+  thread_id: "THR-<shortid>__<topic-slug>"
+  relates_to: "msg-XXXX"
+  from: "<rôle>"
+  to: "<rôle>"
+  sujet: "Sujet clair (topic)"
+  message: |
+    Texte libre (impératif, actionnable).
+  links:
+    attachments: []
+    output: []
+
+change_policy:
+  compatibility: "semver (major)"
+
+exports:
+  messaging_hooks:
+    messaging_handshake: "core.messaging.handshake.v1"

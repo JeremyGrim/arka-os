@@ -1,0 +1,23 @@
+id: ARKPR04-PATH-SETS
+version: 1.2.0
+title: "Profils — Sets de chemins (globs ; réfs ARKORE08)"
+exports:
+  path_sets:
+    features_all:       ["OUTPUT/features/**"]
+    us_tickets_only:    ["OUTPUT/features/**/EPICS/**/US/**/tickets/**"]
+    us_evidence_only:   ["OUTPUT/features/**/EPICS/**/US/**/evidence/**"]
+    mem_only:           [".system/.mem/**"]
+    governance_orders:  ["OUTPUT/governance/orders/**", ".system/Governance/orders/**"]
+    governance_all:     ["OUTPUT/governance/**", ".system/Governance/**"]
+    governance_logs:    [".system/Governance/logs/**"]
+    arka_os_core:       ["../ARKA_OS/**"]
+    claude_memory:      ["../.claude/**"]
+    docs_memory_archive: ["OUTPUT/governance/scribe/memory/archive/**"]
+    docs_memory:        ["OUTPUT/governance/scribe/memory/**"]
+    meta_adr:           ["ARKA_META/adr/**"]
+    meta_reports_agp:   ["ARKA_META/reports/agp/**"]
+  deny_sets:
+    secrets:            ["**/secrets/**"]
+requires: ["ARKORE08-PATHS-GOVERNANCE@>=3.0.0"]
+contracts: { invariants: ["globs are valid"] }
+change_policy: { compatibility: semver }

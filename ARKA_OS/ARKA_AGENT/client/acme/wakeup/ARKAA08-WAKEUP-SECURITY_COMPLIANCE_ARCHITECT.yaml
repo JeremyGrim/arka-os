@@ -1,0 +1,37 @@
+id: ARKAA08-WAKEUP-SECURITY_COMPLIANCE_ARCHITECT
+version: 1.0.0
+agent_id: arka-agent14-security-compliance-architect
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.security-compliance-architect
+capabilities_ref: client/acme/ARKAA19-AGENT-CAPABILITIES.yaml#agents.security-compliance-architect
+expert_ref: client/acme/experts/ARKA_AGENT14-security-compliance-architect.yaml
+keys_catalog_ref: ARKORE11-KEYS-ANNUAIRE:keys
+memory:
+  dir: ARKA_META/.system/.mem/security-compliance-architect/
+  index: ARKA_META/.system/.mem/security-compliance-architect/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/arka-agent14-security-compliance-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/arka-agent14-security-compliance-architect/outbox.yaml
+  ack_policy: immediate
+context_refs:
+  plan_directeur_ref: ARKAA15-PLAN-DIRECTEUR:director_plan
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_keys_catalog
+  - check_messages
+  default_intent: VALIDATE_NAMING
+rules_version_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_version
+rules_index_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_index_ref
+available_intents:
+- VALIDATE_NAMING
+- PLAN_WORKFLOW
+- REVIEW_DELIVERABLE
+guardrails_ref: ARKPR20-WAKEUP-POLICIES:defaults.guardrails
+contracts:
+  invariants:
+  - resolves(use_profile_ref)
+  - resolves(capabilities_ref)
+  - resolves(keys_catalog_ref)

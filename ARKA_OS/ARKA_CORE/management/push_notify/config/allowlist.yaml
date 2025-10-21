@@ -1,0 +1,16 @@
+version: 1
+roles:
+  Archiviste:
+    sessions: ["arka-arka-labs-b-Archiviste-codex"]
+  PMO:
+    sessions: ["arka-arka-labs-b-PMO-codex"]
+  LD:
+    sessions: ["arka-arka-labs-b-LD-codex"]
+  FSX:
+    sessions: ["arka-arka-labs-b-FSX-codex"]
+
+aliases:
+  arka-agent00-core-archivist: "Archiviste"
+  fsx-extreme-fullstack: "FSX"
+  pmo: "PMO"
+  ld: "LD"

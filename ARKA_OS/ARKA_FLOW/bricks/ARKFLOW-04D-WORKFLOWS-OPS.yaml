@@ -1,0 +1,140 @@
+id: ARKFLOW-04D-WORKFLOWS-OPS
+version: 2.2.0
+exports:
+- OPS_BUGFIX_CHAIN
+- OPS_SECURITY_CHAIN
+- OPS_DATA_REPORT_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  OPS_BUGFIX_CHAIN:
+    sequence:
+    - step: Qualify
+      action_key: BUG_QUALIFY
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Fix
+      action_key: BUG_FIX
+      requires_caps:
+      - dev.implement
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - dev.implement
+      requires:
+      - prev_step: Qualify
+        type: RESULT
+    - step: Test
+      action_key: QA_TEST
+      requires_caps:
+      - qa.test.plan
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - qa.test.plan
+      requires:
+      - prev_step: Fix
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - core
+            - adr
+            - security
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Test
+        type: RESULT
+    - step: Release_Notes
+      action_key: RELEASE_NOTE
+      requires_caps:
+      - content.plan
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - content.plan
+      requires:
+      - prev_step: Gate
+        type: RESULT
+  OPS_SECURITY_CHAIN:
+    sequence:
+    - step: Sec_Audit
+      action_key: SEC_AUDIT
+      requires_caps:
+      - audit.compliance
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.compliance
+    - step: Remediate
+      action_key: SEC_REMEDIATE
+      requires_caps:
+      - dev.implement
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - dev.implement
+      requires:
+      - prev_step: Sec_Audit
+        type: RESULT
+    - step: Gate_Core
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: Archiviste
+      requires:
+      - prev_step: Remediate
+        type: RESULT
+  OPS_DATA_REPORT_CHAIN:
+    sequence:
+    - step: Extract
+      action_key: DATA_EXTRACT
+      requires_caps:
+      - data.extract
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - data.extract
+    - step: Analyse
+      action_key: DATA_ANALYSE
+      requires_caps:
+      - marketing.analytics
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - marketing.analytics
+      requires:
+      - prev_step: Extract
+        type: RESULT
+    - step: Report
+      action_key: DATA_REPORT
+      requires_caps:
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+      requires:
+      - prev_step: Analyse
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Report
+        type: RESULT

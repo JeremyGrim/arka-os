@@ -1,0 +1,103 @@
+id: GUIDE-NO-TEMPORAL
+version: 1.0.0
+title: "NO_TIME — Interdiction des références temporelles relatives"
+summary: >
+  Ce guide formalise l'interdiction totale des délais implicites ("dans 1h",
+  "avant midi", "J+2", "sous 24h") au profit d'instructions pilotées par
+  statuts, événements ou preuves datées. Les LLM n'ayant pas la maîtrise du
+  temps réel, toute consigne doit rester exécutable immédiatement.
+
+scope:
+  applies_to:
+    - messaging.STATUS
+    - messaging.RESULT
+    - orders
+    - onboardings
+    - evidence_packs
+  exclusions:
+    - metrics_exports          # agrégations techniques autorisées (ex: 1h rolling window)
+    - audit_logs               # timestamps factuels ISO 8601 Z uniquement
+
+principles:
+  - key: NO_TIME_ABSOLUTE_ONLY
+    rule: >
+      Aucune date/heure relative n'est tolérée. Si une horloge est nécessaire,
+      fournir exclusivement un timestamp ISO 8601 Z prouvé (log, commit, capteur).
+  - key: STATE_DRIVEN_EXECUTION
+    rule: >
+      Exiger une transition d'état (TODO → IN_PROGRESS → RESULT) plutôt qu'un
+      compte à rebours. Décrire le déclencheur attendu (ex: "passer BLOCKED si
+      aucun STATUS livré après exécution").
+  - key: EVENT_TRIGGERED_REMINDERS
+    rule: >
+      Utiliser des événements concrets ("quand le test échoue", "après livraison
+      du rapport") plutôt que des échéances temporelles abstraites.
+
+forbidden_patterns:
+  regex:
+    - label: delay_short
+      pattern: "\\b(dans|sous)\\s+\\d+\\s*(h|heures|min|minutes|j|jours)\\b"
+      example: "Relance dans 2h"
+    - label: deadline_hour
+      pattern: "\\bavant\\s+\\d{1,2}h(\\d{2})?\\b"
+      example: "Clôturer avant 12h"
+    - label: day_offset
+      pattern: "\\bJ\\s*\\+\\s*\\d+\\b"
+      example: "Validation J+2"
+    - label: eta_abbreviation
+      pattern: "\\bETA\\s*[<>=]*\\s*\\d+\\s*(h|j)\\b"
+      example: "ETA < 24h"
+    - label: vague_temporal
+      pattern: "\\b(d'ici|dès que possible|ce soir|demain)\\b"
+      example: "Livrer d'ici demain soir"
+
+rewrite_examples:
+  - before: "1. Relance QA dans 2h si pas de réponse"
+    after: |
+      1. Vérifie la messagerie.
+      2. Si aucun STATUS QA, passe le thread en BLOCKED et notifie QA + Owner.
+  - before: "Clôturer avant 12h"
+    after: |
+      - Dès que toutes les actions sont terminées, produire un RESULT.
+      - Si impossibilité, documenter le blocage et escalader via STATUS BLOCKED.
+  - before: "Validation J+2 avec ETA 24h"
+    after: |
+      - Publie un STATUS détaillant les actions exécutées.
+      - Déclenche une revue Owner quand le STATUS est prêt (aucune mention horaire).
+
+enforcement:
+  messaging_threads:
+    rule: "Tout message contenant un motif interdit doit être refusé (RESULT=REFUSED) avec rappel NO_TIME."
+    actor: core-archivist
+  onboarding_reviews:
+    checklist:
+      - "Aucun `<delai>` ou formulation relative."
+      - "Références à NO_TIME présentes dans la section messaging."
+  automation:
+    lint_scripts:
+      description: "Intégrer les regex forbidden_patterns dans les tests governance."
+      recommended_target: "tests/governance/messaging-no-time.spec.ts (à créer)"
+
+fallbacks:
+  - "Si un SLA existe côté client, encapsuler la règle côté Ops, jamais dans les messages agents."
+  - "Pour les remontées urgentes, utiliser les contraintes ARKORE22 (`EXECUTE_NOW`, `KEEP_CHAIN_ACTIVE`)."
+  - "Consigner les preuves temporelles dans un log horodaté séparé (audit), puis référencer ce log."
+
+references:
+  bricks:
+    - ARKA_OS/ARKA_CORE/bricks/ARKORE02-GLOBAL-RULES.yaml
+    - ARKA_OS/ARKA_CORE/bricks/ARKORE22-INTENT-NOTIFY.yaml
+  docs:
+    - ARKA_OS/ARKA_CORE/docs/governance/NO-TEMPORAL-MOCK.md
+    - ARKA_OS/ARKA_CORE/docs/governance/ACTIONABLE-ONLY.md
+  constraints:
+    - "rules_index.no_time"
+    - "notify.constraints.NO_TIME"
+
+maintenance:
+  owner: core-archivist
+  review_cadence: weekly
+  todo:
+    - "Créer un test de lint spécifique (governance/no-time)."
+    - "Scanner les mémos et CR existants pour remplacer les délais relatifs."
+    - "Mettre à jour les onboarding générés pour inclure un rappel explicite NO_TIME."

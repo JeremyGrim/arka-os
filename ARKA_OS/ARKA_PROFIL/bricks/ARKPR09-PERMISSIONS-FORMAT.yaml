@@ -1,0 +1,88 @@
+id: ARKPR09-PERMISSIONS-FORMAT
+version: 1.0.0
+title: "Format de permissions compact"
+summary: >
+  Syntaxe légère type:actions pour remplacer les 50+ lignes actuelles
+
+exports:
+  # Syntaxe de base
+  syntax:
+    pattern: "{type}:{actions}"
+    examples:
+      - "document:cr"      # Create + Read
+      - "ticket:*"         # Toutes actions
+      - "report:crud"      # CRUD complet
+      - "-delete"          # Interdiction globale
+      - "order:c"          # Create seulement
+  
+  # Mapping actions
+  actions_map:
+    c: CREATE
+    r: READ
+    u: UPDATE
+    d: DELETE
+    m: MOVE
+    n: RENAME
+    a: ARCHIVE
+    s: STATUS
+    p: PUBLISH
+    v: VALIDATE
+    e: ESCALATE
+    "*": ALL
+    
+  # Parser pour transformer en action_sets
+  parser:
+    parse_permission: |
+      Input: "document:cru"
+      Output: [DOCUMENT_CREATE, DOCUMENT_READ, DOCUMENT_UPDATE]
+      
+    parse_denial: |
+      Input: "-delete"
+      Output: deny_actions: [*_DELETE]
+      
+    parse_wildcard: |
+      Input: "ticket:*"
+      Output: [TICKET_CREATE, TICKET_READ, TICKET_UPDATE, TICKET_DELETE, 
+               TICKET_MOVE, TICKET_RENAME, TICKET_ARCHIVE, TICKET_STATUS]
+
+  # Exemples de profils avec nouveau format
+  examples:
+    lead_dev:
+      permissions:
+        - "ticket:*"        # Tout sur tickets
+        - "document:cru"    # Create/Read/Update documents
+        - "report:r"        # Read seul sur reports
+        - "-delete"         # Jamais delete
+        
+    expert_rh:
+      permissions:
+        - "document:*"      # Tout sur documents
+        - "analysis:*"      # Tout sur analyses  
+        - "report:cr"       # Create/Read reports
+        - "plan:cru"        # Create/Read/Update plans
+        - "-ticket"         # Pas d'accès tickets
+        
+    agp:
+      permissions:
+        - "order:*"         # Tout sur orders
+        - "decision:*"      # Tout sur décisions
+        - "*:r"             # Read sur tout
+        - "*:v"             # Validate sur tout
+
+  # Fonction de résolution
+  resolver:
+    steps:
+      1: "Parser chaque ligne de permissions"
+      2: "Générer liste d'actions autorisées"
+      3: "Appliquer les deny (-)"
+      4: "Mapper vers ARKORE12 action_keys"
+      5: "Retourner action_sets final"
+
+contracts:
+  invariants:
+    - "Toute action mappée existe dans ARKORE12"
+    - "Les deny ont priorité sur allow"
+    - "Parser doit gérer wildcards"
+    
+provides: ["syntax", "parser", "resolver"]
+requires: ["ARKORE12-ACTION-KEYS@>=2.0.0"]

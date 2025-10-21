@@ -1,0 +1,61 @@
+id: ARKORE01-HIERARCHY
+version: 1.0.0
+title: "Hiérarchie et autorités"
+summary: >
+  Source unique des rôles, des niveaux d’autorité et des relations de reporting.
+maintainers: ["owner", "arka_archivist_orchestrator"]
+sources:
+  - "01-fondations-hierarchie.md"
+exports:
+  roles:
+    owner:
+      description: "Responsable ultime. Peut bypass en cas d’urgence documentée."
+    system_guardians:
+      description: >
+        Cellule sous mandat direct de l’Owner (Core Archiviste, Core Scribe,
+        Archivist Orchestrator). Protège ARKA_OS, pilote la gouvernance et
+        supervise les briques systèmes. Aucune exposition directe aux livrables
+        projet/production ; interlocuteur unique : l’Owner.
+    arka_scribe:
+      description: >
+        Garant des mémoires système. Compacte, audite et alerte sur toute
+        dérive documentaire affectant ARKA_OS ou les briques critiques.
+    agp:
+      description: >
+        Architecte de Gouvernance Principal. Gate unique des flux Projet /
+        Production / Livrables utilisateur ; arbitre les conflits de règles
+        côté exécution en coordination avec l’Owner.
+    pmo:
+      description: "Orchestrateur opérationnel. Distribue aux agents d’exécution. Limité à un pool défini."
+    execution_agents:
+      description: "Agents spécialisés. Ne décident pas de la gouvernance."
+    core_archivist:
+      description: >
+        Gardien central ARKA_OS : audits, ordres, optimisations mémoire/
+        messagerie, pilotage des Core Guardians, hors mandat projet/production.
+    arka_archivist_orchestrator:
+      description: >
+        Coordonne l’Archiviste et le Scribe pour ARKA_OS. Assure la boucle
+        Owner ↔ System Guardians.
+  authority_levels:
+    order: ["owner", "system_guardians", "agp", "pmo", "execution_agents", "core_archivist"]
+    notes:
+      - "Le passage par la gate AGP est obligatoire hors bypass Owner. Sur le périmètre ARKA_OS, les System Guardians auditent et peuvent suspendre la gate."
+  reporting:
+    system_guardians -> owner: "revue hebdo ARKA_OS + audits ciblés"
+    arka_scribe -> owner: "compte rendu mémoire / anomalies critiques"
+    core_archivist -> owner: "reporting hebdo + validation actions critiques"
+    arka_archivist_orchestrator -> owner: "synchronisation continue + arbitrage"
+    agp -> system_guardians: "transparence brique AGP (statuts, incidents)"
+    pmo -> agp: "reporting hebdomadaire + sur incidents"
+    execution_agents -> pmo: "chaque tâche"
+provides: ["roles", "hierarchy", "reporting"]
+requires: []
+contracts:
+  invariants:
+    - "authority_levels.order[0] == 'owner'"
+    - "'agp' precedes 'pmo'"
+  schema: "jsonschema://arka/hierarchy/v1"
+change_policy:
+  compatibility: semver
+  stable_keys: ["roles", "authority_levels.order"]

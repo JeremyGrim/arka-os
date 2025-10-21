@@ -1,0 +1,43 @@
+# === CONFIGURATION CLIENT & CONTEXTE ===
+ARKAA10-CONTEXT:            { file: client/acme/ARKAA10-CONTEXT.yaml,                 version: 1.0.0, exports: [sector, locale, glossary, risk_tolerance, data_classes, naming_overrides, acceptance_overrides_ref] }
+ARKAA11-TEMPLATES-PROVIDER: { file: client/acme/ARKAA11-TEMPLATES-PROVIDER.yaml,      version: 1.0.0, exports: [] }
+ARKAA12-EVENTS-PACK:        { file: client/acme/ARKAA12-EVENTS-PACK.yaml,             version: 1.0.0, exports: [subscriptions, dispatch] }
+ARKAA13-COMPLIANCE-POLICY:  { file: client/acme/ARKAA13-COMPLIANCE-POLICY.yaml,       version: 1.0.0, exports: [overrides] }
+ARKAA14-VOCAB-ALIASES:      { file: client/acme/ARKAA14-VOCAB-ALIASES.yaml,           version: 1.0.0, exports: [aliases] }
+ARKAA15-PLAN-DIRECTEUR:     { file: client/acme/ARKAA15-PLAN-DIRECTEUR.yaml,          version: 1.0.0, exports: [director_plan, prompt_shortcuts] }
+ARKAA21-PROJECT-CONTEXT:    { file: client/acme/ARKAA21-PROJECT-CONTEXT.yaml,         version: 1.0.0, exports: [vars] }
+
+# === DOCUMENTATION SYSTÈME ===
+ARKAA23-ONBOARDING:         { file: Docs/ARKA-CONCEPT-ONBOARDING.md,                  version: 1.0.0, type: documentation, exports: [concept, architecture, pattern_v3, orchestration, memory_ops] }
+
+# === AGENTS CORE (Orchestration) ===
+ARKAA08-WAKEUP-AGP:         { file: client/acme/wakeup/ARKAA08-WAKEUP-AGP.yaml,       version: 1.0.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+ARKAA08-WAKEUP-PMO:         { file: client/acme/wakeup/ARKAA08-WAKEUP-PMO.yaml,       version: 1.0.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+ARKAA08-WAKEUP-SPEC-WRITER: { file: client/acme/wakeup/ARKAA08-WAKEUP-SPEC_WRITER.yaml, version: 1.0.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+ARKAA08-WAKEUP-CORE_ARCHIVIST: { file: client/acme/wakeup/ARKAA08-WAKEUP-CORE_ARCHIVIST.yaml, version: 1.1.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+ARKAA08-WAKEUP-CORE_SCRIBE:    { file: client/acme/wakeup/ARKAA08-WAKEUP-CORE_SCRIBE.yaml,    version: 1.1.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+ARKAA08-WAKEUP-GEMINI:      { file: client/acme/wakeup/ARKAA08-WAKEUP-GEMINI.yaml,    version: 1.0.0, exports: [agent_id, use_profile_ref, capabilities_ref, keys_catalog_ref, memory, context_refs, startup, guardrails, contracts] }
+
+# === AGENTS EXPERTS (Pattern v3) ===
+# Agents Core Produit
+ARKA_AGENT15-AGP:           { file: client/acme/experts/ARKA_AGENT15-agp.yaml,                         version: 3.0.0, pattern: v3, status: active }
+ARKA_AGENT15-PMO:           { file: client/acme/experts/ARKA_AGENT15-arka-product-manager-officer.yaml, version: 3.0.0, pattern: v3, status: active }
+ARKA_AGENT30-SPEC-WRITER:   { file: client/acme/experts/ARKA_AGENT30-spec-writer.yaml,                version: 1.0.0, pattern: v3, status: active }
+
+# Secteur Sales & Business Development
+ARKA_AGENT16-MARKET-RESEARCH: { file: client/acme/experts/ARKA_AGENT16-market-research-specialist.yaml, version: 3.0.0, pattern: v3, status: active }
+ARKA_AGENT17-POSITIONING:   { file: client/acme/experts/ARKA_AGENT17-positioning-expert.yaml,          version: 3.0.0, pattern: v3, status: active }
+ARKA_AGENT18-OUTREACH:      { file: client/acme/experts/ARKA_AGENT18-outreach-strategist.yaml,         version: 3.0.0, pattern: v3, status: active }
+ARKA_AGENT19-PIPELINE:      { file: client/acme/experts/ARKA_AGENT19-pipeline-tracker.yaml,            version: 3.0.0, pattern: v3, status: active }
+
+# Secteur HR (nouveaux - wakeup à créer)
+ARKA_AGENT20-HR-TRANSFORM:  { file: client/acme/experts/ARKA_AGENT20-hr-transformation-specialist.yaml, version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT21-EMPLOYEE-EXP:  { file: client/acme/experts/ARKA_AGENT21-employee-experience-designer.yaml, version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT22-COMPENSATION:  { file: client/acme/experts/ARKA_AGENT22-compensation-benefits-analyst.yaml, version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT23-LEARNING-DEV:  { file: client/acme/experts/ARKA_AGENT23-learning-development-strategist.yaml, version: 3.0.0, pattern: v3, status: expert_only }
+
+# Secteur Marketing (nouveaux - wakeup à créer)
+ARKA_AGENT24-BRAND:         { file: client/acme/experts/ARKA_AGENT24-brand-strategy-architect.yaml,    version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT25-GROWTH:        { file: client/acme/experts/ARKA_AGENT25-growth-hacker-specialist.yaml,    version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT26-CONTENT:       { file: client/acme/experts/ARKA_AGENT26-content-strategy-manager.yaml,    version: 3.0.0, pattern: v3, status: expert_only }
+ARKA_AGENT27-MARKETING-ANALYTICS: { file: client/acme/experts/ARKA_AGENT27-marketing-analytics-expert.yaml, version: 3.0.0, pattern: v3, status: expert_only }

@@ -1,0 +1,7 @@
+id: ASSEMBLE_SMOKE
+version: 1.1.0
+assertions:
+  - "Aucun module SSE chargé"
+  - "Guardians actifs (blockers)"
+  - "Notify daemon actif (instance unique)"
+  - "Messaging: append-only ; pas d’ACK LLM"

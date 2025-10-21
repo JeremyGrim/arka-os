@@ -1,0 +1,5 @@
+checks:
+  - name: versions_match_index
+  - name: exports_match_provides
+  - name: doc_links_exist
+  - name: status_has_OBSOLETE_in_files

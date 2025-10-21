@@ -1,0 +1,148 @@
+id: ARKFLOW-04B-WORKFLOWS-DELIVERY
+version: 2.2.0
+exports:
+- DELIVERY_EPIC_CHAIN
+- DELIVERY_FEATURE_CHAIN
+- DELIVERY_US_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  DELIVERY_EPIC_CHAIN:
+    sequence:
+    - step: Epic_Discovery
+      action_key: DISCOVERY
+      requires_caps:
+      - market.research
+      - ux.audit
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - market.research
+        - ux.audit
+        - spec.write
+    - step: Epic_Breakdown
+      action_key: US_BREAKDOWN
+      requires_caps:
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+      requires:
+      - prev_step: Epic_Discovery
+        type: RESULT
+    - step: US_Cycle
+      action_key: US_DO
+      requires:
+      - prev_step: Epic_Breakdown
+        type: RESULT
+      use_chain: DELIVERY_US_CHAIN
+  DELIVERY_FEATURE_CHAIN:
+    sequence:
+    - step: Feature_Discovery
+      action_key: DISCOVERY
+      requires_caps:
+      - market.research
+      - ux.audit
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - market.research
+        - ux.audit
+        - spec.write
+    - step: Feature_Breakdown
+      action_key: US_BREAKDOWN
+      requires_caps:
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+      requires:
+      - prev_step: Feature_Discovery
+        type: RESULT
+    - step: US_Cycle
+      action_key: US_DO
+      requires:
+      - prev_step: Feature_Breakdown
+        type: RESULT
+      use_chain: DELIVERY_US_CHAIN
+  DELIVERY_US_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Specify
+      action_key: SPEC_DRAFT
+      requires_caps:
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Do_Work
+      action_key: DO_WORK
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps_any:
+        - dev.implement
+        - content.plan
+        - ux.prototype
+        - growth.experiment
+        - hr.transformation
+        - data.extract
+      requires:
+      - prev_step: Specify
+        type: RESULT
+    - step: Review
+      action_key: REVIEW
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps_any:
+        - pmo.review
+        - brand.strategy
+        - arch.design
+        - marketing.analytics
+        - qa.test.plan
+      requires:
+      - prev_step: Do_Work
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - adr
+            - core
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Review
+        type: RESULT
+    - step: Publish
+      action_key: PUBLISH
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps_any:
+        - devops.guard
+        - content.plan
+        - pipeline.track
+      requires:
+      - prev_step: Gate
+        type: RESULT

@@ -1,0 +1,6 @@
+# Inclusion d'un pack externe, sans modifier ARKA_CORE/
+enable:
+  - include: "ARKA_EXT/ARKAEXT01-SUBS-CI.yaml"
+override:
+  ARKORE15-AGP-REACTIVE-CONTROL.zones.Z4_owner_confirmation.policy.when.condition: "high_risk_change"
+  ARKORE15-AGP-REACTIVE-CONTROL.runtime.ack_strategy: "immediate"

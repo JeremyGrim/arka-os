@@ -1,0 +1,65 @@
+id: ARKORE00-INDEX
+version: 1.2.0
+registry:
+  ARKORE01-HIERARCHY:
+    file: bricks/ARKORE01-HIERARCHY.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE02-GLOBAL-RULES:
+    file: bricks/ARKORE02-GLOBAL-RULES.yaml
+    version: 1.1.0
+    exports: []
+  ARKORE03-TEAMS-CLAUDE:
+    file: bricks/ARKORE03-TEAMS-CLAUDE.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE05-EXECUTION-SPECS:
+    file: bricks/ARKORE05-EXECUTION-SPECS.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE06-CONTROL-MATRICES:
+    file: bricks/ARKORE06-CONTROL-MATRICES.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE07-ARCHIVISTE-MODULE:
+    file: bricks/ARKORE07-ARCHIVISTE-MODULE.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE08-PATHS-GOVERNANCE:
+    file: bricks/ARKORE08-PATHS-GOVERNANCE.yaml
+    version: 3.0.0
+    exports: []
+  ARKORE09-NAMING-PATTERNS:
+    file: bricks/ARKORE09-NAMING-PATTERNS.yaml
+    version: 2.0.0
+    exports: []
+  ARKORE11-NOTIFY-EXEC-DISPATCH:
+    file: bricks/ARKORE11-NOTIFY-EXEC-DISPATCH.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE13-TEMPLATES:
+    file: bricks/ARKORE13-TEMPLATES.yaml
+    version: 1.2.0
+    exports: []
+  ARKORE14-MEMORY-OPS:
+    file: bricks/ARKORE14-MEMORY-OPS.yaml
+    version: 1.0.0
+    exports: []
+  ARKORE20-MESSAGING:
+    file: bricks/ARKORE20-MESSAGING.yaml
+    version: 2.1.0
+    exports: []
+  ARKORE21-SYSTEM-GUARDIANS:
+    file: bricks/ARKORE21-SYSTEM-GUARDIANS.yaml
+    version: 1.1.0
+    exports: []
+  ARKORE22-INTENT-NOTIFY:
+    file: bricks/ARKORE22-INTENT-NOTIFY.yaml
+    version: 1.4.0
+    exports: []
+contracts:
+  invariants:
+  - templates are content-only (no rules)
+  schema: jsonschema://arka/templates/v1
+change_policy:
+  compatibility: semver

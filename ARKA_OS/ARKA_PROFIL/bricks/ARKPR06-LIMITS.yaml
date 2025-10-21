@@ -1,0 +1,18 @@
+id: ARKPR06-LIMITS
+version: 1.1.0
+title: "Profils — Limites & budgets (réfs ARKORE06)"
+exports:
+  limits:
+    strict:
+      ratelimit: { per_min: 20 }
+      budgets_ref:    "ARKORE06-CONTROL-MATRICES:performance_matrix.budgets"
+      escalation_ref: "ARKORE06-CONTROL-MATRICES:escalation_matrix"
+    moderate:
+      ratelimit: { per_min: 60 }
+      budgets_ref:    "ARKORE06-CONTROL-MATRICES:performance_matrix.budgets"
+    emergency:
+      ratelimit: { per_min: 120 }
+      budgets_ref:    "ARKORE06-CONTROL-MATRICES:performance_matrix.budgets"
+contracts: { invariants: ["refs resolve under CORE"] }
+requires: ["ARKORE06-CONTROL-MATRICES@>=1.0.0"]
+change_policy: { compatibility: semver }

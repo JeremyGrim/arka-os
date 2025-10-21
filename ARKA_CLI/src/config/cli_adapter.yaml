@@ -1,0 +1,93 @@
+adapter:
+  id: cli_adapter
+  name: "ARKA CLI Adapter"
+  version: 1.0.0-core
+  type: local
+
+connection:
+  type: http
+  baseUrl: http://localhost:9090
+  timeout: 30000
+  retries: 3
+
+capabilities:
+  - init
+  - status
+  - session_management
+  - file_operations
+  - meta_search_tags
+  - context_basic
+  - config_management
+  - log_streaming
+
+commands:
+  init:
+    handler: socle.init
+    timeout: 60000
+
+  status:
+    handler: socle.getStatus
+    timeout: 5000
+
+  session_start:
+    handler: sessionOrchestrator.createSession
+    timeout: 30000
+    validation: required
+
+  session_list:
+    handler: sessionOrchestrator.listSessions
+    timeout: 5000
+
+  session_stop:
+    handler: sessionOrchestrator.destroySession
+    timeout: 10000
+
+  file_inject:
+    handler: metaEngine.saveInput
+    timeout: 60000
+    maxFileSize: 10485760  # 10MB
+
+  file_list:
+    handler: metaEngine.listInputs
+    timeout: 5000
+
+  meta_search:
+    handler: metaEngine.searchByTag
+    timeout: 10000
+
+  context_show:
+    handler: contextSync.getContext
+    timeout: 5000
+
+  config_get:
+    handler: config.get
+    timeout: 1000
+
+  config_set:
+    handler: config.set
+    timeout: 5000
+    validation: required
+
+  logs_stream:
+    handler: eventBus.subscribe
+    timeout: infinite
+    stream: true
+
+output:
+  format: text
+  colors: true
+
+errors:
+  showStack: false
+  suggestions: true
+
+dependencies:
+  - arka_core
+  - arka_os
+  - arka_meta
+  - session_orchestrator
+  - context_sync
+  - event_bus
+
+priority: 2
+autoStart: true

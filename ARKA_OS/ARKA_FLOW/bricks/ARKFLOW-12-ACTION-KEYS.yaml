@@ -1,0 +1,98 @@
+id: ARKFLOW-12-ACTION-KEYS
+version: 1.0.0
+exports:
+- keys
+keys:
+  INTAKE:
+    kind: work
+    desc: Qualification de la demande
+  DISCOVERY:
+    kind: work
+    desc: Découverte / cadrage
+  AUDIT_READ:
+    kind: work
+    desc: Lecture/Analyse initiale
+  AUDIT_FINDINGS:
+    kind: work
+    desc: Synthèse des constats
+  AUDIT_FILES_SCAN:
+    kind: work
+    desc: Scan fichiers
+  AUDIT_TREE_ASSESS:
+    kind: work
+    desc: Évaluation arborescence
+  AUDIT_RGPD_ASSESS:
+    kind: work
+    desc: Évaluation RGPD
+  AUDIT_COMPLIANCE_ASSESS:
+    kind: work
+    desc: Évaluation conformité
+  AUDIT_FEATURE_ASSESS:
+    kind: work
+    desc: Évaluation fonctionnalité
+  AUDIT_ACCOUNTING_ASSESS:
+    kind: work
+    desc: Évaluation comptable
+  SPEC_DRAFT:
+    kind: work
+    desc: Rédaction d'une spécification
+  US_BREAKDOWN:
+    kind: work
+    desc: Décomposition en User Stories
+  ADR_DRAFT:
+    kind: work
+    desc: Rédiger un ADR
+  ADR_REVIEW:
+    kind: check
+    desc: Revue ADR
+  ADR_MERGE:
+    kind: send
+    desc: Merge ADR
+  DO_WORK:
+    kind: work
+    desc: Réalisation (générique)
+  REVIEW:
+    kind: check
+    desc: Revue (générique)
+  TEST:
+    kind: check
+    desc: Test/QA (générique)
+  PUBLISH:
+    kind: send
+    desc: Publication
+  BUG_QUALIFY:
+    kind: work
+    desc: Qualification bug
+  BUG_FIX:
+    kind: work
+    desc: Correction
+  QA_TEST:
+    kind: check
+    desc: Plan de test QA
+  RELEASE_NOTE:
+    kind: send
+    desc: Notes de version
+  SEC_AUDIT:
+    kind: work
+    desc: Audit sécurité/conformité
+  SEC_REMEDIATE:
+    kind: work
+    desc: Remédiation sécurité
+  DATA_EXTRACT:
+    kind: work
+    desc: Extraction de données
+  DATA_ANALYSE:
+    kind: work
+    desc: Analyse de données
+  DATA_REPORT:
+    kind: work
+    desc: Rédaction rapport
+  PMO_VALIDATE:
+    kind: check
+    desc: Validation PMO
+  GATE_FINAL:
+    kind: gate
+    desc: Validation finale (AGP/Archiviste)
+  OWNER_SUBMIT:
+    kind: send
+    desc: Soumission par Owner

@@ -1,0 +1,52 @@
+id: ARKORE09-NAMING-PATTERNS
+version: 2.0.0
+title: "Patterns de nommage"
+summary: >
+  Règles de nommage, expressions régulières et structure des artefacts d’évidence.
+maintainers: ["agp", "pmo"]
+sources:
+  - "09-patterns-nommage-artefacts.md"
+exports:
+  patterns:
+    feature: "FEAT-{id}-{kebab_title}"
+    epic: "EPIC-{featureId}-{id}-{kebab_title}"
+    user_story: "US-{epicId}-{id}-{kebab_title}"
+    ticket: "TCK-{usId}-{id}-{kebab_title}"
+    document: "DOC-{type}-{id}-{kebab_title}"
+    report: "RPT-{type}-{id}-{date}"
+    analysis: "ANL-{scope}-{id}-{kebab_title}"
+    plan: "PLN-{type}-{id}-{version}"
+    contract: "CTR-{parties}-{id}-{date}"
+    order: "ORD-{severity}-{id}-{target}"
+    decision: "DEC-{type}-{id}-{date}"
+    change_request: "CR-{type}-{id}-{date}"
+    agp_review: "FEAT{id}-{date}-review-{status}_AGP"
+    agp_validation: "VAL-{type}-{id}-{date}-AGP"
+    evidence:
+      summary: "{ticket}_SUMMARY.md"
+      test_report: "{ticket}_TESTS.md"
+      perf_report: "{ticket}_PERF.md"
+  regex:
+    feature: "^FEAT-[0-9]{2,}-[a-z0-9-]+$"
+    epic: "^EPIC-FEAT-[0-9]{2,}-[0-9]{2,}-[a-z0-9-]+$"
+    user_story: "^US-EPIC-[0-9]{2,}-[0-9]{2,}-[a-z0-9-]+$"
+    ticket: "^TCK-US-[0-9]{2,}-[0-9]{2,}-[0-9]{2,}-[a-z0-9-]+$"
+    document: "^DOC-[A-Z]+-[0-9]{3}-[a-z0-9-]+$"
+    report: "^RPT-[A-Z]+-[0-9]{3}-[0-9]{8}$"
+    analysis: "^ANL-[A-Z]+-[0-9]{3}-[a-z0-9-]+$"
+    plan: "^PLN-[A-Z]+-[0-9]{3}-v[0-9]+\\.[0-9]+$"
+    contract: "^CTR-[A-Z]+-[0-9]{3}-[0-9]{8}$"
+    order: "^ORD-S[0-3]-[0-9]{3}-[A-Z]+$"
+    decision: "^DEC-[A-Z]+-[0-9]{3}-[0-9]{8}$"
+    change_request: "^CR-[A-Z]+-[0-9]{3}-[0-9]{8}$"
+    agp_review: "^FEAT[0-9]{2,}-[0-9]{8}-review-(pass|fail|pending)_AGP$"
+    agp_validation: "^VAL-[A-Z]+-[0-9]{2,}-[0-9]{8}-AGP$"
+provides: ["patterns", "regex", "structure"]
+requires: ["ARKORE08-PATHS-GOVERNANCE@>=3.0.0"]
+contracts:
+  invariants:
+    - "all regex compile"
+    - "patterns keys referenced by ARKORE06 checks"
+  schema: "jsonschema://arka/naming-patterns/v1"
+change_policy:
+  compatibility: semver

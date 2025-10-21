@@ -1,0 +1,23 @@
+id: ARKAA08-WAKEUP-MARKET_RESEARCH_SPECIALIST
+version: 3.0.0
+agent_id: market-research-specialist
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.market-research-specialist
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.market-research-specialist
+expert_ref: client/acme/experts/ARKA_AGENT08-market-research-specialist.yaml
+memory:
+  dir: ARKA_META/.system/.mem/market-research/
+  index: ARKA_META/.system/.mem/market-research/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/market-research-specialist/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/market-research-specialist/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: ANALYSIS_CREATE
+  dispatch_mode: research_mode

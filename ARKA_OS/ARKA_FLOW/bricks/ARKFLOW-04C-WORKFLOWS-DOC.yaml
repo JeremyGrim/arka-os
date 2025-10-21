@@ -1,0 +1,106 @@
+id: ARKFLOW-04C-WORKFLOWS-DOC
+version: 2.2.0
+exports:
+- DOC_ADR_CHAIN
+- DOC_CONTENT_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  DOC_ADR_CHAIN:
+    sequence:
+    - step: Draft_ADR
+      action_key: ADR_DRAFT
+      requires_caps:
+      - spec.write
+      - arch.design
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+        - arch.design
+    - step: Review_ADR
+      action_key: ADR_REVIEW
+      requires_caps:
+      - arch.design
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - arch.design
+      requires:
+      - prev_step: Draft_ADR
+        type: RESULT
+    - step: Gate_Core
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: Archiviste
+      requires:
+      - prev_step: Review_ADR
+        type: RESULT
+    - step: Merge_ADR
+      action_key: ADR_MERGE
+      requires_caps:
+      - arch.design
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - arch.design
+      requires:
+      - prev_step: Gate_Core
+        type: RESULT
+  DOC_CONTENT_CHAIN:
+    sequence:
+    - step: Brief
+      action_key: CONTENT_BRIEF
+      requires_caps:
+      - content.plan
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - content.plan
+    - step: Write
+      action_key: CONTENT_WRITE
+      requires_caps:
+      - spec.write
+      - content.plan
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - spec.write
+        - content.plan
+      requires:
+      - prev_step: Brief
+        type: RESULT
+    - step: Review
+      action_key: CONTENT_REVIEW
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps_any:
+        - content.plan
+        - brand.strategy
+      requires:
+      - prev_step: Write
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Review
+        type: RESULT
+    - step: Publish
+      action_key: CONTENT_PUBLISH
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps_any:
+        - content.plan
+        - devops.guard
+      requires:
+      - prev_step: Gate
+        type: RESULT

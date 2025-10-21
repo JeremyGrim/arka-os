@@ -1,0 +1,140 @@
+id: CAPAMAP01-CAPABILITY-MATRIX
+version: 0.1.0
+title: "Matrice Intent ↔ Capabilité ↔ Rôles"
+summary: >
+  Décrit les capacités opérationnelles supportées par ARKA_OS et relie chaque
+  intent à la ou aux capabilités correspondantes ainsi qu'aux rôles autorisés.
+  Sert de base au provisionnement RBAC de la CLI et aux contrôles CI.
+maintainers: ["agp", "pmo"]
+
+templates:
+  capability_base: &capability_base
+    intents: []
+    roles_allowed: []
+
+capabilities:
+  - <<: *capability_base
+    capability: architecture_governance
+    description: "Pilotage de la gouvernance (ADR, décisions, ordres, gates)"
+    intents:
+      - ADR_CREATE
+      - DECISION_PUBLISH
+      - DECISION_ARCHIVE
+      - GATE_BROADCAST
+      - GATE_NOTIFY
+      - ORDER_CREATE
+      - ORDER_ESCALATE
+      - STRATEGY_CREATE
+      - ROADMAP_CREATE
+      - PROGRAM_CREATE
+      - PROCESS_DESIGN
+      - DELEGATION_CREATE
+    roles_allowed: [agp, technical_architect]
+
+  - <<: *capability_base
+    capability: product_steering
+    description: "Planification produit et orchestration des features"
+    intents:
+      - FEATURE_CREATE
+      - EPIC_CREATE
+      - US_CREATE
+      - PLAN_CREATE
+      - WORKFLOW_PLAN
+      - EDITORIAL_PLAN_CREATE
+      - CURRICULUM_DESIGN
+    roles_allowed: [pmo, agp, lead_dev]
+
+  - <<: *capability_base
+    capability: deliverable_management
+    description: "Gestion des livrables et documentation projet"
+    intents:
+      - DOCUMENT_CREATE
+      - DOCUMENT_READ
+      - DOCUMENT_UPDATE
+      - SPEC_CREATE
+      - GUIDELINES_CREATE
+      - CONTENT_CREATE
+      - SURVEY_CREATE
+      - TEMPLATE_CREATE
+      - PUBLISH_CONTENT
+      - REVIEW_DELIVERABLE
+      - ARCHIVE_CAPTURE
+    roles_allowed: [pmo, lead_dev, agp, technical_architect, devops]
+
+  - <<: *capability_base
+    capability: analysis_intelligence
+    description: "Analyses, benchmarks et insights data"
+    intents:
+      - ANALYSIS_CREATE
+      - ANALYSIS_READ
+      - ASSESSMENT_CREATE
+      - BENCHMARK_CREATE
+      - INSIGHT_GENERATE
+      - MODEL_CREATE
+      - SIMULATION_RUN
+      - SOURCING
+    roles_allowed: [pmo, technical_architect]
+
+  - <<: *capability_base
+    capability: growth_experimentation
+    description: "Automation, expérimentations et tests"
+    intents:
+      - AUTOMATION_CREATE
+      - EXPERIMENT_CREATE
+      - TEST_RUN
+    roles_allowed: [lead_dev, pmo, qa]
+
+  - <<: *capability_base
+    capability: reporting_insights
+    description: "Rapports, dashboards et publications d'analyse"
+    intents:
+      - REPORT_CREATE
+      - REPORT_UPDATE
+      - DASHBOARD_CREATE
+      - DASHBOARD_UPDATE
+    roles_allowed: [pmo, agp]
+
+  - <<: *capability_base
+    capability: engineering_delivery
+    description: "Flux d'exécution technique et garanties qualité"
+    intents:
+      - TICKET_CREATE
+      - TICKET_UPDATE
+      - TICKET_CLOSE
+      - TICKET_VALIDATE
+      - DELIVERY_SUBMIT
+      - VALIDATE_NAMING
+    roles_allowed: [lead_dev, qa, devops, technical_architect]
+
+  - <<: *capability_base
+    capability: communication_control
+    description: "Communication interne et notifications synchronisées"
+    intents:
+      - MESSAGE_SEND
+      - NOTIFICATION_SEND
+    roles_allowed: [agp, pmo]
+
+  - <<: *capability_base
+    capability: governance_documents
+    description: "Production d'artefacts de gouvernance stratégiques"
+    intents:
+      - STRATEGY_CREATE
+      - ROADMAP_CREATE
+      - PROGRAM_CREATE
+      - PROCESS_DESIGN
+      - SPEC_CREATE
+      - DELEGATION_CREATE
+    roles_allowed: [agp, pmo, technical_architect]
+
+provides: ["capability_matrix"]
+requires:
+  - "ARKORE12-ACTION-KEYS@>=2.1.0"
+  - "ARKORE17-ORCHESTRATION-RULES@>=2.0.0"
+contracts:
+  invariants:
+    - "each intent appears in at least one capability entry"
+    - "roles_allowed are non-empty arrays"
+    - "capabilities use kebab_case identifiers"
+  schema: "jsonschema://arka/capabilities/v1"
+change_policy:
+  compatibility: semver

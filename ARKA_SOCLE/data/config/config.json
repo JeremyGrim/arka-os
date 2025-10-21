@@ -1,0 +1,5 @@
+{
+  "socle.environment": "development",
+  "socle.version": "0.1-d_beta",
+  "logging.level": "info"
+}

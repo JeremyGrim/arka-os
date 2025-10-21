@@ -1,0 +1,45 @@
+id: ARKAA08-WAKEUP-SPEC_WRITER
+version: 1.0.0
+agent_id: spec-writer
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.spec-writer
+capabilities_ref: client/acme/ARKAA19-AGENT-CAPABILITIES.yaml#agents.spec-writer
+expert_ref: client/acme/experts/ARKA_AGENT30-spec-writer.yaml
+keys_catalog_ref: ARKORE11-KEYS-ANNUAIRE:keys
+memory:
+  dir: ARKA_META/.system/.mem/spec-writer/
+  index: ARKA_META/.system/.mem/spec-writer/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/spec-writer/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/spec-writer/outbox.yaml
+  ack_policy: immediate
+context_refs:
+  plan_directeur_ref: ARKAA15-PLAN-DIRECTEUR:director_plan
+  client_ref: clients/acme.yaml
+  north_star_ref: north_star.json
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_keys_catalog
+  - check_messages
+  default_intent: SPEC_CREATE
+rules_version_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_version
+rules_index_ref: ARKPR20-WAKEUP-POLICIES:defaults.rules_index_ref
+available_intents:
+- FEATURE_CREATE
+- EPIC_CREATE
+- US_CREATE
+- SPEC_CREATE
+- DOCUMENT_CREATE
+- DOCUMENT_UPDATE
+- CRITERIA_DEFINE
+guardrails_ref: ARKPR20-WAKEUP-POLICIES:defaults.guardrails
+contracts:
+  invariants:
+  - resolves(use_profile_ref)
+  - resolves(capabilities_ref)
+  - resolves(keys_catalog_ref)
+  - no_estimation_only_complexity
+  - all_specs_testable

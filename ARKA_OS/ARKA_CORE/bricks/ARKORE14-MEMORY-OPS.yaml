@@ -1,0 +1,81 @@
+id: ARKORE14-MEMORY-OPS
+version: 1.1.0
+title: "Opérations mémoire & hooks"
+summary: >
+  Mémoire orientée LLM: schéma compact, hooks systématiques post-action et à la
+  réception d’un ordre de mission. Pas de duplication: références vers paths (ARKORE08)
+  et vers règles d’acceptation (ARKORE05).
+maintainers: ["agp", "pmo"]
+sources: ["08-chemins-gouvernance-fondamentaux.md", "05-specifications-execution.md"]
+exports:
+  schema:
+    mem_record:
+      fields:
+        - { key: ts, type: iso8601 }
+        - { key: actor, type: string }
+        - { key: action_key, type: string }
+        - { key: scope, type: object, keys: [featureId, epicId, usId, ticketId] }
+        - { key: inputs, type: object }
+        - { key: outputs, type: object }
+        - { key: refs_resolved, type: list, items: string }
+        - { key: validations,   type: list, items: string }
+        - { key: status, type: enum, values: [success, failed, partial] }
+        - { key: notes, type: string }
+    mission_record:
+      fields:
+        - { key: ts, type: iso8601 }
+        - { key: mission_id, type: string }
+        - { key: source, type: enum, values: [owner, agp, pmo] }
+        - { key: summary, type: string }
+        - { key: scope, type: object, keys: [featureId, epicId] }
+        - { key: acceptance_ref, type: ref, value: "ARKORE05-EXECUTION-SPECS:acceptance" }
+        - { key: priority, type: enum, values: [low, normal, high, critical] }
+        - { key: deadline, type: iso8601? }
+  storage:
+    roots_ref: "ARKORE08-PATHS-GOVERNANCE:system.memory"
+    files:
+      daily_jsonl: "${arka_root}/.system/.mem/{agent}/log/{YYYY-MM-DD}.jsonl"
+      index_json:  "${arka_root}/.system/.mem/{agent}/index.json"
+  operations:
+    MEMORY_UPDATE:
+      input: { action_key: string, scope?: object, inputs?: object, outputs?: object, validations?: list }
+      write:
+        - append: daily_jsonl
+        - update_index: index_json (latest per scope)
+      idempotency:
+        key: [action_key, scope, outputs]
+        strategy: "coalesce duplicates within 5 minutes"
+    MISSION_INGEST:
+      input: { mission_record }
+      write:
+        - append: daily_jsonl
+        - update_index: index_json (missions)
+    READ_CONTEXT:
+      input: { scope: object, horizon: {days: 7}, limit: 20 }
+      filter:
+        - same_scope: true
+        - order: desc(ts)
+      output: { records: { type: list, items: mem_record } }
+
+    PERIODIC_COMPACT:
+      schedule: "daily@02:00"
+      action: "squash low-signal duplicates, keep status=success last N=3 per scope"
+  hooks:
+    post_action:
+      description: "Toujours exécuter après n’importe quelle action_key"
+      run: ["MEMORY_UPDATE"]
+    on_mission_order:
+      description: "Dès réception d’un ordre de mission"
+      run: ["MISSION_INGEST", "MEMORY_UPDATE"]
+  retention:
+    default_days: 180
+    critical_days: 365
+provides: ["schema", "storage", "operations", "hooks", "retention"]
+requires: ["ARKORE08-PATHS-GOVERNANCE@>=3.0.0", "ARKORE05-EXECUTION-SPECS@>=1.0.0"]
+contracts:
+  invariants:
+    - "all ops only reference paths from ARKORE08"
+    - "post_action hook includes MEMORY_UPDATE"
+  schema: "jsonschema://arka/memory-ops/v1"
+change_policy:
+  compatibility: semver

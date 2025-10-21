@@ -1,0 +1,19 @@
+assembly:
+  order: [03, 04, 05, 06, 07, 08]
+provides: [action_sets, path_sets, rights, limits, policy, profiles]
+requires: [
+  "ARKORE12-ACTION-KEYS@>=2.1.0",
+  "ARKORE08-PATHS-GOVERNANCE@>=3.0.0",
+  "ARKORE06-CONTROL-MATRICES@>=1.0.0"
+]
+profiles:
+  default:
+    enable:
+      - ARKPR03-ACTION-SETS@>=1.2.0
+      - ARKPR04-PATH-SETS@>=1.2.0
+      - ARKPR05-RIGHTS@>=1.2.0
+      - ARKPR06-LIMITS@>=1.1.0
+      - ARKPR07-AUTHZ-POLICY@>=1.0.0
+      - ARKPR08-PROFILES-CATALOG@>=1.1.0
+      - ARKPR09-PERMISSIONS-FORMAT@>=1.0.0
+      - ARKPR20-WAKEUP-POLICIES@>=1.1.0

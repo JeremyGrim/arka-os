@@ -1,0 +1,32 @@
+id: ARKFLOW-17-ORCHESTRATION-RULES
+version: 1.1.0
+exports:
+- actor_selector
+- chain_locks
+actor_selector:
+  inputs:
+    required_caps: array
+    required_caps_any: array
+    thread_tags: array
+    mission_owner: string
+  policy:
+    pools_from_capabilities: ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX:capabilities
+    allowlist_sessions: true
+    ranking:
+    - criterion: capability_match
+    - criterion: domain_tags
+    - criterion: load
+    - criterion: latency
+    - criterion: recency
+    tiebreaker: mission_owner_if_candidate
+  output:
+    selected_actor: string
+    reason: string
+chain_locks:
+  single_active_step: true
+  result_required_to_advance: true
+  write_guard:
+    enforce_selected_actor_only: true
+  timeout:
+    sec: 3600
+    on_timeout: 'escalate_to: mission_owner -> PMO -> Owner'

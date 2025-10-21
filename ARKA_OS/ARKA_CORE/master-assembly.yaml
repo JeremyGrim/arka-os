@@ -1,0 +1,78 @@
+schema: 1
+version: 1.0.0
+about: "Document maître d’assemblage des briques ARKORE*.yaml"
+profiles:
+  default:
+    enable:
+      - ARKORE01-HIERARCHY@>=1.0.0
+      - ARKORE02-GLOBAL-RULES@>=1.0.0
+      - ARKORE03-TEAMS-CLAUDE@>=1.0.0
+      - ARKORE04-WORKFLOWS@>=1.0.0
+      - ARKORE05-EXECUTION-SPECS@>=1.0.0
+      - ARKORE06-CONTROL-MATRICES@>=1.0.0
+      - ARKORE07-ARCHIVISTE-MODULE@>=1.0.0
+      - ARKORE08-PATHS-GOVERNANCE@>=3.0.0
+      - ARKORE09-NAMING-PATTERNS@>=2.0.0
+      - ARKORE11-NOTIFY-EXEC-DISPATCH@>=1.0.0
+      - ARKORE20-MESSAGING@>=1.1.0
+      - ARKORE22-INTENT-NOTIFY@>=1.0.0
+      - ARKORE12-ACTION-KEYS@>=2.1.0
+      - ARKORE13-TEMPLATES@>=1.2.0
+      - ARKORE14-MEMORY-OPS@>=1.1.0
+      - ARKORE15-AGP-REACTIVE-CONTROL@>=1.0.0
+      - ARKORE16-EVENT-BUS@>=1.0.0
+      - ARKORE17-ORCHESTRATION-RULES@>=1.0.0
+      - ARKORE18-INTENTS-REGISTRY@>=0.1.0
+      - CAPAMAP01-CAPABILITY-MATRIX@>=0.1.0
+      - ARKORE19-PRECONDITIONS-DEFS@>=0.1.0
+  dev-light:
+    enable: [
+      ARKORE01-HIERARCHY, ARKORE03-TEAMS-CLAUDE, ARKORE04-WORKFLOWS,
+      ARKORE08-PATHS-GOVERNANCE, ARKORE09-NAMING-PATTERNS,
+      ARKORE11-NOTIFY-EXEC-DISPATCH, ARKORE20-MESSAGING, ARKORE22-INTENT-NOTIFY,
+      ARKORE12-ACTION-KEYS, ARKORE14-MEMORY-OPS, ARKORE15-AGP-REACTIVE-CONTROL,
+      ARKORE16-EVENT-BUS, ARKORE18-INTENTS-REGISTRY, CAPAMAP01-CAPABILITY-MATRIX,
+      ARKORE19-PRECONDITIONS-DEFS
+    ]
+    override:
+      ARKORE06-CONTROL-MATRICES.performance_matrix.budgets.chat_ttft: "< 3s"
+  strict-security:
+    enable: [
+      ARKORE01-HIERARCHY, ARKORE02-GLOBAL-RULES, ARKORE04-WORKFLOWS,
+      ARKORE05-EXECUTION-SPECS, ARKORE06-CONTROL-MATRICES, ARKORE07-ARCHIVISTE-MODULE,
+      ARKORE08-PATHS-GOVERNANCE, ARKORE09-NAMING-PATTERNS, ARKORE11-NOTIFY-EXEC-DISPATCH,
+      ARKORE20-MESSAGING, ARKORE22-INTENT-NOTIFY, ARKORE12-ACTION-KEYS, ARKORE13-TEMPLATES, ARKORE14-MEMORY-OPS,
+      ARKORE15-AGP-REACTIVE-CONTROL, ARKORE16-EVENT-BUS, ARKORE18-INTENTS-REGISTRY,
+      CAPAMAP01-CAPABILITY-MATRIX, ARKORE19-PRECONDITIONS-DEFS
+    ]
+    override:
+      ARKORE06-CONTROL-MATRICES.performance_matrix.budgets.chat_ttft: "< 1.5s"
+      ARKORE06-CONTROL-MATRICES.evidence_matrix.required_artifacts.S1: ["trace", "review", "security_check", "perf_report"]
+assembly:
+  order: [01, 02, 03, 04, 05, 06, 07, 08, 09, 11, 12, 13, 14, 15, 16, 17, CAPAMAP01, 18, 19, 20, 22]
+contracts:
+  require:
+    - "ARKORE04-WORKFLOWS must reference ARKORE06-CONTROL-MATRICES.gate.criteria (no local copy)"
+    - "ARKORE03-TEAMS-CLAUDE must not declare external-invocations; enforced by ARKORE06 authority_matrix"
+    - "AGP gate precedes PMO execution across all workflows"
+  schema: "jsonschema://arka/master-assembly/v1"
+ref_resolver:
+  syntax: "brick:key.path"
+  example: "ARKORE06-CONTROL-MATRICES:gate.criteria"
+
+
+runner_prompt:
+  goal: "Exécuter une action en 2 étapes max + sauvegarde mémoire compacte"
+  steps:
+    - detect_intent:
+        use: "ARKORE12-ACTION-KEYS:intent_router"
+        output: action_key
+    - execute_action:
+        resolve_refs: true
+        follow: "ARKORE12-ACTION-KEYS:prompt_macros.minimal_steps.{action_key}"
+        do_not_expand_rules: true
+    - post_hooks:
+        run: "ARKORE14-MEMORY-OPS:hooks.post_action"
+  io:
+    input_contracts: "ARKORE12-ACTION-KEYS:io_contracts"
+    memory_write: "ARKORE14-MEMORY-OPS:operations.MEMORY_UPDATE"

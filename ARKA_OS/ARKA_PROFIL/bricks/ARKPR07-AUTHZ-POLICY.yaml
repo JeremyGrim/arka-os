@@ -1,0 +1,17 @@
+id: ARKPR07-AUTHZ-POLICY
+version: 1.0.0
+title: "Profils — Politique d'autorisation (évaluation)"
+exports:
+  policy:
+    merge_order: ["deny_actions > allow_actions", "deny_paths > allow_paths"]
+    net_access_order: ["none","restricted","full"]
+    evaluation:
+      - check_action:   "agent.rights.action_sets ⊇ action_key"
+      - check_paths:    "all outputs ∈ allow_paths ∧ ¬deny_paths"
+      - check_limits:   "apply ratelimit; consult budgets_ref/escalation_ref"
+      - post_memory:    "MEMORY_UPDATE always (success/fail)"
+contracts:
+  invariants:
+    - "policy has exactly 4 evaluation steps in the order above"
+provides: [policy]
+change_policy: { compatibility: semver }

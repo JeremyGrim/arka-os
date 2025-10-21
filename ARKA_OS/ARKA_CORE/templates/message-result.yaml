@@ -1,0 +1,12 @@
+tid: T-XXXXXX
+type: RESULT
+thread_id: THR-xxxxxx__topic-slug
+relates_to: msg-XXXX
+from: ROLE
+to: ROLE
+sujet: "Sujet clair"
+message: |
+  Résultat + références d'évidence.
+links:
+  attachments: []
+  output: []

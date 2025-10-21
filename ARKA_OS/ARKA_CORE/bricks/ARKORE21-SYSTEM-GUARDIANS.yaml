@@ -1,0 +1,22 @@
+id: ARKORE21-SYSTEM-GUARDIANS
+version: 1.1.0
+title: "Guardians — Enforcement exécutable"
+summary: >
+  La police fait respecter les règles, bloque les dérives, et produit des preuves (evidence pack).
+
+operations:
+  pre_write_blockers:
+    - id: "block_llm_ack_file"
+      desc: "Rejeter tout fichier ACK produit par un LLM (ACK = transport système uniquement)."
+    - id: "block_illegal_status"
+      desc: "Rejeter un STATUS hors gabarit (statut invalide, pas de relates_to, corps non actionnable)."
+  post_notify_blockers:
+    - id: "block_chat_output_after_notify"
+      desc: "Après une notif, interdire toute bulle chat ; seule la messagerie est autorisée."
+  escalation:
+    on_violation: "PMO → Owner (si PMO expéditeur ou inactif)"
+  evidence:
+    stored_under: "ARKA_META/evidence/guardians/<date>/"
+
+change_policy:
+  compatibility: "semver"

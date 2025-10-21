@@ -1,0 +1,23 @@
+id: ARKAA08-WAKEUP-BRAND_STRATEGY_ARCHITECT
+version: 3.0.0
+agent_id: brand-strategy-architect
+use_profile_ref: ARKPR08-PROFILES-CATALOG:profiles.brand-strategy-architect
+capabilities_ref: ARKAA19-AGENT-CAPABILITIES:agents.brand-strategy-architect
+expert_ref: client/acme/experts/ARKA_AGENT24-brand-strategy-architect.yaml
+memory:
+  dir: ARKA_META/.system/.mem/brand-strategy/
+  index: ARKA_META/.system/.mem/brand-strategy/index.json
+messaging:
+  general_ref: ARKA_META/messaging/general.yaml
+  inbox_ref: ARKA_META/messaging/agents/brand-strategy-architect/inbox.yaml
+  outbox_ref: ARKA_META/messaging/agents/brand-strategy-architect/outbox.yaml
+  ack_policy: immediate
+startup:
+  sequence:
+  - resolve_profile
+  - mount_memory
+  - load_capabilities
+  - load_expert
+  - check_messages
+  default_intent: STRATEGY_CREATE
+  dispatch_mode: brand_strategy_mode

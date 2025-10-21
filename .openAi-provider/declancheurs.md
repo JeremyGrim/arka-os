@@ -1,0 +1,8 @@
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-DevOPS\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-LD\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-UX-UI\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-AGP\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-QA\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-PMO\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-Archiviste\onboarding.md
+- voici ton role et context projet lis tout les doc et presente moi ton role : .openAi-provider\.codex-Scribe\onboarding.md

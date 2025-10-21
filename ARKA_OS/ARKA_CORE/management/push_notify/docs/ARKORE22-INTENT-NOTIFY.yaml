@@ -1,0 +1,11 @@
+# Copie conforme à déposer sous ARKA_CORE/bricks/ARKORE22-INTENT-NOTIFY.yaml
+# (source unique ; ce fichier existe pour faciliter le remplacement)
+
+id: ARKORE22-INTENT-NOTIFY
+version: 1.2.0
+policies:
+  chat_response_forbidden: true
+  ui_gate_strict: true
+  ack_policy: system
+  no_sse_transport: true
+  optionA_sessions: attach_only

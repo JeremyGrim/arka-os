@@ -1,0 +1,40 @@
+assembly:
+  order: [08, 10, 11, 12, 13, 14, 15]
+requires:
+  - "../build/core.assembly.yaml"
+  - "../build/profiles.bundle.yaml"
+profiles:
+  default:
+    include:
+      - from: "../build/core.assembly.yaml"
+      - from: "../build/profiles.bundle.yaml"
+    enable:
+      # Wake-Ups Core (5 agents)
+      - ARKAA08-WAKEUP-AGP@>=1.0.0
+      - ARKAA08-WAKEUP-PMO@>=1.0.0
+      - ARKAA08-WAKEUP-SPEC-WRITER@>=1.0.0
+      - ARKAA08-WAKEUP-CORE_ARCHIVIST@>=1.1.0
+      - ARKAA08-WAKEUP-GEMINI@>=1.0.0
+      # Ajout des wakeups pour les agents spécialisés (numérotés selon le catalogue)
+      - ARKAA08-WAKEUP-ARKA_ARCHIVIST_ORCHESTRATOR@>=1.0.0
+      - ARKAA08-WAKEUP-CORE_SCRIBE@>=1.1.0
+      - ARKAA08-WAKEUP-AGENT_CREATOR_CLIENT@>=1.0.0
+      - ARKAA08-WAKEUP-LEAD_DEV_BATISSEUR@>=1.0.0
+      - ARKAA08-WAKEUP-TECHNICAL_ARCHITECT@>=1.0.0
+      - ARKAA08-WAKEUP-DEVOPS_GUARDIAN@>=1.0.0
+      - ARKAA08-WAKEUP-UX_UI_DESIGN_GUARDIAN@>=1.0.0
+      - ARKAA08-WAKEUP-MARKET_RESEARCH_SPECIALIST@>=1.0.0
+      - ARKAA08-WAKEUP-MISSION_QUALIFIER@>=1.0.0
+      - ARKAA08-WAKEUP-OUTREACH_STRATEGIST@>=1.0.0
+      - ARKAA08-WAKEUP-PIPELINE_TRACKER@>=1.0.0
+      - ARKAA08-WAKEUP-POSITIONING_EXPERT@>=1.0.0
+      - ARKAA08-WAKEUP-QA_TESTEUR@>=1.0.0
+      - ARKAA08-WAKEUP-SECURITY_COMPLIANCE_ARCHITECT@>=1.0.0
+      # (Optionnel selon ton repo) Cards/Context/Templates/Events/Compliance/Aliases/Plan
+      - ARKAA09-AGENT-CARDS@>=1.0.0
+      - ARKAA10-CONTEXT@>=1.0.0
+      - ARKAA11-TEMPLATES-PROVIDER@>=1.0.0
+      - ARKAA12-EVENTS-PACK@>=1.0.0
+      - ARKAA13-COMPLIANCE-POLICY@>=1.0.0
+      - ARKAA14-VOCAB-ALIASES@>=1.0.0
+      - ARKAA15-PLAN-DIRECTEUR@>=1.0.0

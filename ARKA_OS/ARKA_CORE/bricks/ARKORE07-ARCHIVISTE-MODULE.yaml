@@ -1,0 +1,31 @@
+id: ARKORE07-ARCHIVISTE-MODULE
+version: 1.0.0
+title: "Module Archiviste"
+summary: >
+  Équipe d’archivage autonome, isolation stricte, et processus de capture.
+maintainers: ["archiviste", "agp"]
+sources:
+  - "07-equipe-archivist-orchestrator.md"
+exports:
+  org:
+    orchestrator: "archi_orchestrator"
+    agents: ["archi_curator1", "archi_curator2", "archi_curator3", "archi_curator4"]
+  isolation:
+    network: "no direct access to PMO runtime"
+    data: "read-only from published artifacts"
+  archive:
+    handoff:
+      inputs: ["final_artifacts", "evidence", "approvals"]
+      validations: ["nomenclature_ok", "evidence_ok"]
+    retention:
+      default: "180d"
+      critical: "> 365d"
+provides: ["org", "isolation", "archive"]
+requires: ["ARKORE01-HIERARCHY@>=1.0.0", "ARKORE06-CONTROL-MATRICES@>=1.0.0", "ARKORE09-NAMING-PATTERNS@>=1.0.0"]
+contracts:
+  invariants:
+    - "no runtime write access to PMO workspaces"
+    - "handoff.validations reference ARKORE06 & ARKORE09 checks"
+  schema: "jsonschema://arka/archiviste/v1"
+change_policy:
+  compatibility: semver

@@ -1,0 +1,25 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ARKA Intent Notify (brique 22)",
+  "type": "object",
+  "required": ["nt_id", "intent", "resource", "to_agent"],
+  "properties": {
+    "nt_id": { "type": "string" },
+    "intent": { "type": "object", "required": ["key"], "properties": { "key": { "type": "string" } } },
+    "resource": { "type": "object", "required": ["type","pointer"],
+      "properties": { "type": { "type": "string" }, "pointer": { "type": "string" } }
+    },
+    "constraints": { "type": "array", "items": { "oneOf": [ { "type": "string" }, { "type": "object" } ] } },
+    "from_agent": { "type": "string" },
+    "to_agent": { "type": "string" },
+    "message_id": { "type": "string" },
+    "workflow_id": { "type": "string" },
+    "correlation_id": { "type": "string" },
+    "project": { "type": "string" },
+    "provider": { "type": "string" },
+    "session": { "type": "string" },
+    "metadata": { "type": "object" }
+  },
+  "additionalProperties": true
+}

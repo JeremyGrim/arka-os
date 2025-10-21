@@ -1,0 +1,18 @@
+version: 1
+attach_only: true
+no_sse_transport: true
+provider_default: "codex"
+session_prefix_default: "arka"
+
+on_missing_session: "block"     # Option A
+notify_return_to_sender: true
+
+escalation_policy:
+  default: "PMO"
+  if_sender_is_PMO_or_PMO_inactive: "Owner"
+  pmo_inactive_after_sec: 600
+
+role_activity:
+  source: "tmux"
+  pane_default: "0.0"
+  inactive_threshold_sec: 600

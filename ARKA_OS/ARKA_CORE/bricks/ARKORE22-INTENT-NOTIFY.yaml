@@ -1,0 +1,47 @@
+id: ARKORE22-INTENT-NOTIFY
+version: 1.4.0
+title: "INTENT → NOTIFY (dev=prod, sans SSE, threads-only)"
+summary: >
+  Spécifie comment une intention exécutoire se traduit en notification stricte,
+  sans canal SSE interne, séparation chat/message, exécution déterministe.
+  Toute réponse attendue est un fichier de messagerie (STATUS|RESULT), jamais une bulle chat.
+
+maintainers: ["system_guardian", "core_archivist"]
+requires:
+  - "ARKORE20-MESSAGING@>=2.1.0"
+  - "ARKORE21-SYSTEM-GUARDIANS@>=1.1.0"
+  - "ARKORE11-NOTIFY-EXEC-DISPATCH@>=1.1.0"
+
+policies:
+  chat_response_forbidden: true
+  ui_gate_strict: true
+  ack_policy: system
+  no_sse_transport: true
+  optionA_sessions: attach_only
+
+routing:
+  reply_must_reference:
+    relates_to: required
+    thread_id: required
+
+notes:
+  - "Les réponses vont dans `messaging/threads/<thread-ref>/` (v2 only)."
+  - "Aucune compat v1 : `messaging/msg/...` est décommissionné côté écriture et non supporté."
+
+contract: "jsonschema://arka/intent-notify/v1"
+
+templates:
+  nt_a2a_message_to_result:
+    id: "NT-A2A-MESSAGE_TO_RESULT"
+    description: >
+      Ordre automatique de lecture/traitement d’un message strict, puis réponse
+      par fichier STATUS/RESULT dans le même fil (threads v2).
+    content:
+      - "Lire le message via `arkamsg pull --agent <role>` (mark read)."
+      - "Exécuter les actions demandées, produire les évidences."
+      - "Publier `STATUS` ou `RESULT` (append-only) avec `relates_to` et `thread_id`."
+    notes:
+      - "Aucune sortie chat autorisée ; zéro temporalité (« NO_TIME »)."
+
+change_policy:
+  compatibility: "semver"

@@ -1,0 +1,89 @@
+[
+  {
+    "id": "arka_core",
+    "name": "ARKA Core",
+    "version": "1.0.0",
+    "type": "core",
+    "priority": 1,
+    "enabled": true,
+    "status": "ready",
+    "dependencies": [],
+    "adapter": "adapters/core_adapter.yaml"
+  },
+  {
+    "id": "arka_os",
+    "name": "ARKA OS",
+    "version": "1.0.0",
+    "type": "core",
+    "priority": 1,
+    "enabled": true,
+    "status": "ready",
+    "dependencies": [
+      "arka_core"
+    ],
+    "adapter": "adapters/os_adapter.yaml"
+  },
+  {
+    "id": "arka_cli",
+    "name": "ARKA CLI",
+    "version": "1.0.0",
+    "type": "local",
+    "priority": 2,
+    "enabled": true,
+    "status": "ready",
+    "dependencies": [
+      "arka_core",
+      "arka_os"
+    ],
+    "adapter": "adapters/cli_adapter.yaml"
+  },
+  {
+    "id": "arka_meta",
+    "name": "ARKA MetaEngine",
+    "version": "1.0.0",
+    "type": "meta",
+    "priority": 3,
+    "enabled": true,
+    "status": "ready",
+    "dependencies": [
+      "arka_core"
+    ],
+    "adapter": "adapters/meta_adapter.yaml"
+  },
+  {
+    "id": "adapter_router_advanced",
+    "name": "Advanced Adapter Router",
+    "version": "1.0.0",
+    "type": "extension",
+    "priority": 5,
+    "enabled": false,
+    "status": "ready",
+    "dependencies": [
+      "arka_core"
+    ]
+  },
+  {
+    "id": "fallback_engine",
+    "name": "Fallback Engine",
+    "version": "1.0.0",
+    "type": "extension",
+    "priority": 6,
+    "enabled": false,
+    "status": "ready",
+    "dependencies": [
+      "adapter_router_advanced"
+    ]
+  },
+  {
+    "id": "circuit_breaker",
+    "name": "Circuit Breaker",
+    "version": "1.0.0",
+    "type": "extension",
+    "priority": 6,
+    "enabled": false,
+    "status": "ready",
+    "dependencies": [
+      "fallback_engine"
+    ]
+  }
+]

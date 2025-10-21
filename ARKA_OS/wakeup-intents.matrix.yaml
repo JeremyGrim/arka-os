@@ -1,0 +1,200 @@
+id: ARKA-WAKEUP-INTENTS-MATRIX
+version: 1.0.0
+generated_with: bin/generate-wakeup-matrix.mjs
+matrix:
+  - agent_id: agp
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-AGP.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.agp"
+    profile: agp
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT15-agp.yaml
+    default_intent: ADR_CREATE
+    intents: [ADR_CREATE, DECISION_ARCHIVE, DECISION_PUBLISH, DOCUMENT_CREATE, DOCUMENT_READ, GATE_BROADCAST, GATE_NOTIFY, ORDER_CREATE, ORDER_ESCALATE, REVIEW_DELIVERABLE]
+  - agent_id: arka-agent00-core-archivist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-CORE_ARCHIVIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.core-archivist"
+    profile: core-archivist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT00-archivist.yaml
+    default_intent: PLAN_WORKFLOW
+    intents: [PLAN_WORKFLOW, REVIEW_DELIVERABLE, ARCHIVE_CAPTURE, DOCUMENT_CREATE]
+  - agent_id: arka-agent01-arka-archivist-orchestrator
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-ARKA_ARCHIVIST_ORCHESTRATOR.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.arka-archivist-orchestrator"
+    profile: arka-archivist-orchestrator
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT01-arka-archivist-orchestrator.yaml
+    default_intent: ARCHIVE_CAPTURE
+    intents: []
+  - agent_id: arka-agent02-core-scribe
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-CORE_SCRIBE.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.arka-scribe"
+    profile: core-scribe
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT02-arka-scribe.yaml
+    default_intent: PLAN_WORKFLOW
+    intents: [PLAN_WORKFLOW, REVIEW_DELIVERABLE, ARCHIVE_CAPTURE, DOCUMENT_CREATE]
+  - agent_id: arka-agent03-agent-creator-client
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-AGENT_CREATOR_CLIENT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.agent-creator-client"
+    profile: agent-creator-client
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT03-agent-creator-client.yaml
+    default_intent: FEATURE_CREATE
+    intents: []
+  - agent_id: arka-agent14-security-compliance-architect
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-SECURITY_COMPLIANCE_ARCHITECT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.security-compliance-architect"
+    profile: security-compliance-architect
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT14-security-compliance-architect.yaml
+    default_intent: VALIDATE_NAMING
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, ORDER_ESCALATE, REPORT_CREATE, REVIEW_DELIVERABLE]
+  - agent_id: brand-strategy-architect
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-BRAND_STRATEGY_ARCHITECT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.brand-strategy-architect"
+    profile: brand-strategy-architect
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT24-brand-strategy-architect.yaml
+    default_intent: STRATEGY_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, GUIDELINES_CREATE, REVIEW_DELIVERABLE, STRATEGY_CREATE]
+  - agent_id: compensation-benefits-analyst
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-COMPENSATION_BENEFITS_ANALYST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.compensation-benefits-analyst"
+    profile: compensation-benefits-analyst
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT22-compensation-benefits-analyst.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, BENCHMARK_CREATE, DOCUMENT_CREATE, REPORT_CREATE, SIMULATION_RUN]
+  - agent_id: content-strategy-manager
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-CONTENT_STRATEGY_MANAGER.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.content-strategy-manager"
+    profile: content-strategy-manager
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT26-content-strategy-manager.yaml
+    default_intent: CONTENT_CREATE
+    intents: [ANALYSIS_CREATE, CONTENT_CREATE, DOCUMENT_CREATE, EDITORIAL_PLAN_CREATE, PUBLISH_CONTENT]
+  - agent_id: devops-guardian
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-DEVOPS_GUARDIAN.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.devops-guardian"
+    profile: devops-guardian
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT06-devops-guardian.yaml
+    default_intent: VALIDATE_NAMING
+    intents: [ARCHIVE_CAPTURE, DOCUMENT_CREATE, REPORT_CREATE, TICKET_CREATE, TICKET_UPDATE, VALIDATE_NAMING, WORKFLOW_PLAN]
+  - agent_id: employee-experience-designer
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-EMPLOYEE_EXPERIENCE_DESIGNER.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.employee-experience-designer"
+    profile: employee-experience-designer
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT21-employee-experience-designer.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, PROCESS_DESIGN, REPORT_CREATE, SURVEY_CREATE]
+  - agent_id: fsx-extreme-fullstack
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-FSX_EXTREME.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.fsx-extreme-fullstack"
+    profile: fsx-extreme-fullstack
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT99-fsx-extreme-fullstack.yaml
+    default_intent: ORDER_ESCALATE
+    intents: [ARCHIVE_CAPTURE, DELIVERY_SUBMIT, ORDER_ESCALATE, REPORT_CREATE, TICKET_CLOSE, TICKET_CREATE]
+  - agent_id: gemini-owner-sourcing
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-GEMINI.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.gemini-owner-sourcing"
+    profile: gemini-owner-sourcing
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT40-gemini-owner-sourcing.yaml
+    default_intent: SOURCING
+    intents: [ANALYSIS_CREATE, REPORT_CREATE, SOURCING]
+  - agent_id: growth-hacker-specialist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-GROWTH_HACKER_SPECIALIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.growth-hacker-specialist"
+    profile: growth-hacker-specialist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT25-growth-hacker-specialist.yaml
+    default_intent: EXPERIMENT_CREATE
+    intents: [ANALYSIS_CREATE, AUTOMATION_CREATE, EXPERIMENT_CREATE, REPORT_CREATE, TEST_RUN]
+  - agent_id: hr-transformation-specialist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-HR_TRANSFORMATION_SPECIALIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.hr-transformation-specialist"
+    profile: hr-transformation-specialist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT20-hr-transformation-specialist.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, PROCESS_DESIGN, REPORT_CREATE, ROADMAP_CREATE]
+  - agent_id: lead-dev-batisseur
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-LEAD_DEV_BATISSEUR.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.lead-dev-batisseur"
+    profile: lead-dev-batisseur
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT04-lead-dev-batisseur.yaml
+    default_intent: TICKET_CREATE
+    intents: [DELIVERY_SUBMIT, DOCUMENT_CREATE, DOCUMENT_UPDATE, REPORT_CREATE, TICKET_CLOSE, TICKET_CREATE, TICKET_UPDATE]
+  - agent_id: learning-development-strategist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-LEARNING_DEVELOPMENT_STRATEGIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.learning-development-strategist"
+    profile: learning-development-strategist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT23-learning-development-strategist.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, ASSESSMENT_CREATE, CURRICULUM_DESIGN, PROGRAM_CREATE, REPORT_CREATE]
+  - agent_id: market-research-specialist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-MARKET_RESEARCH_SPECIALIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.market-research-specialist"
+    profile: market-research-specialist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT08-market-research-specialist.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, ANALYSIS_READ, DOCUMENT_CREATE, DOCUMENT_READ, REPORT_CREATE]
+  - agent_id: marketing-analytics-expert
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-MARKETING_ANALYTICS_EXPERT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.marketing-analytics-expert"
+    profile: marketing-analytics-expert
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT27-marketing-analytics-expert.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, DASHBOARD_CREATE, INSIGHT_GENERATE, MODEL_CREATE, REPORT_CREATE]
+  - agent_id: mission-qualifier
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-MISSION_QUALIFIER.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.mission-qualifier"
+    profile: mission-qualifier
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT09-mission-qualifier.yaml
+    default_intent: ANALYSIS_CREATE
+    intents: [ANALYSIS_CREATE, DECISION_PUBLISH, DOCUMENT_CREATE, DOCUMENT_UPDATE, REPORT_CREATE]
+  - agent_id: outreach-strategist
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-OUTREACH_STRATEGIST.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.outreach-strategist"
+    profile: outreach-strategist
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT10-outreach-strategist.yaml
+    default_intent: DOCUMENT_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, DOCUMENT_UPDATE, MESSAGE_SEND, REPORT_CREATE]
+  - agent_id: pipeline-tracker
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-PIPELINE_TRACKER.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.pipeline-tracker"
+    profile: pipeline-tracker
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT11-pipeline-tracker.yaml
+    default_intent: REPORT_CREATE
+    intents: [ANALYSIS_CREATE, DASHBOARD_UPDATE, NOTIFICATION_SEND, REPORT_CREATE, REPORT_UPDATE]
+  - agent_id: pmo
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-PMO.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.arka-product-manager-officer"
+    profile: arka-product-manager-officer
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT15-arka-product-manager-officer.yaml
+    default_intent: FEATURE_CREATE
+    intents: [DELEGATION_CREATE, DOCUMENT_READ, REPORT_CREATE, WORKFLOW_PLAN]
+  - agent_id: positioning-expert
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-POSITIONING_EXPERT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.positioning-expert"
+    profile: positioning-expert
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT12-positioning-expert.yaml
+    default_intent: DOCUMENT_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, DOCUMENT_UPDATE, REVIEW_DELIVERABLE, TEMPLATE_CREATE]
+  - agent_id: qa-testeur
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-QA_TESTEUR.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.qa-testeur"
+    profile: qa-testeur
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT13-qa-testeur.yaml
+    default_intent: TICKET_VALIDATE
+    intents: [DOCUMENT_CREATE, DOCUMENT_UPDATE, REPORT_CREATE, REVIEW_DELIVERABLE, TICKET_VALIDATE]
+  - agent_id: spec-writer
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-SPEC_WRITER.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.spec-writer"
+    profile: spec-writer
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT30-spec-writer.yaml
+    default_intent: SPEC_CREATE
+    intents: [DOCUMENT_CREATE, EPIC_CREATE, FEATURE_CREATE, SPEC_CREATE, US_CREATE]
+  - agent_id: technical-architect
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-TECHNICAL_ARCHITECT.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.technical-architect"
+    profile: technical-architect
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT05-technical-architect.yaml
+    default_intent: ADR_CREATE
+    intents: [ADR_CREATE, ANALYSIS_CREATE, ANALYSIS_READ, DOCUMENT_CREATE, DOCUMENT_UPDATE, PLAN_CREATE, REVIEW_DELIVERABLE]
+  - agent_id: ux-ui-design-guardian
+    wakeup_file: ARKA_AGENT/client/acme/wakeup/ARKAA08-WAKEUP-UX_UI_DESIGN_GUARDIAN.yaml
+    profile_ref: "ARKPR08-PROFILES-CATALOG:profiles.ux-ui-design-guardian"
+    profile: ux-ui-design-guardian
+    expert_file: ARKA_AGENT/client/acme/experts/ARKA_AGENT07-ux-ui-design-guardian.yaml
+    default_intent: DOCUMENT_CREATE
+    intents: [ANALYSIS_CREATE, DOCUMENT_CREATE, DOCUMENT_UPDATE, REPORT_CREATE, REVIEW_DELIVERABLE]

@@ -1,0 +1,178 @@
+id: ARKPR05-RIGHTS
+version: 1.2.0
+title: "Profils — Bundles de droits (compose action_sets + path_sets + net)"
+exports:
+  rights:
+    base_rights:
+      action_sets: [quality_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    architect_rights:
+      action_sets: [create_structure, quality_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    lead_dev_rights:
+      action_sets: [ticket_ops, quality_ops, control_ops]
+      allow_paths: [us_tickets_only, us_evidence_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    devops_rights:
+      action_sets: [control_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    ux_guardian_rights:
+      action_sets: [ux_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    core_archivist_rights:
+      action_sets: [document_ops, report_ops, analysis_ops, plan_ops, contract_ops, order_ops, governance_ops, workflow_ops, review_ops, archive_ops, quality_ops]
+      allow_paths: [mem_only, governance_all, governance_orders, governance_logs, arka_os_core, docs_memory, docs_memory_archive, claude_memory]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    agp_rights:
+      action_sets: [control_ops, quality_ops, workflow_ops, review_ops]
+      allow_paths: [features_all, meta_adr, meta_reports_agp]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    fsx_fullstack_rights:
+      action_sets: [create_structure, ticket_ops, control_ops, quality_ops]
+      allow_paths: [features_all, us_tickets_only, us_evidence_only, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    pmo_rights:
+      # Le PMO peut créer la structure et orchestrer/planifier des workflows, mais ne produit pas directement les artefacts.
+      action_sets: [create_structure, quality_ops, workflow_ops, review_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    scribe_rights:
+      action_sets: [quality_ops, document_ops, report_ops, analysis_ops, workflow_ops]
+      allow_paths: [mem_only, claude_memory, docs_memory, docs_memory_archive, governance_all, governance_logs]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    market_research_rights:
+      action_sets: [quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  full
+
+    mission_qualifier_rights:
+      action_sets: [control_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    outreach_rights:
+      action_sets: [quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  full
+
+    agent_creator_rights:
+      action_sets: [create_structure, quality_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    qa_rights:
+      action_sets: [bug_ticket_ops, quality_ops]
+      allow_paths: [us_tickets_only, us_evidence_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    pipeline_tracker_rights:
+      action_sets: [control_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    positioning_expert_rights:
+      action_sets: [quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    security_compliance_architect_rights:
+      action_sets: [quality_ops]
+      allow_paths: [features_all]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    brand_strategy_architect_rights:
+      action_sets: [analysis_ops, document_ops, plan_ops, report_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    compensation_benefits_analyst_rights:
+      action_sets: [analysis_ops, report_ops, document_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    content_strategy_manager_rights:
+      action_sets: [document_ops, analysis_ops, report_ops, plan_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    employee_experience_designer_rights:
+      action_sets: [plan_ops, document_ops, analysis_ops, report_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    growth_hacker_specialist_rights:
+      action_sets: [analysis_ops, report_ops, document_ops, plan_ops, workflow_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  full
+
+    hr_transformation_specialist_rights:
+      action_sets: [plan_ops, analysis_ops, report_ops, document_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    learning_development_strategist_rights:
+      action_sets: [plan_ops, analysis_ops, document_ops, report_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+
+    marketing_analytics_expert_rights:
+      action_sets: [analysis_ops, report_ops, document_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  full
+
+    sourcing_specialist_rights:
+      action_sets: [analysis_ops, report_ops, document_ops, workflow_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  full
+
+    spec_writer_rights:
+      action_sets: [document_ops, analysis_ops, plan_ops, quality_ops]
+      allow_paths: [features_all, mem_only]
+      deny_paths:  [secrets]
+      net_access:  restricted
+contracts:
+  invariants:
+    - "all referenced action_sets/path_sets exist in ARKPR03/04"
+requires: ["ARKPR03-ACTION-SETS@>=1.2.0","ARKPR04-PATH-SETS@>=1.2.0"]
+change_policy: { compatibility: semver }

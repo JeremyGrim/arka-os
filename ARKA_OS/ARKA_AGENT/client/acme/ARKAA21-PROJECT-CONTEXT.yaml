@@ -1,0 +1,42 @@
+id: ARKAA21-PROJECT-CONTEXT
+version: 1.0.0
+title: "Contexte & variables de projet (client/acme)"
+# Un fichier par client/projet. Les wakeups y référencent des variables, pas de chemins en dur.
+
+vars:
+  docs:
+    vision_produit: docs/product/vision_produit_v5.md
+    roadmap: docs/product/roadmap.md
+    vision_slice_template: docs/product/vision_slice.md
+    pitch_deck: docs/product/pitch_deck.md
+    plan_directeur: ARKAA_AGENT/client/acme/ARKAA15-PLAN-DIRECTEUR.yaml
+
+  rules_refs:
+    - ARKA_CORE/bricks/ARKORE04-WORKFLOWS.yaml
+    - ARKA_CORE/bricks/ARKORE05-EXECUTION-SPECS.yaml
+    - ARKA_CORE/bricks/ARKORE08-PATHS-GOVERNANCE.yaml
+    - ARKA_CORE/rules_index.yaml
+    - ARKA_PROFIL/bricks/ARKPR20-WAKEUP-POLICIES.yaml
+
+  governance:
+    agp_gate_mandatory: true
+    double_validation: true
+    evidence_pack: [tests, logs, docs, rollback, perf, memory, files]
+    collaboration_required: true
+    max_reworks_before_escalation: 2
+
+  dor_dod:
+    dor: "norme-feature-spec-v2"       # alias logique → résolu via rules_index
+    dod: "methode-feature-complete"    # idem
+
+  providers:
+    chat_multi_provider: true
+    must_log_provider: true
+
+  language_tone:
+    ban: ["NEVER", "CARVED IN STONE", "1000+ day one", "catastrophique", "sacré"]
+    prefer: ["vision slice", "options", "trade-offs", "plan de rollback"]
+
+  workflow_canvas:
+    enable: true
+    required_blocks: [start, actions, validations, end, rollback]

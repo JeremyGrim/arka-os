@@ -1,0 +1,317 @@
+id: ARKFLOW-04A-WORKFLOWS-AUDIT
+version: 2.2.0
+exports:
+- AUDIT_FILES_CHAIN
+- AUDIT_TREE_CHAIN
+- AUDIT_RGPD_CHAIN
+- AUDIT_COMPLIANCE_CHAIN
+- AUDIT_FEATURE_CHAIN
+- AUDIT_ACCOUNTING_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  AUDIT_FILES_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Read
+      action_key: AUDIT_READ
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Specific
+      action_key: AUDIT_FILES_SCAN
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Read
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - adr
+            - core
+            - security
+            - compliance
+            - rgpd
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT
+  AUDIT_TREE_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Read
+      action_key: AUDIT_READ
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Specific
+      action_key: AUDIT_TREE_ASSESS
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Read
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - adr
+            - core
+            - security
+            - compliance
+            - rgpd
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT
+  AUDIT_RGPD_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Specific
+      action_key: AUDIT_RGPD_ASSESS
+      requires_caps:
+      - audit.compliance
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.compliance
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - rgpd
+            - compliance
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT
+  AUDIT_COMPLIANCE_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Specific
+      action_key: AUDIT_COMPLIANCE_ASSESS
+      requires_caps:
+      - audit.compliance
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.compliance
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - when:
+            any_tag:
+            - compliance
+            - security
+          actor: Archiviste
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT
+  AUDIT_FEATURE_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Specific
+      action_key: AUDIT_FEATURE_ASSESS
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT
+  AUDIT_ACCOUNTING_CHAIN:
+    sequence:
+    - step: Intake
+      action_key: INTAKE
+      requires_caps:
+      - mission.qualify
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - mission.qualify
+    - step: Specific
+      action_key: AUDIT_ACCOUNTING_ASSESS
+      requires_caps:
+      - audit.read
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+      requires:
+      - prev_step: Intake
+        type: RESULT
+    - step: Findings
+      action_key: AUDIT_FINDINGS
+      requires_caps:
+      - audit.read
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - audit.read
+        - spec.write
+      requires:
+      - prev_step: Specific
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Findings
+        type: RESULT

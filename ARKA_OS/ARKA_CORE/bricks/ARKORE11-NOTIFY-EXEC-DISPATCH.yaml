@@ -1,0 +1,26 @@
+id: ARKORE11-NOTIFY-EXEC-DISPATCH
+version: 1.1.1
+title: "Notification → Exécution (Dispatch déterministe, Option A)"
+summary: >
+  Convertit une notification stricte (contrat v1) en exécution déterministe sans LLM.
+  Pas de SSE. Journal local + daemon unique. Sessions attach_only (Option A).
+  Profil Codex : bloc → Enter → "" → Enter → Enter.
+
+requires:
+  - "ARKORE20-MESSAGING@>=1.2.0"
+  - "ARKORE21-SYSTEM-GUARDIANS@>=1.1.0"
+
+execution_profile:
+  provider: "codex"
+  transport: "one_liner"
+  validation_sequence:
+    - "C-m"
+    - '""'         # guillemets bruts
+    - "C-m"
+    - "C-m"
+  notes:
+    - "Ne jamais échapper la ligne ""."
+    - "Idempotence par message_id unique."
+
+change_policy:
+  compatibility: "semver"

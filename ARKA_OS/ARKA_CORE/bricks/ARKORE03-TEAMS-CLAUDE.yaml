@@ -1,0 +1,45 @@
+id: ARKORE03-TEAMS-CLAUDE
+version: 1.0.0
+title: "PMO + Pool d’agents Claude"
+summary: >
+  Définition du PMO et du pool de 9 agents Claude, leurs domaines et limitations.
+maintainers: ["pmo"]
+sources:
+  - "03-definition-equipes-agents.md"
+exports:
+  team:
+    pmo:
+      head: "pmo_lead"
+      assistants: ["pmo_ops1", "pmo_ops2"]
+    claude_pool:
+      size: 9
+      agents:
+        - { id: "claude-01", domain: "research" }
+        - { id: "claude-02", domain: "writing" }
+        - { id: "claude-03", domain: "coding" }
+        - { id: "claude-04", domain: "analysis" }
+        - { id: "claude-05", domain: "testing" }
+        - { id: "claude-06", domain: "data" }
+        - { id: "claude-07", domain: "ux_copy" }
+        - { id: "claude-08", domain: "docs" }
+        - { id: "claude-09", domain: "automation" }
+  limitations:
+    external_invocations: "forbidden"   # AGP/FSX/Gemini etc. via PMO: interdit.
+    governance_changes: "forbidden"
+  assignment:
+    logic:
+      simple: 1
+      standard: 2
+      complex: 4
+      critical: 6
+provides: ["team", "limitations", "assignment"]
+requires: ["ARKORE01-HIERARCHY@>=1.0.0", "ARKORE06-CONTROL-MATRICES@>=1.0.0"]
+contracts:
+  invariants:
+    - "claude_pool.size == 9"
+    - "external_invocations == 'forbidden'"
+    - "assignment.logic keys ⊆ {'simple','standard','complex','critical'}"
+  schema: "jsonschema://arka/teams-claude/v1"
+change_policy:
+  compatibility: semver
+  breaking_change_requires: ["bump_major", "update_contract_tests"]

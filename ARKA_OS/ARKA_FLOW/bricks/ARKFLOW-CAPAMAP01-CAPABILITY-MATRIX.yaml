@@ -1,0 +1,56 @@
+id: ARKFLOW-CAPAMAP01-CAPABILITY-MATRIX
+version: 1.0.0
+exports: [capabilities, domains]
+
+domains:
+  core:        { tags: ["adr","core","architecture","security"] }
+  delivery:    { tags: ["feature","product","delivery","engineering"] }
+  design:      { tags: ["ux","ui","content","brand"] }
+  marketing:   { tags: ["growth","campaign","seo","sem","analytics"] }
+  people:      { tags: ["hr","people","talent","compensation","learning"] }
+  compliance:  { tags: ["compliance","policy","legal","security"] }
+
+capabilities:
+  # ───────── Produit / Tech
+  spec.write:               [SpecWriter, TechArchitecte, Scribe]
+  spec.refine:              [TechArchitecte, LeadDev, SpecWriter]
+  arch.design:              [TechArchitecte, LeadDev, FSX]
+  dev.implement:            [LeadDev, FSX]
+  dev.spike:                [LeadDev, TechArchitecte]
+  qa.test.plan:             [QATesteur, LeadDev]
+  devops.guard:             [DevOpsGuardian]
+  data.extract:             [FSX, MarketingAnalyticsExpert]
+
+  # ───────── Design / Contenu / Marque
+  ux.audit:                 [UXUIDesignGuardian, Scribe]
+  ux.prototype:             [UXUIDesignGuardian]
+  content.plan:             [ContentStrategyManager, Scribe, AgentCreatorClient]
+  brand.strategy:           [BrandStrategyArchitect, AGP]
+  outreach.strategy:        [OutreachStrategist, MarketResearchSpecialist]
+
+  # ───────── Marketing / Growth
+  market.research:          [MarketResearchSpecialist, AgentCreatorClient]
+  growth.experiment:        [GrowthHackerSpecialist, MarketingAnalyticsExpert]
+  marketing.analytics:      [MarketingAnalyticsExpert]
+  campaign.plan:            [ContentStrategyManager, GrowthHackerSpecialist, BrandStrategyArchitect]
+
+  # ───────── People / RH
+  hr.transformation:        [HRTransformationSpecialist]
+  employee.experience:      [EmployeeExperienceDesigner]
+  compensation.analysis:    [CompensationBenefitsAnalyst]
+  lnd.curriculum:           [LearningDevelopmentStrategist]
+  owner.sourcing:           [GeminiOwnerSourcing]
+
+  # ───────── Conformité / Sécurité / Core
+  audit.read:               [Archiviste, Scribe, TechArchitecte, SecurityComplianceArchitect]
+  audit.compliance:         [SecurityComplianceArchitect, Archiviste]
+  policy.define:            [SecurityComplianceArchitect, AGP, Archiviste]
+
+  # ───────── PMO / Orchestration (souple)
+  pmo.review:               [PMO, AGP]
+  mission.qualify:          [MissionQualifier, PMO]
+  pipeline.track:           [PipelineTracker]
+
+  # ───────── Gates (obligatoires selon domaine)
+  gate.core:                [Archiviste]
+  gate.delivery:            [AGP]

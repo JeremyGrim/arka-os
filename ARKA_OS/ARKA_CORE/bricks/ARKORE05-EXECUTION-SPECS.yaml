@@ -1,0 +1,33 @@
+id: ARKORE05-EXECUTION-SPECS
+version: 1.0.0
+title: "Spécifications d’exécution"
+summary: >
+  Définitions des métriques, critères d’acceptation, sécurité et rollback.
+maintainers: ["agp", "pmo"]
+sources:
+  - "05-specifications-execution.md"
+exports:
+  metrics:
+    quality: { lint: true, tests: ">=80%", review: true }
+    efficiency: { lead_time: "<=48h", wip_limit: 3 }
+    adaptability: { change_fail_rate: "<15%" }
+  acceptance:
+    doc_complete: true
+    functional_ok: true
+    security_baseline_ok: true
+    performance_ok: true
+  security_baseline:
+    min_controls: ["secrets_handling", "least_privilege", "dependency_scan"]
+    perf_budgets_ref: "ARKORE06-CONTROL-MATRICES:performance_matrix.budgets"
+  rollback:
+    strategy: "feature_flags"
+    artifacts: ["pre_state", "post_state", "migration_scripts"]
+provides: ["metrics", "acceptance", "security_baseline", "rollback"]
+requires: ["ARKORE06-CONTROL-MATRICES@>=1.0.0"]
+contracts:
+  invariants:
+    - "acceptance.schema must include security_baseline_ok"
+    - "perf_budgets_ref must resolve"
+  schema: "jsonschema://arka/execution-specs/v1"
+change_policy:
+  compatibility: semver

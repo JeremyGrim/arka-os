@@ -1,0 +1,50 @@
+id: ARKFLOW-19-PRECONDITIONS-DEFS
+version: 1.0.0
+exports:
+- preconditions
+preconditions:
+  SPEC_DRAFT:
+  - prev_step: Audit|Discovery|Intake|Read
+    require: RESULT
+  US_BREAKDOWN:
+  - prev_step: Epic_Discovery|Feature_Discovery|Discovery
+    require: RESULT
+  DO_WORK:
+  - prev_step: Specify
+    require: RESULT
+  REVIEW:
+  - prev_step: Do_Work
+    require: RESULT
+  PUBLISH:
+  - prev_step: Gate|Gate_Core|Gate_Delivery|Gate_Final
+    require: RESULT
+  PMO_VALIDATE:
+  - prev_step: SpecDraft|Spec_Draft|Specify
+    require: RESULT
+  GATE_FINAL:
+  - prev_step: PMO_Review|Review|Findings
+    require: RESULT
+  OWNER_SUBMIT:
+  - prev_step: Gate_Final|Gate|Gate_Core
+    require: RESULT
+  ADR_REVIEW:
+  - prev_step: Draft_ADR
+    require: RESULT
+  ADR_MERGE:
+  - prev_step: Gate_Core
+    require: RESULT
+  QA_TEST:
+  - prev_step: Fix
+    require: RESULT
+  RELEASE_NOTE:
+  - prev_step: Gate
+    require: RESULT
+  SEC_REMEDIATE:
+  - prev_step: Sec_Audit
+    require: RESULT
+  DATA_ANALYSE:
+  - prev_step: Extract
+    require: RESULT
+  DATA_REPORT:
+  - prev_step: Analyse
+    require: RESULT

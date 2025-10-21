@@ -1,0 +1,68 @@
+id: ARKORE06-CONTROL-MATRICES
+version: 1.0.0
+title: "Matrices de contrôle"
+summary: >
+  Source unique des seuils, autorisations, escalades, nomenclatures et critères de gate.
+maintainers: ["agp"]
+sources:
+  - "06-matrices-controle-sections-critiques.md"
+exports:
+  authority_matrix:
+    owner:
+      can_bypass: true
+      conditions: ["incident_critique", "risque_legal"]
+    agp:
+      governs: ["gate", "validation", "conflict_resolution"]
+    pmo_limitations:
+      external_invocations: "forbidden"
+      governance_changes: "forbidden"
+      max_parallel_agents: 6
+    execution_agents:
+      may_request: ["clarification", "scope_adjustment"]
+      cannot: ["change_governance", "invoke_external_models"]
+  escalation_matrix:
+    levels:
+      S0: { notify: ["owner", "agp"], action: "stop_all", sla: "immediate" }
+      S1: { notify: ["agp", "pmo"], action: "pause_flow", sla: "4h" }
+      S2: { notify: ["pmo"], action: "monitor", sla: "24h" }
+      S3: { notify: ["pmo"], action: "log_only", sla: "72h" }
+  nomenclature_matrix:
+    compliance_ref: "ARKORE09-NAMING-PATTERNS:patterns"
+    checks:
+      - name: "feature_format"
+        regex_ref: "ARKORE09-NAMING-PATTERNS:regex.feature"
+      - name: "epic_format"
+        regex_ref: "ARKORE09-NAMING-PATTERNS:regex.epic"
+      - name: "us_format"
+        regex_ref: "ARKORE09-NAMING-PATTERNS:regex.user_story"
+  evidence_matrix:
+    required_artifacts:
+      S0: ["postmortem", "security_report", "trace", "approvals"]
+      S1: ["security_check", "trace", "review"]
+      S2: ["trace", "review"]
+      S3: ["trace"]
+  performance_matrix:
+    budgets:
+      chat_ttft: "< 2s"
+      throughput_msgs_min: 15
+      max_cost_per_task: "<= €25"
+  gate:
+    criteria:
+      dor:
+        scope_defined: true
+        dependencies_known: true
+      security: { baseline_ok: true }
+      performance: { within_budgets_ref: "ARKORE06-CONTROL-MATRICES:performance_matrix.budgets" }
+provides:
+  - "enforcement.policies"
+  - "gate.criteria"
+requires: ["ARKORE01-HIERARCHY@>=1.0.0", "ARKORE09-NAMING-PATTERNS@>=1.0.0"]
+contracts:
+  invariants:
+    - "pmo_limitations.external_invocations == 'forbidden'"
+    - "gate.criteria.performance.within_budgets_ref resolves locally"
+    - "no duplication of patterns (must reference ARKORE09)"
+  schema: "jsonschema://arka/control-matrices/v1"
+change_policy:
+  compatibility: semver
+  stable_keys: ["authority_matrix", "gate.criteria"]

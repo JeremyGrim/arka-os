@@ -1,0 +1,85 @@
+id: ARKFLOW-00-MANIFEST
+version: 1.0.0
+exports:
+- workflows_catalog
+workflows_catalog:
+- intent: AUDIT:FILES
+  title: Audit de fichiers
+  description: Scan fichiers, constats, gate.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FILES_CHAIN
+- intent: AUDIT:TREE
+  title: Audit d'arborescence
+  description: Évaluation structure et nommage.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_TREE_CHAIN
+- intent: AUDIT:RGPD
+  title: Audit RGPD
+  description: Évaluation RGPD, DPA, registre.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_RGPD_CHAIN
+- intent: AUDIT:COMPLIANCE
+  title: Audit conformité
+  description: Conformité aux politiques/normes.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_COMPLIANCE_CHAIN
+- intent: AUDIT:FEATURE
+  title: Audit de fonctionnalité
+  description: Impacts, dépendances, risques.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_FEATURE_CHAIN
+- intent: AUDIT:ACCOUNTING
+  title: Audit comptable
+  description: Contrôles et rapprochements.
+  family: AUDIT
+  flow_ref: ARKFLOW-04A-WORKFLOWS-AUDIT:AUDIT_ACCOUNTING_CHAIN
+- intent: DELIVERY:EPIC
+  title: Cycle Epic (agnostique)
+  description: Cadrage Epic → US.
+  family: DELIVERY
+  flow_ref: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_EPIC_CHAIN
+- intent: DELIVERY:FEATURE
+  title: Cycle Feature (agnostique)
+  description: Cadrage Feature → US → gate.
+  family: DELIVERY
+  flow_ref: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_FEATURE_CHAIN
+- intent: DELIVERY:US
+  title: Cycle User Story (agnostique)
+  description: Spécifier → Réaliser → Revue → Gate → Publish.
+  family: DELIVERY
+  flow_ref: ARKFLOW-04B-WORKFLOWS-DELIVERY:DELIVERY_US_CHAIN
+- intent: DOC:ADR
+  title: Proposition ADR
+  description: ADR draft → review → gate core → merge.
+  family: DOC
+  flow_ref: ARKFLOW-04C-WORKFLOWS-DOC:DOC_ADR_CHAIN
+- intent: DOC:CONTENT
+  title: Chaîne contenu
+  description: Brief → rédaction → review → gate → publish.
+  family: DOC
+  flow_ref: ARKFLOW-04C-WORKFLOWS-DOC:DOC_CONTENT_CHAIN
+- intent: OPS:BUGFIX
+  title: Correctif (bugfix)
+  description: Qualif → fix → test → gate → RN.
+  family: OPS
+  flow_ref: ARKFLOW-04D-WORKFLOWS-OPS:OPS_BUGFIX_CHAIN
+- intent: OPS:SECURITY
+  title: Chaîne sécurité
+  description: Audit sécu → remédiation → gate core.
+  family: OPS
+  flow_ref: ARKFLOW-04D-WORKFLOWS-OPS:OPS_SECURITY_CHAIN
+- intent: OPS:DATA_REPORT
+  title: Rapport de données
+  description: Extract → analyse → report → gate.
+  family: OPS
+  flow_ref: ARKFLOW-04D-WORKFLOWS-OPS:OPS_DATA_REPORT_CHAIN
+- intent: MKT:CAMPAIGN
+  title: Campagne Marketing
+  description: Research → plan → création → analytics → gate.
+  family: MKT
+  flow_ref: ARKFLOW-04E-WORKFLOWS-MKT:MKT_CAMPAIGN_CHAIN
+- intent: PEOPLE:HR_CHANGE
+  title: Programme RH (change)
+  description: Diag → roadmap → gate → déploiement.
+  family: PEOPLE
+  flow_ref: ARKFLOW-04F-WORKFLOWS-PEOPLE:HR_CHANGE_CHAIN

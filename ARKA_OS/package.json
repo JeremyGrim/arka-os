@@ -1,0 +1,15 @@
+{
+  "name": "arka_os",
+  "private": true,
+  "scripts": {
+    "build:ps": "pwsh -File bin/os-build.ps1",
+    "build:sh": "bash bin/os-build.sh",
+    "build:matrix": "node bin/generate-wakeup-matrix.mjs",
+    "validate": "node bin/os-validate.mjs && node bin/os-validate-intents.mjs && node bin/os-lint-wakeups.mjs",
+    "validate:intents": "node bin/os-validate-intents.mjs",
+    "lint:wakeups": "node bin/os-lint-wakeups.mjs",
+    "build": "npm run build:sh && npm run build:matrix",
+    "run:ps": "pwsh -File bin/os-run.ps1",
+    "run:sh": "bash bin/os-run.sh"
+  }
+}

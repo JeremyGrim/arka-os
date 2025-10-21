@@ -1,0 +1,13 @@
+tid: T-XXXXXX
+type: STATUS
+status: TODO
+thread_id: THR-xxxxxx__topic-slug
+relates_to: msg-XXXX
+from: ROLE
+to: ROLE
+sujet: "Sujet clair"
+message: |
+  ...
+links:
+  attachments: []
+  output: []

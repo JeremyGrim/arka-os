@@ -1,0 +1,67 @@
+id: ARKFLOW-04E-WORKFLOWS-MKT
+version: 2.2.0
+exports:
+- MKT_CAMPAIGN_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  MKT_CAMPAIGN_CHAIN:
+    sequence:
+    - step: Research
+      action_key: MKT_RESEARCH
+      requires_caps:
+      - market.research
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - market.research
+    - step: Plan
+      action_key: MKT_PLAN
+      requires_caps:
+      - campaign.plan
+      - content.plan
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - campaign.plan
+        - content.plan
+      requires:
+      - prev_step: Research
+        type: RESULT
+    - step: Create_Assets
+      action_key: MKT_CREATE
+      requires_caps:
+      - content.plan
+      - ux.prototype
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - content.plan
+        - ux.prototype
+      requires:
+      - prev_step: Plan
+        type: RESULT
+    - step: Analytics
+      action_key: MKT_ANALYTICS
+      requires_caps:
+      - marketing.analytics
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - marketing.analytics
+      requires:
+      - prev_step: Create_Assets
+        type: RESULT
+    - step: Gate_Delivery
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Analytics
+        type: RESULT

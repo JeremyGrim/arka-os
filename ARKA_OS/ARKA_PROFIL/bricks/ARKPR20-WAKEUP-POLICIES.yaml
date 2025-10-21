@@ -1,0 +1,17 @@
+id: ARKPR20-WAKEUP-POLICIES
+version: 1.1.0
+title: "Politiques par défaut des wake-ups"
+exports:
+  rules_version: "0.1"
+  rules_index_ref: "ARKA_CORE/rules_index.yaml"
+  intents_common: ["PLAN_WORKFLOW", "REVIEW_DELIVERABLE"]
+  guardrails:
+    scan_by_pattern: ["ARKA_CORE/rules_index.yaml", "docs/**"]
+    read_mode: by_ref_only
+    use_dir_ref_only: true
+    no_mock: true
+    require_evidence: true
+    memory_update_always: true
+provides: ["defaults"]
+change_policy:
+  compatibility: semver

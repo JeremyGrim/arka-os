@@ -1,0 +1,56 @@
+id: ARKFLOW-04F-WORKFLOWS-PEOPLE
+version: 2.2.0
+exports:
+- HR_CHANGE_CHAIN
+common:
+  policy:
+    single_thread: true
+    require_result_to_advance: true
+    timeout_sec: 3600
+  refs:
+    selector: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+flows:
+  HR_CHANGE_CHAIN:
+    sequence:
+    - step: Diagnostic
+      action_key: HR_DIAG
+      requires_caps:
+      - hr.transformation
+      - employee.experience
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - hr.transformation
+        - employee.experience
+    - step: Roadmap
+      action_key: HR_ROADMAP
+      requires_caps:
+      - hr.transformation
+      - spec.write
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - hr.transformation
+        - spec.write
+      requires:
+      - prev_step: Diagnostic
+        type: RESULT
+    - step: Gate
+      action_key: GATE_FINAL
+      gate_select:
+        choose:
+        - default: AGP
+      requires:
+      - prev_step: Roadmap
+        type: RESULT
+    - step: Deploy
+      action_key: HR_DEPLOY
+      requires_caps:
+      - hr.transformation
+      select_actor:
+        use: ARKFLOW-17-ORCHESTRATION-RULES:actor_selector
+        required_caps:
+        - hr.transformation
+      requires:
+      - prev_step: Gate
+        type: RESULT

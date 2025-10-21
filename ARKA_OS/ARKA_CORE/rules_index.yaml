@@ -1,0 +1,78 @@
+id: RULES_INDEX
+version: 0.1.0
+title: "Index des règles dynamiques"
+summary: >
+  Ce fichier catalogue les règles de gouvernance, de nommage, de templates et de critères
+  d’acceptation disponibles dans ARKA_OS. Chaque entrée renvoie vers une référence
+  exacte (file path + section) et indique la version minimale requise. Il sert de point
+  d’entrée aux agents pour récupérer uniquement les règles nécessaires, sans charger
+  l’ensemble de la constitution.
+
+rules:
+  path_templates:
+    feature_dir:        { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.feature_dir",        version: ">=3.0.0" }
+    epic_dir:           { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.epic_dir",           version: ">=3.0.0" }
+    us_dir:             { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.us_dir",             version: ">=3.0.0" }
+    ticket_dir:         { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.ticket_dir",         version: ">=3.0.0" }
+    feature_reviews_dir:{ ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.feature_reviews_dir", version: ">=3.0.0" }
+    feature_cr_dir:     { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.feature_cr_dir",     version: ">=3.0.0" }
+    epic_cr_dir:        { ref: "ARKORE08-PATHS-GOVERNANCE:path_templates.epic_cr_dir",        version: ">=3.0.0" }
+  naming_patterns:
+    feature_regex:       { ref: "ARKORE09-NAMING-PATTERNS:regex.feature",        version: ">=2.0.0" }
+    epic_regex:          { ref: "ARKORE09-NAMING-PATTERNS:regex.epic",           version: ">=2.0.0" }
+    us_regex:            { ref: "ARKORE09-NAMING-PATTERNS:regex.user_story",     version: ">=2.0.0" }
+    ticket_regex:        { ref: "ARKORE09-NAMING-PATTERNS:regex.ticket",         version: ">=2.0.0" }
+    change_request_regex:{ ref: "ARKORE09-NAMING-PATTERNS:regex.change_request", version: ">=2.0.0" }
+    agp_review_regex:    { ref: "ARKORE09-NAMING-PATTERNS:regex.agp_review",     version: ">=2.0.0" }
+  templates:
+    feature_readme:      { ref: "ARKORE13-TEMPLATES:feature.readme",      version: ">=1.2.0" }
+    epic_readme:         { ref: "ARKORE13-TEMPLATES:epic.readme",         version: ">=1.2.0" }
+    us_readme:           { ref: "ARKORE13-TEMPLATES:us.readme",           version: ">=1.2.0" }
+    ticket_work:         { ref: "ARKORE13-TEMPLATES:ticket.work",         version: ">=1.2.0" }
+    cr_default:          { ref: "ARKORE13-TEMPLATES:change_request.default", version: ">=1.2.0" }
+    agp_review:          { ref: "ARKORE13-TEMPLATES:agp.review",          version: ">=1.2.0" }
+  acceptance_criteria:
+    default: { ref: "ARKORE05-EXECUTION-SPECS:acceptance", version: ">=1.0.0" }
+  workflows:
+    feature_creation: { ref: "ARKORE04-WORKFLOWS:workflows.feature_creation", version: ">=1.0.0" }
+    epic_creation:    { ref: "ARKORE04-WORKFLOWS:workflows.epic_creation",    version: ">=1.0.0" }
+    review_cycle:     { ref: "ARKORE04-WORKFLOWS:workflows.review_cycle",     version: ">=1.0.0" }
+  notify_templates:
+    nt_a2a_message_to_result: { ref: "ARKORE22-INTENT-NOTIFY:notify.templates.NT-A2A-MESSAGE_TO_RESULT", version: ">=1.0.0" }
+    nt_cron_exec_with_doc:    { ref: "ARKORE22-INTENT-NOTIFY:notify.templates.NT-CRON-EXEC_WITH_DOC",    version: ">=1.0.0" }
+    nt_human_inline_exec:     { ref: "ARKORE22-INTENT-NOTIFY:notify.templates.NT-HUMAN-INLINE_EXEC",     version: ">=1.0.0" }
+  notify_constraints:
+    no_time:      { ref: "ARKORE22-INTENT-NOTIFY:notify.constraints.NO_TIME",      version: ">=1.0.0" }
+    execute_now:  { ref: "ARKORE22-INTENT-NOTIFY:notify.constraints.EXECUTE_NOW",  version: ">=1.0.0" }
+  notify_assembler:
+    role:        { ref: "ARKORE22-INTENT-NOTIFY:assembler.role",        version: ">=1.0.0" }
+    guarantees:  { ref: "ARKORE22-INTENT-NOTIFY:assembler.guarantees",  version: ">=1.0.0" }
+  orders:
+    order_spec:                { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_SPEC",                version: ">=1.0.0" }
+    order_analyse:             { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_ANALYSE",             version: ">=1.0.0" }
+    order_redaction:           { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_REDACTION",           version: ">=1.0.0" }
+    order_info_request:        { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_INFO_REQUEST",        version: ">=1.0.0" }
+    order_intermediate_response: { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_INTERMEDIATE_RESPONSE", version: ">=1.0.0" }
+    order_final_delivery:      { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_FINAL_DELIVERY_OWNER", version: ">=1.0.0" }
+    order_escalate_pmo:        { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_ESCALATE_TO_PMO",     version: ">=1.0.0" }
+    order_escalate_owner:      { ref: "ARKORE22-INTENT-NOTIFY:orders.definitions.ORDER_ESCALATE_TO_OWNER",   version: ">=1.0.0" }
+  orders_policies:
+    zero_params:        { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.zero_params",        version: ">=1.0.0" }
+    response_channel:   { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.response_channel",   version: ">=1.0.0" }
+    ui_gate:            { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.ui_gate",            version: ">=1.0.0" }
+    no_time:            { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.no_time",            version: ">=1.0.0" }
+    strict_ack_rule:    { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.strict_ack_rule",    version: ">=1.0.0" }
+    escalation_rights:  { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.escalation_rights",  version: ">=1.0.0" }
+    anti_loop:          { ref: "ARKORE22-INTENT-NOTIFY:orders.policies.anti_loop",          version: ">=1.0.0" }
+  messaging_storage:
+    threads_dir:        { ref: "ARKORE20-MESSAGING:storage.threads_dir",        version: ">=1.2.0" }
+    thread_template:    { ref: "ARKORE20-MESSAGING:storage.thread_file_template", version: ">=1.2.0" }
+    agent_msg_box:      { ref: "ARKORE20-MESSAGING:storage.agent_msg_box",      version: ">=1.2.0" }
+    statuses:           { ref: "ARKORE20-MESSAGING:storage.statuses",           version: ">=1.2.0" }
+    result_types:       { ref: "ARKORE20-MESSAGING:storage.result_types",       version: ">=1.2.0" }
+  notify_processing_workflows:
+    nt_a2a_message_to_result: { ref: "ARKORE22-INTENT-NOTIFY:processing_workflows.nt_a2a_message_to_result", version: ">=1.0.0" }
+    nt_human_inline_exec:     { ref: "ARKORE22-INTENT-NOTIFY:processing_workflows.nt_human_inline_exec",     version: ">=1.0.0" }
+
+provides: ["rules"]
+change_policy: { compatibility: semver }

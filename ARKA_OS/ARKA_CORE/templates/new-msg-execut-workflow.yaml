@@ -1,0 +1,43 @@
+id: TEMPLATE-NEW-MSG-EXECUT-WORKFLOW
+version: 2.1.0
+title: "Workflow d’exécution à partir d’un message (threads-only, strict)"
+policies:
+  chat_response_forbidden: true
+  ack_policy: system
+  append_only: true
+  require:
+    relates_to: true
+    thread_id: true
+
+inputs:
+  agent_id: "<rôle exécutant>"
+  relates_to: "msg-XXXX (message source)"
+  thread_id: "THR-xxxxxx__topic-slug (fil cible, même sujet)"
+  from: "<rôle auteur de la réponse>"
+  to: "<rôle destinataire de la réponse>"
+  sujet: "Sujet clair (topic)"
+  now_iso: "horodatage ISO Z pour nommage de fichier"
+
+steps:
+  - "1. SYNC/READ — Lire le message source: `npm exec arkamsg -- pull --agent {agent_id} --verbose` puis marquer `read`."
+  - "2. THREAD — Vérifier/initialiser le dossier `messaging/threads/{thread_id}/` et son `index.yaml`."
+  - "3. EXEC — Appliquer les actions demandées; capturer les évidences (chemins OUTPUT, journaux). Aucune sortie chat."
+  - "4. WRITE — Écrire un fichier `STATUS` **ou** `RESULT` dans le fil au format `{{now_iso}}__{from}@{to}__STATUS.yaml` (ou RESULT)."
+  - "5. CONTENT — Remplir le YAML avec: `type`, `status` (si STATUS), `thread_id`, `relates_to`, `from`, `to`, `sujet`, `message`, `links.attachments|output`."
+  - "6. TIMELINE — Ajouter une entrée append-only dans `ARKA_META/messaging/general.yaml` (version: 2) pointant le **chemin réel** du fichier."
+  - "7. BLOCKED — Si blocage: `status: BLOCKED` (cause claire, 1–3 questions) et, si policy l’exige, escalade PMO/Owner."
+  - "8. RESULT — Si fin: publier `RESULT` (jamais « STATUS: complete »), référencer les évidences, ne pas répondre dans le chat."
+  - "9. POST — Aucun ACK LLM; seuls les accusés transport s’appliquent si prévus côté passerelle."
+
+guards:
+  - "Refuser si `relates_to` manquant."
+  - "Refuser si `thread_id` manquant (doit être repris du message source ou fourni)."
+  - "Refuser si fichier hors `messaging/threads/{thread_id}/`."
+  - "Refuser si nommage ≠ `ISOZ__from@to__STATUS.yaml|RESULT.yaml`."
+  - "Refuser toute production d’un fichier ACK par un LLM."
+  - "Refuser toute bulle chat pendant ce workflow."
+
+notes:
+  - "Statuts autorisés: TODO, IN_PROGRESS, BLOCKED, OBSOLETE (pour STATUS)."
+  - "Respect `append-only`: ne jamais modifier un fichier existant; écrire un nouveau fichier."
+  - "Les liens OUTPUT sont relatifs; ne pas copier de livrables dans le fil."
